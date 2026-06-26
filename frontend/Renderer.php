@@ -85,7 +85,7 @@ final class Renderer {
 
 		Assets::enqueue_front( $atts );
 
-		self::$instances++;
+		++self::$instances;
 
 		$data = array(
 			'testimonials'  => $items,
@@ -135,9 +135,9 @@ final class Renderer {
 			$atts['limit'] = -1;
 		}
 
-		$order          = strtolower( (string) $atts['order'] );
-		$atts['order']  = in_array( $order, array( 'asc', 'desc', 'random' ), true ) ? $order : 'desc';
-		$orderby        = strtolower( (string) $atts['orderby'] );
+		$order           = strtolower( (string) $atts['order'] );
+		$atts['order']   = in_array( $order, array( 'asc', 'desc', 'random' ), true ) ? $order : 'desc';
+		$orderby         = strtolower( (string) $atts['orderby'] );
 		$atts['orderby'] = in_array( $orderby, array( 'date', 'title', 'menu_order', 'rand' ), true ) ? $orderby : 'date';
 
 		$atts['group'] = sanitize_text_field( (string) $atts['group'] );
@@ -333,7 +333,7 @@ final class Renderer {
 	 * @return string
 	 */
 	private static function wrapper_style( array $atts ) {
-		$shadows = array(
+		$shadows    = array(
 			'none'   => 'none',
 			'soft'   => '0 2px 10px rgba(0,0,0,.06)',
 			'medium' => '0 6px 20px rgba(0,0,0,.10)',

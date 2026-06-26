@@ -38,17 +38,17 @@ final class Loader {
 	/**
 	 * Resolve a fully-qualified class name to a file and require it.
 	 *
-	 * @param string $class Fully-qualified class name.
+	 * @param string $class_name Fully-qualified class name.
 	 * @return void
 	 */
-	public static function autoload( $class ) {
+	public static function autoload( $class_name ) {
 		$prefix = 'AdvancedTestimonial\\';
 
-		if ( 0 !== strpos( $class, $prefix ) ) {
+		if ( 0 !== strpos( $class_name, $prefix ) ) {
 			return;
 		}
 
-		$relative = substr( $class, strlen( $prefix ) );
+		$relative = substr( $class_name, strlen( $prefix ) );
 		$parts    = explode( '\\', $relative );
 		$base     = 'includes/';
 
