@@ -1,0 +1,505 @@
+/**
+ * Advanced Testimonial — frontend styles.
+ *
+ * Theming is driven by CSS custom properties set inline on .at-wrapper:
+ *   --at-primary, --at-accent, --at-text, --at-radius, --at-gap,
+ *   --at-columns, --at-shadow
+ *
+ * @package AdvancedTestimonial
+ */
+
+.at-wrapper {
+	--at-primary: #2563eb;
+	--at-accent: #f59e0b;
+	--at-text: #1f2937;
+	--at-radius: 12px;
+	--at-gap: 24px;
+	--at-columns: 3;
+	--at-shadow: 0 2px 10px rgba( 0, 0, 0, 0.06 );
+	color: var( --at-text );
+	box-sizing: border-box;
+}
+
+.at-wrapper *,
+.at-wrapper *::before,
+.at-wrapper *::after {
+	box-sizing: border-box;
+}
+
+/* Width breakout — let the testimonials exceed the theme content width.
+   Uses the canonical margin-based full-bleed technique (symmetric, no transform),
+   which centers against a horizontally-centered theme container. */
+.at-wrapper.at-width-wide {
+	width: min( 1180px, 94vw );
+	max-width: none;
+	margin-left: calc( 50% - min( 1180px, 94vw ) / 2 );
+	margin-right: calc( 50% - min( 1180px, 94vw ) / 2 );
+}
+
+.at-wrapper.at-width-full {
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc( 50% - 50vw );
+	margin-right: calc( 50% - 50vw );
+	padding-left: clamp( 16px, 4vw, 60px );
+	padding-right: clamp( 16px, 4vw, 60px );
+	box-sizing: border-box;
+}
+
+.at-visually-hidden {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect( 0, 0, 0, 0 );
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ---------- Card ---------- */
+.at-card {
+	height: 100%;
+}
+
+.at-card__inner {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	height: 100%;
+	padding: 26px;
+	background: #fff;
+	border: 1px solid #eceef1;
+	border-radius: var( --at-radius );
+	box-shadow: var( --at-shadow );
+}
+
+.at-card__review {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1rem;
+	line-height: 1.65;
+	color: var( --at-text );
+	quotes: none;
+}
+
+.at-card__review p {
+	margin: 0 0 0.6em;
+}
+
+.at-card__review p:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------- Stars ---------- */
+.at-stars {
+	display: inline-flex;
+	gap: 2px;
+}
+
+.at-star {
+	width: 18px;
+	height: 18px;
+	display: block;
+}
+
+.at-star.is-filled {
+	fill: var( --at-accent );
+}
+
+.at-star.is-empty {
+	fill: #d6dae0;
+}
+
+/* ---------- Author ---------- */
+.at-card__author {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-top: auto;
+}
+
+.at-card__avatar {
+	flex: 0 0 auto;
+}
+
+.at-avatar__img {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	object-fit: cover;
+	display: block;
+}
+
+.at-avatar__fallback {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var( --at-primary );
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.25rem;
+	text-transform: uppercase;
+}
+
+.at-card__meta {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.35;
+	min-width: 0;
+}
+
+.at-card__name {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 700;
+	color: var( --at-text );
+}
+
+.at-card__role,
+.at-card__location,
+.at-card__date {
+	font-size: 0.85rem;
+	color: #6b7280;
+}
+
+.at-verified {
+	display: inline-flex;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #10b981;
+	align-items: center;
+	justify-content: center;
+}
+
+.at-verified svg {
+	width: 11px;
+	height: 11px;
+	fill: #fff;
+}
+
+.at-card__logo {
+	margin-left: auto;
+	flex: 0 0 auto;
+}
+
+.at-card__logo .at-logo__img {
+	max-width: 88px;
+	height: auto;
+	display: block;
+	opacity: 0.85;
+}
+
+/* ---------- Button ---------- */
+.at-btn {
+	display: inline-block;
+	padding: 9px 18px;
+	border-radius: calc( var( --at-radius ) / 1.6 );
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	line-height: 1.2;
+	cursor: pointer;
+	transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.at-btn-filled .at-btn {
+	background: var( --at-primary );
+	color: #fff;
+}
+
+.at-btn-filled .at-btn:hover {
+	opacity: 0.9;
+	color: #fff;
+}
+
+.at-btn-outline .at-btn {
+	background: transparent;
+	color: var( --at-primary );
+	border: 1px solid var( --at-primary );
+}
+
+.at-btn-outline .at-btn:hover {
+	background: var( --at-primary );
+	color: #fff;
+}
+
+/* ---------- Socials ---------- */
+.at-card__socials {
+	display: flex;
+	gap: 8px;
+}
+
+.at-social {
+	display: inline-flex;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	align-items: center;
+	justify-content: center;
+	background: #f1f3f6;
+	color: var( --at-primary );
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.at-social:hover {
+	background: var( --at-primary );
+	color: #fff;
+}
+
+/* ---------- Grid ---------- */
+.at-grid {
+	display: grid;
+	grid-template-columns: repeat( var( --at-columns, 3 ), minmax( 0, 1fr ) );
+	gap: var( --at-gap, 24px );
+}
+
+/* ---------- List ---------- */
+.at-list {
+	display: flex;
+	flex-direction: column;
+	gap: var( --at-gap, 24px );
+}
+
+.at-list .at-card__inner {
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 18px;
+}
+
+.at-list .at-card__review {
+	flex: 1 1 60%;
+	order: 2;
+}
+
+.at-list .at-card__author {
+	flex: 1 1 220px;
+	margin-top: 0;
+	order: 1;
+}
+
+/* ---------- Card layout ---------- */
+.at-card-layout {
+	display: flex;
+	flex-direction: column;
+	gap: var( --at-gap, 24px );
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+.at-card-layout .at-card__inner {
+	padding: 34px;
+	text-align: center;
+	align-items: center;
+}
+
+.at-card-layout .at-card__review {
+	font-size: 1.15rem;
+}
+
+.at-card-layout .at-card__author {
+	flex-direction: column;
+	margin-top: 8px;
+}
+
+.at-card-layout .at-card__meta {
+	align-items: center;
+}
+
+.at-card-layout .at-card__logo {
+	margin-left: 0;
+}
+
+/* ---------- Masonry ---------- */
+.at-masonry {
+	column-count: var( --at-columns, 3 );
+	column-gap: var( --at-gap, 24px );
+}
+
+.at-masonry__item {
+	break-inside: avoid;
+	margin-bottom: var( --at-gap, 24px );
+}
+
+/* ---------- Carousel ---------- */
+.at-carousel {
+	position: relative;
+}
+
+.at-carousel__viewport {
+	overflow: hidden;
+}
+
+.at-carousel__track {
+	display: flex;
+	transition: transform 0.4s ease;
+	will-change: transform;
+}
+
+.at-carousel__slide {
+	flex: 0 0 100%;
+	max-width: 100%;
+	padding: 6px calc( var( --at-gap, 24px ) / 2 );
+}
+
+.at-carousel__nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY( -50% );
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e5e7eb;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: var( --at-shadow );
+	cursor: pointer;
+	z-index: 2;
+	padding: 0;
+}
+
+.at-carousel__nav svg {
+	width: 20px;
+	height: 20px;
+	fill: none;
+	stroke: var( --at-primary );
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.at-carousel__nav:hover {
+	background: var( --at-primary );
+}
+
+.at-carousel__nav:hover svg {
+	stroke: #fff;
+}
+
+.at-carousel__prev {
+	left: -8px;
+}
+
+.at-carousel__next {
+	right: -8px;
+}
+
+.at-carousel__dots {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 18px;
+}
+
+.at-carousel__dot {
+	width: 9px;
+	height: 9px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: #cbd2da;
+	cursor: pointer;
+	transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.at-carousel__dot.is-active {
+	background: var( --at-primary );
+	transform: scale( 1.25 );
+}
+
+/* ---------- Spotlight ---------- */
+.at-carousel--spotlight .at-card__inner {
+	padding: 40px;
+	text-align: center;
+	align-items: center;
+}
+
+.at-carousel--spotlight .at-card__review {
+	font-size: 1.3rem;
+	line-height: 1.6;
+}
+
+.at-carousel--spotlight .at-card__author {
+	flex-direction: column;
+	margin-top: 12px;
+}
+
+.at-carousel--spotlight .at-card__meta {
+	align-items: center;
+}
+
+.at-carousel--spotlight .at-avatar__img,
+.at-carousel--spotlight .at-avatar__fallback {
+	width: 72px;
+	height: 72px;
+}
+
+/* ---------- Empty / RTL ---------- */
+.at-empty {
+	padding: 16px;
+	background: #fff7ed;
+	border: 1px dashed #fdba74;
+	border-radius: 8px;
+	color: #9a3412;
+}
+
+.at-rtl {
+	direction: rtl;
+}
+
+.at-rtl .at-card__logo {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+/* ---------- Responsive ---------- */
+@media ( max-width: 900px ) {
+	.at-grid {
+		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	}
+
+	.at-masonry {
+		column-count: 2;
+	}
+}
+
+@media ( max-width: 600px ) {
+	.at-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.at-masonry {
+		column-count: 1;
+	}
+
+	.at-list .at-card__inner {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.at-carousel__prev {
+		left: 2px;
+	}
+
+	.at-carousel__next {
+		right: 2px;
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.at-carousel__track {
+		transition: none;
+	}
+}

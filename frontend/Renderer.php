@@ -1,0 +1,375 @@
+<?php
+/**
+ * Frontend renderer — turns attributes into testimonial markup.
+ *
+ * @package AdvancedTestimonial
+ */
+
+namespace AdvancedTestimonial\Frontend;
+
+use AdvancedTestimonial\Admin\Settings;
+use AdvancedTestimonial\Helpers;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Builds the testimonial output for shortcodes and blocks.
+ */
+final class Renderer {
+
+	/**
+	 * Allowed layouts.
+	 */
+	const LAYOUTS = array( 'grid', 'list', 'card', 'carousel', 'masonry', 'spotlight' );
+
+	/**
+	 * Running instance counter for unique ids.
+	 *
+	 * @var int
+	 */
+	private static $instances = 0;
+
+	/**
+	 * Default display attributes.
+	 *
+	 * @return array<string,mixed>
+	 */
+	public static function defaults() {
+		return array(
+			'layout'           => 'grid',
+			'width'            => '',
+			'columns'          => 3,
+			'limit'            => 9,
+			'group'            => '',
+			'ids'              => '',
+			'order'            => 'desc',
+			'orderby'          => 'date',
+			'show_rating'      => true,
+			'show_image'       => true,
+			'show_company'     => true,
+			'show_designation' => true,
+			'show_location'    => true,
+			'show_date'        => false,
+			'show_verified'    => true,
+			'show_website'     => true,
+			'autoplay'         => 0,
+		);
+	}
+
+	/**
+	 * Render testimonials and return the HTML string.
+	 *
+	 * @param array $atts Raw display attributes.
+	 * @return string
+	 */
+	public static function render( $atts ) {
+		$atts = self::normalize( (array) $atts );
+
+		$query = ( new Query() )->get( $atts );
+
+		if ( ! $query->have_posts() ) {
+			return self::empty_message( $atts );
+		}
+
+		$items = array();
+		foreach ( $query->posts as $post ) {
+			$items[] = self::build_item( $post, $atts );
+		}
+
+		$loader          = new TemplateLoader();
+		$layout_template = $loader->locate( $atts['layout'] );
+		if ( '' === $layout_template ) {
+			$layout_template = $loader->locate( 'grid' );
+		}
+		$item_template = $loader->locate( 'item' );
+
+		Assets::enqueue_front( $atts );
+
+		self::$instances++;
+
+		$data = array(
+			'testimonials'  => $items,
+			'atts'          => $atts,
+			'schema'        => (bool) Settings::get( 'enable_schema' ),
+			'item_template' => $item_template,
+			'instance'      => 'at-' . self::$instances,
+			'wrapper_class' => self::wrapper_class( $atts ),
+			'wrapper_style' => self::wrapper_style( $atts ),
+		);
+
+		$html = $loader->render( $layout_template, $data );
+
+		/**
+		 * Filter the final testimonial HTML.
+		 *
+		 * @param string $html Rendered markup.
+		 * @param array  $atts Display attributes.
+		 */
+		return apply_filters( 'advanced_testimonial_output', $html, $atts );
+	}
+
+	/**
+	 * Normalize raw attributes into a clean, typed array.
+	 *
+	 * @param array $atts Raw attributes.
+	 * @return array
+	 */
+	public static function normalize( array $atts ) {
+		$atts = wp_parse_args( $atts, self::defaults() );
+
+		$atts['layout'] = in_array( $atts['layout'], self::LAYOUTS, true ) ? $atts['layout'] : 'grid';
+
+		$width         = strtolower( (string) $atts['width'] );
+		$atts['width'] = in_array( $width, array( 'wide', 'full' ), true ) ? $width : '';
+
+		$atts['columns'] = (int) $atts['columns'];
+		if ( $atts['columns'] < 1 ) {
+			$atts['columns'] = 1;
+		}
+		if ( $atts['columns'] > 6 ) {
+			$atts['columns'] = 6;
+		}
+
+		$atts['limit'] = (int) $atts['limit'];
+		if ( 0 === $atts['limit'] ) {
+			$atts['limit'] = -1;
+		}
+
+		$order          = strtolower( (string) $atts['order'] );
+		$atts['order']  = in_array( $order, array( 'asc', 'desc', 'random' ), true ) ? $order : 'desc';
+		$orderby        = strtolower( (string) $atts['orderby'] );
+		$atts['orderby'] = in_array( $orderby, array( 'date', 'title', 'menu_order', 'rand' ), true ) ? $orderby : 'date';
+
+		$atts['group'] = sanitize_text_field( (string) $atts['group'] );
+
+		if ( ! empty( $atts['ids'] ) && ! is_array( $atts['ids'] ) ) {
+			$atts['ids'] = array_filter( array_map( 'absint', explode( ',', (string) $atts['ids'] ) ) );
+		} elseif ( empty( $atts['ids'] ) ) {
+			$atts['ids'] = array();
+		}
+
+		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website' ) as $flag ) {
+			$atts[ $flag ] = self::to_bool( $atts[ $flag ] );
+		}
+
+		$atts['autoplay'] = absint( $atts['autoplay'] );
+		$atts['cache']    = (bool) Settings::get( 'cache_queries' );
+
+		return $atts;
+	}
+
+	/**
+	 * Cast a loose value to boolean.
+	 *
+	 * @param mixed $value Value.
+	 * @return bool
+	 */
+	private static function to_bool( $value ) {
+		if ( is_bool( $value ) ) {
+			return $value;
+		}
+
+		return in_array( strtolower( (string) $value ), array( '1', 'true', 'yes', 'on' ), true );
+	}
+
+	/**
+	 * Build a normalized data array for one testimonial.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @param array    $atts Display attributes.
+	 * @return array
+	 */
+	private static function build_item( $post, array $atts ) {
+		$id   = $post->ID;
+		$meta = function ( $field ) use ( $id ) {
+			return get_post_meta( $id, Helpers::meta_key( $field ), true );
+		};
+
+		$rating = Helpers::clamp_rating( $meta( 'rating' ) );
+
+		$socials = array_filter(
+			array(
+				'twitter'  => $meta( 'social_twitter' ),
+				'linkedin' => $meta( 'social_linkedin' ),
+				'facebook' => $meta( 'social_facebook' ),
+			)
+		);
+
+		$item = array(
+			'id'          => $id,
+			'name'        => get_the_title( $id ),
+			'review'      => $post->post_content,
+			'rating'      => $rating,
+			'company'     => (string) $meta( 'company' ),
+			'designation' => (string) $meta( 'designation' ),
+			'location'    => (string) $meta( 'location' ),
+			'website'     => (string) $meta( 'website' ),
+			'email'       => (string) $meta( 'email' ),
+			'verified'    => '1' === $meta( 'verified' ),
+			'date'        => (string) $meta( 'review_date' ),
+			'photo'       => $atts['show_image'] ? self::avatar_html( $post, $atts ) : '',
+			'logo'        => self::logo_html( (int) $meta( 'company_logo' ) ),
+			'stars'       => self::stars_html( $rating ),
+			'socials'     => $socials,
+		);
+
+		/**
+		 * Filter a single testimonial's prepared data.
+		 *
+		 * @param array    $item Prepared data.
+		 * @param \WP_Post $post Post object.
+		 * @param array    $atts Display attributes.
+		 */
+		return apply_filters( 'advanced_testimonial_item_data', $item, $post, $atts );
+	}
+
+	/**
+	 * Build the client avatar markup (featured image or initial fallback).
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @param array    $atts Display attributes.
+	 * @return string
+	 */
+	private static function avatar_html( $post, array $atts ) {
+		$size = (string) Settings::get( 'image_size', 'medium' );
+		$lazy = (bool) Settings::get( 'lazy_load', 1 );
+
+		if ( has_post_thumbnail( $post ) ) {
+			return get_the_post_thumbnail(
+				$post,
+				$size,
+				array(
+					'class'   => 'at-avatar__img',
+					'alt'     => esc_attr( get_the_title( $post ) ),
+					'loading' => $lazy ? 'lazy' : 'eager',
+				)
+			);
+		}
+
+		$initial = function_exists( 'mb_substr' ) ? mb_substr( get_the_title( $post ), 0, 1 ) : substr( get_the_title( $post ), 0, 1 );
+
+		return '<span class="at-avatar__fallback" aria-hidden="true">' . esc_html( $initial ) . '</span>';
+	}
+
+	/**
+	 * Build the company logo markup.
+	 *
+	 * @param int $logo_id Attachment ID.
+	 * @return string
+	 */
+	private static function logo_html( $logo_id ) {
+		if ( ! $logo_id ) {
+			return '';
+		}
+
+		return wp_get_attachment_image(
+			$logo_id,
+			'medium',
+			false,
+			array(
+				'class'   => 'at-logo__img',
+				'loading' => 'lazy',
+				'alt'     => '',
+			)
+		);
+	}
+
+	/**
+	 * Build accessible star-rating markup.
+	 *
+	 * @param int $rating Rating 0-5.
+	 * @return string
+	 */
+	public static function stars_html( $rating ) {
+		$rating = Helpers::clamp_rating( $rating );
+
+		if ( 0 === $rating ) {
+			return '';
+		}
+
+		/* translators: %d: rating value out of five. */
+		$label = sprintf( __( 'Rated %d out of 5', 'advanced-testimonial' ), $rating );
+		$path  = 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z';
+
+		$out = '<div class="at-stars" role="img" aria-label="' . esc_attr( $label ) . '">';
+		for ( $i = 1; $i <= 5; $i++ ) {
+			$state = ( $i <= $rating ) ? 'is-filled' : 'is-empty';
+			$out  .= '<svg class="at-star ' . esc_attr( $state ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' . esc_attr( $path ) . '"/></svg>';
+		}
+		$out .= '</div>';
+
+		return $out;
+	}
+
+	/**
+	 * CSS classes for the outer wrapper.
+	 *
+	 * @param array $atts Display attributes.
+	 * @return string
+	 */
+	private static function wrapper_class( array $atts ) {
+		$classes = array(
+			'at-wrapper',
+			'at-layout-' . $atts['layout'],
+			'at-shadow-' . sanitize_html_class( (string) Settings::get( 'card_shadow', 'soft' ) ),
+			'at-btn-' . sanitize_html_class( (string) Settings::get( 'button_style', 'filled' ) ),
+		);
+
+		if ( '' !== $atts['width'] ) {
+			$classes[] = 'at-width-' . $atts['width'];
+		}
+
+		if ( Settings::get( 'enable_rtl' ) || is_rtl() ) {
+			$classes[] = 'at-rtl';
+		}
+
+		return implode( ' ', $classes );
+	}
+
+	/**
+	 * Inline CSS custom properties built from the style settings.
+	 *
+	 * @param array $atts Display attributes.
+	 * @return string
+	 */
+	private static function wrapper_style( array $atts ) {
+		$shadows = array(
+			'none'   => 'none',
+			'soft'   => '0 2px 10px rgba(0,0,0,.06)',
+			'medium' => '0 6px 20px rgba(0,0,0,.10)',
+			'strong' => '0 12px 30px rgba(0,0,0,.16)',
+		);
+		$shadow_key = (string) Settings::get( 'card_shadow', 'soft' );
+
+		$vars = array(
+			'--at-primary' => (string) Settings::get( 'primary_color', '#2563eb' ),
+			'--at-accent'  => (string) Settings::get( 'accent_color', '#f59e0b' ),
+			'--at-text'    => (string) Settings::get( 'text_color', '#1f2937' ),
+			'--at-radius'  => (int) Settings::get( 'border_radius', 12 ) . 'px',
+			'--at-gap'     => (int) Settings::get( 'spacing', 24 ) . 'px',
+			'--at-columns' => (int) $atts['columns'],
+			'--at-shadow'  => isset( $shadows[ $shadow_key ] ) ? $shadows[ $shadow_key ] : $shadows['soft'],
+		);
+
+		$style = '';
+		foreach ( $vars as $name => $value ) {
+			$style .= $name . ':' . $value . ';';
+		}
+
+		return $style;
+	}
+
+	/**
+	 * Markup shown when there are no testimonials to display.
+	 *
+	 * @param array $atts Display attributes.
+	 * @return string
+	 */
+	private static function empty_message( array $atts ) {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return '';
+		}
+
+		return '<p class="at-empty">' . esc_html__( 'No testimonials found for the selected options.', 'advanced-testimonial' ) . '</p>';
+	}
+}
