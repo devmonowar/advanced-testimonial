@@ -4,8 +4,8 @@ name: Deploy to WordPress.org
 # WordPress.org SVN repository (trunk + tags/<version>) and syncs the
 # banner / icon / screenshots from .wordpress-org/.
 #
-# Before tagging: bump the version in advanced-testimonial.php, block/block.json
-# and the "Stable tag" in readme.txt so they all match the tag.
+# Before tagging: bump the version in advanced-testimonial.php, blocks/block.json,
+# composer.json and the "Stable tag" in readme.txt so they all match the tag.
 
 on:
   push:
