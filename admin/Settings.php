@@ -237,14 +237,14 @@ final class Settings {
 	/**
 	 * Get a single setting value.
 	 *
-	 * @param string $key     Setting key.
-	 * @param mixed  $default Fallback when not set.
+	 * @param string $key      Setting key.
+	 * @param mixed  $fallback Value returned when the setting is not set.
 	 * @return mixed
 	 */
-	public static function get( $key, $default = null ) {
+	public static function get( $key, $fallback = null ) {
 		$settings = self::get_settings();
 
-		return array_key_exists( $key, $settings ) ? $settings[ $key ] : $default;
+		return array_key_exists( $key, $settings ) ? $settings[ $key ] : $fallback;
 	}
 
 	/**
