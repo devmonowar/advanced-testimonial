@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="Advanced Testimonial">
+	<description>Coding standards for the Advanced Testimonial plugin.</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>/.wordpress-org/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="basepath" value="."/>
+	<arg name="parallel" value="8"/>
+	<arg value="ps"/>
+
+	<config name="minimum_wp_version" value="6.5"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<rule ref="WordPress-Core">
+		<!-- We use PSR-4 class files (Plugin.php), not class-plugin.php. -->
+		<exclude name="WordPress.Files.FileName"/>
+		<!-- Allow flexible array alignment. -->
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="advanced-testimonial"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="advanced_testimonial"/>
+				<element value="AdvancedTestimonial"/>
+				<element value="ADVANCED_TESTIMONIAL"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="PHPCompatibilityWP"/>
+</ruleset>

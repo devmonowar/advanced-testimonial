@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "advanced-testimonial/testimonials",
+	"version": "2.0.1",
+	"title": "Advanced Testimonial",
+	"category": "widgets",
+	"icon": "format-quote",
+	"description": "Display customer testimonials in grids, carousels, cards and more.",
+	"keywords": [ "testimonial", "review", "carousel", "social proof" ],
+	"textdomain": "advanced-testimonial",
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"attributes": {
+		"layout": { "type": "string", "default": "grid" },
+		"group": { "type": "string", "default": "" },
+		"columns": { "type": "number", "default": 3 },
+		"limit": { "type": "number", "default": 9 },
+		"order": { "type": "string", "default": "desc" },
+		"autoplay": { "type": "number", "default": 0 },
+		"showRating": { "type": "boolean", "default": true },
+		"showImage": { "type": "boolean", "default": true },
+		"showCompany": { "type": "boolean", "default": true },
+		"showDesignation": { "type": "boolean", "default": true },
+		"showLocation": { "type": "boolean", "default": true },
+		"showDate": { "type": "boolean", "default": false },
+		"showVerified": { "type": "boolean", "default": true },
+		"showWebsite": { "type": "boolean", "default": true },
+		"align": { "type": "string" }
+	},
+	"editorScript": "advanced-testimonial-editor",
+	"style": "advanced-testimonial",
+	"editorStyle": "advanced-testimonial"
+}
