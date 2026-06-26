@@ -27,6 +27,15 @@ Key ideas:
 1. Upload the `advanced-testimonial` folder to `/wp-content/plugins/`.
 2. Activate the plugin through the **Plugins** screen in WordPress.
 3. Add testimonials under the new **Testimonials** menu.
+4. Display them anywhere with the `[advanced_testimonial]` shortcode or the **Advanced Testimonial** block.
+
+== Screenshots ==
+
+1. Grid layout — testimonials in a responsive grid with star ratings and verified badges.
+2. Carousel layout — a lightweight, swipeable slider with navigation and dots.
+3. Spotlight layout — one large featured testimonial.
+4. Gutenberg block with live preview and full inspector controls.
+5. Settings page — colors, layout, performance and advanced options.
 
 == Changelog ==
 
