@@ -8,6 +8,7 @@
 namespace AdvancedTestimonial\Frontend;
 
 use AdvancedTestimonial\Admin\Settings;
+use AdvancedTestimonial\Admin\Tools;
 use AdvancedTestimonial\Helpers;
 
 defined( 'ABSPATH' ) || exit;
@@ -37,6 +38,7 @@ final class Renderer {
 	public static function defaults() {
 		return array(
 			'layout'           => 'grid',
+			'title'            => '',
 			'width'            => '',
 			'columns'          => 3,
 			'limit'            => 9,
@@ -119,6 +121,8 @@ final class Renderer {
 
 		$atts['layout'] = in_array( $atts['layout'], self::LAYOUTS, true ) ? $atts['layout'] : 'grid';
 
+		$atts['title'] = sanitize_text_field( (string) $atts['title'] );
+
 		$width         = strtolower( (string) $atts['width'] );
 		$atts['width'] = in_array( $width, array( 'wide', 'full' ), true ) ? $width : '';
 
@@ -153,7 +157,7 @@ final class Renderer {
 		}
 
 		$atts['autoplay'] = absint( $atts['autoplay'] );
-		$atts['cache']    = (bool) Settings::get( 'cache_queries' );
+		$atts['cache']    = (bool) Settings::get( 'cache_queries' ) && ! get_option( Tools::DEBUG_OPTION );
 
 		return $atts;
 	}
@@ -186,6 +190,9 @@ final class Renderer {
 		};
 
 		$rating = Helpers::clamp_rating( $meta( 'rating' ) );
+		if ( 0 === $rating ) {
+			$rating = Helpers::clamp_rating( Settings::get( 'default_rating', 0 ) );
+		}
 
 		$socials = array_filter(
 			array(
@@ -289,7 +296,13 @@ final class Renderer {
 
 		/* translators: %d: rating value out of five. */
 		$label = sprintf( __( 'Rated %d out of 5', 'advanced-testimonial' ), $rating );
-		$path  = 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z';
+
+		$icons = array(
+			'star'  => 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z',
+			'heart' => 'M12 21s-7.55-4.74-10.05-9.2C.43 8.5 2.02 5 5.5 5c2.04 0 3.3 1.18 4.5 2.6C11.2 6.18 12.46 5 14.5 5c3.48 0 5.07 3.5 3.55 6.8C19.55 16.26 12 21 12 21z',
+		);
+		$icon  = (string) Settings::get( 'star_icon', 'star' );
+		$path  = isset( $icons[ $icon ] ) ? $icons[ $icon ] : $icons['star'];
 
 		$out = '<div class="at-stars" role="img" aria-label="' . esc_attr( $label ) . '">';
 		for ( $i = 1; $i <= 5; $i++ ) {
@@ -313,6 +326,7 @@ final class Renderer {
 			'at-layout-' . $atts['layout'],
 			'at-shadow-' . sanitize_html_class( (string) Settings::get( 'card_shadow', 'soft' ) ),
 			'at-btn-' . sanitize_html_class( (string) Settings::get( 'button_style', 'filled' ) ),
+			'at-avatar-' . sanitize_html_class( (string) Settings::get( 'avatar_shape', 'circle' ) ),
 		);
 
 		if ( '' !== $atts['width'] ) {

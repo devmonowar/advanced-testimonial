@@ -66,7 +66,7 @@ final class CPT {
 			'has_archive'        => false,
 			'publicly_queryable' => true,
 			'menu_position'      => 26,
-			'menu_icon'          => 'dashicons-format-quote',
+			'menu_icon'          => 'dashicons-testimonial',
 			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author' ),
 			'rewrite'            => array(
 				'slug'       => 'testimonial',

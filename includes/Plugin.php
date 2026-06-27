@@ -70,6 +70,10 @@ final class Plugin {
 			( new Admin\Columns() )->register();
 			( new Admin\Assets() )->register();
 			( new Admin\Settings() )->register();
+			( new Admin\Tools() )->register();
+			( new Admin\Notices() )->register();
+			( new Admin\ShortcodeHelper() )->register();
+			( new Admin\DemoLibrary() )->register();
 		}
 	}
 }

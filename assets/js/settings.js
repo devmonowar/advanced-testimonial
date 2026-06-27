@@ -24,6 +24,12 @@
 				var on = panel.getAttribute( 'data-panel' ) === tabKey;
 				panel.style.display = on ? '' : 'none';
 			} );
+
+			// The "Save Changes" button only applies to the settings tabs.
+			var save = document.querySelector( '.at-settings-save' );
+			if ( save ) {
+				save.style.display = ( 'tools' === tabKey ) ? 'none' : '';
+			}
 		}
 
 		Array.prototype.forEach.call( tabs, function ( tab ) {

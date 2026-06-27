@@ -113,3 +113,159 @@
 	cursor: pointer;
 	background: none;
 }
+
+/* Demo Library */
+.at-demo-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 280px, 1fr ) );
+	gap: 20px;
+	margin-top: 16px;
+	max-width: 1120px;
+}
+
+.at-demo-card {
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.at-demo-card__preview {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	background: #eef2f6;
+}
+
+.at-demo-card__preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.at-demo-badge {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	padding: 3px 10px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.at-demo-badge--featured {
+	background: #2563eb;
+}
+
+.at-demo-badge--new {
+	background: #10b981;
+}
+
+.at-demo-card__body {
+	flex: 1;
+	padding: 14px 16px;
+}
+
+.at-demo-card__title {
+	margin: 0 0 6px;
+	font-size: 16px;
+}
+
+.at-demo-card__desc {
+	margin: 0 0 8px;
+	color: #50575e;
+}
+
+.at-demo-card__cat {
+	margin: 0;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: #787c82;
+}
+
+.at-demo-card__actions {
+	padding: 0 16px 16px;
+}
+
+.at-demo-card__requires {
+	margin: 6px 0 0;
+	font-size: 12px;
+	color: #b32d2e;
+}
+
+/* Click-to-copy shortcode */
+.at-copy {
+	cursor: pointer;
+}
+
+code.at-copy {
+	display: inline-block;
+	padding: 2px 7px;
+	background: #f0f0f1;
+	border: 1px solid #dcdcde;
+	border-radius: 3px;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+code.at-copy:hover {
+	background: #e8e8ea;
+}
+
+.at-copy.is-copied {
+	color: #008a20;
+}
+
+.column-at_shortcode {
+	width: 290px;
+}
+
+/* Balanced Groups columns: equal Count + Slug, slightly tighter Name. */
+.taxonomy-testimonial_group .column-name {
+	width: 180px;
+}
+
+.taxonomy-testimonial_group .column-posts,
+.taxonomy-testimonial_group .column-slug {
+	width: 88px;
+}
+
+/* Match the Shortcode and Description column widths. */
+.taxonomy-testimonial_group .column-at_shortcode,
+.taxonomy-testimonial_group .column-description {
+	width: 290px;
+}
+
+/* Tools tab */
+.at-tools {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	margin-top: 16px;
+	max-width: 920px;
+}
+
+.at-tools-card {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	padding: 14px 20px 18px;
+}
+
+.at-tools-card h3 {
+	margin-top: 6px;
+}
+
+.at-tools-card--wide {
+	grid-column: 1 / -1;
+}
+
+@media screen and (max-width: 782px) {
+	.at-tools {
+		grid-template-columns: 1fr;
+	}
+}

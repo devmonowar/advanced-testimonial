@@ -27,6 +27,12 @@
 			return;
 		}
 
+		// Label each slide "N of M" for screen readers.
+		var total = this.slides.length;
+		this.slides.forEach( function ( slide, i ) {
+			slide.setAttribute( 'aria-label', ( i + 1 ) + ' of ' + total );
+		} );
+
 		this.bind();
 		this.layout();
 		this.startAutoplay();
@@ -73,8 +79,11 @@
 			Array.prototype.forEach.call( this.dotsWrap.children, function ( dot, i ) {
 				var active = i === this.index;
 				dot.classList.toggle( 'is-active', active );
-				dot.setAttribute( 'aria-selected', active ? 'true' : 'false' );
-				dot.tabIndex = active ? 0 : -1;
+				if ( active ) {
+					dot.setAttribute( 'aria-current', 'true' );
+				} else {
+					dot.removeAttribute( 'aria-current' );
+				}
 			}.bind( this ) );
 		}
 	};
@@ -109,8 +118,7 @@
 			var dot = document.createElement( 'button' );
 			dot.type = 'button';
 			dot.className = 'at-carousel__dot';
-			dot.setAttribute( 'role', 'tab' );
-			dot.setAttribute( 'aria-label', 'Slide ' + ( i + 1 ) );
+			dot.setAttribute( 'aria-label', 'Go to slide ' + ( i + 1 ) );
 			dot.addEventListener( 'click', this.goTo.bind( this, i ) );
 			this.dotsWrap.appendChild( dot );
 		}

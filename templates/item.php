@@ -24,6 +24,14 @@ if ( ! empty( $atts['show_designation'] ) && '' !== $item['designation'] ) {
 if ( ! empty( $atts['show_company'] ) && '' !== $item['company'] ) {
 	$at_role[] = $item['company'];
 }
+
+/**
+ * Fires before a testimonial card is rendered.
+ *
+ * @param array $item Prepared testimonial data.
+ * @param array $atts Display attributes.
+ */
+do_action( 'advanced_testimonial_before_card', $item, $atts );
 ?>
 <article class="at-card"<?php echo $at_review ? ' itemscope itemtype="https://schema.org/Review"' : ''; ?>>
 	<div class="at-card__inner">
@@ -48,7 +56,17 @@ if ( ! empty( $atts['show_company'] ) && '' !== $item['company'] ) {
 		<?php endif; ?>
 
 		<blockquote class="at-card__review"<?php echo $at_review ? ' itemprop="reviewBody"' : ''; ?>>
-			<?php echo wp_kses_post( wpautop( $item['review'] ) ); ?>
+			<?php
+			/**
+			 * Filter the testimonial review HTML before output (output is still
+			 * passed through wp_kses_post afterwards).
+			 *
+			 * @param string $html Review HTML (already run through wpautop).
+			 * @param array  $item Prepared testimonial data.
+			 * @param array  $atts Display attributes.
+			 */
+			echo wp_kses_post( apply_filters( 'advanced_testimonial_review_html', wpautop( $item['review'] ), $item, $atts ) );
+			?>
 		</blockquote>
 
 		<footer class="at-card__author">
@@ -108,3 +126,11 @@ if ( ! empty( $atts['show_company'] ) && '' !== $item['company'] ) {
 
 	</div>
 </article>
+<?php
+/**
+ * Fires after a testimonial card is rendered.
+ *
+ * @param array $item Prepared testimonial data.
+ * @param array $atts Display attributes.
+ */
+do_action( 'advanced_testimonial_after_card', $item, $atts );

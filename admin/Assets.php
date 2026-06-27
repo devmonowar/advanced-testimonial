@@ -7,6 +7,8 @@
 
 namespace AdvancedTestimonial\Admin;
 
+use AdvancedTestimonial\Helpers;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -38,8 +40,9 @@ final class Assets {
 
 		$is_editor = in_array( $hook, array( 'post.php', 'post-new.php' ), true );
 		$is_list   = ( 'edit.php' === $hook );
+		$is_groups = ( 'edit-tags.php' === $hook );
 
-		if ( ! $is_editor && ! $is_list ) {
+		if ( ! $is_editor && ! $is_list && ! $is_groups ) {
 			return;
 		}
 
@@ -47,8 +50,23 @@ final class Assets {
 			'advanced-testimonial-admin',
 			ADVANCED_TESTIMONIAL_URL . 'assets/css/admin.css',
 			array(),
-			ADVANCED_TESTIMONIAL_VERSION
+			Helpers::asset_version( 'assets/css/admin.css' )
 		);
+
+		if ( $is_list || $is_groups ) {
+			wp_enqueue_script(
+				'advanced-testimonial-copy',
+				ADVANCED_TESTIMONIAL_URL . 'assets/js/copy.js',
+				array(),
+				Helpers::asset_version( 'assets/js/copy.js' ),
+				true
+			);
+			wp_localize_script(
+				'advanced-testimonial-copy',
+				'advancedTestimonialCopy',
+				array( 'copied' => __( 'Copied!', 'advanced-testimonial' ) )
+			);
+		}
 
 		if ( $is_editor ) {
 			wp_enqueue_media();
@@ -57,7 +75,7 @@ final class Assets {
 				'advanced-testimonial-admin',
 				ADVANCED_TESTIMONIAL_URL . 'assets/js/admin.js',
 				array( 'media-editor' ),
-				ADVANCED_TESTIMONIAL_VERSION,
+				Helpers::asset_version( 'assets/js/admin.js' ),
 				true
 			);
 
