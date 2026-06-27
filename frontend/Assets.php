@@ -8,6 +8,7 @@
 namespace AdvancedTestimonial\Frontend;
 
 use AdvancedTestimonial\Admin\Settings;
+use AdvancedTestimonial\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +52,7 @@ final class Assets {
 			self::STYLE,
 			ADVANCED_TESTIMONIAL_URL . 'assets/css/front' . $min . '.css',
 			array(),
-			ADVANCED_TESTIMONIAL_VERSION
+			Helpers::asset_version( 'assets/css/front' . $min . '.css' )
 		);
 	}
 
@@ -71,7 +72,7 @@ final class Assets {
 			self::SCRIPT_CAROUSEL,
 			ADVANCED_TESTIMONIAL_URL . 'assets/js/carousel' . $min . '.js',
 			array(),
-			ADVANCED_TESTIMONIAL_VERSION,
+			Helpers::asset_version( 'assets/js/carousel' . $min . '.js' ),
 			true
 		);
 	}

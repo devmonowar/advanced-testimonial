@@ -30,6 +30,28 @@ final class Helpers {
 	}
 
 	/**
+	 * Asset version string for cache-busting.
+	 *
+	 * Uses the file's modification time so any CSS/JS change invalidates caches
+	 * even within the same plugin version; falls back to the plugin version.
+	 *
+	 * @param string $relative Path relative to the plugin root, e.g. assets/css/admin.css.
+	 * @return string
+	 */
+	public static function asset_version( $relative ) {
+		$path = ADVANCED_TESTIMONIAL_DIR . ltrim( $relative, '/' );
+
+		if ( is_readable( $path ) ) {
+			$mtime = filemtime( $path );
+			if ( $mtime ) {
+				return (string) $mtime;
+			}
+		}
+
+		return ADVANCED_TESTIMONIAL_VERSION;
+	}
+
+	/**
 	 * Clamp a value to a valid 0-5 rating.
 	 *
 	 * @param mixed $value Raw rating value.

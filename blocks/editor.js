@@ -18,6 +18,7 @@
 	var SelectControl      = wp.components.SelectControl;
 	var RangeControl       = wp.components.RangeControl;
 	var ToggleControl      = wp.components.ToggleControl;
+	var TextControl        = wp.components.TextControl;
 	var ServerSideRender   = wp.serverSideRender;
 	var __                 = wp.i18n.__;
 
@@ -62,6 +63,11 @@
 				el(
 					PanelBody,
 					{ title: __( 'Layout', 'advanced-testimonial' ), initialOpen: true },
+					el( TextControl, {
+						label: __( 'Heading (optional)', 'advanced-testimonial' ),
+						value: a.title,
+						onChange: function ( v ) { set( { title: v } ); }
+					} ),
 					el( SelectControl, {
 						label: __( 'Layout', 'advanced-testimonial' ),
 						value: a.layout,

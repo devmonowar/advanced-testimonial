@@ -7,6 +7,8 @@
 
 namespace AdvancedTestimonial\Admin;
 
+use AdvancedTestimonial\Helpers;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -45,6 +47,21 @@ final class Settings {
 		add_action( 'admin_menu', array( $this, 'add_page' ) );
 		add_action( 'admin_init', array( $this, 'register_setting' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+		add_filter( 'plugin_action_links_' . ADVANCED_TESTIMONIAL_BASENAME, array( $this, 'action_links' ) );
+	}
+
+	/**
+	 * Add a "Settings" link to the plugin's row on the Plugins screen.
+	 *
+	 * @param array $links Existing action links.
+	 * @return array
+	 */
+	public function action_links( $links ) {
+		$url      = admin_url( 'edit.php?post_type=' . CPT::POST_TYPE . '&page=' . self::PAGE );
+		$settings = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'advanced-testimonial' ) . '</a>';
+		array_unshift( $links, $settings );
+
+		return $links;
 	}
 
 	/**
@@ -157,6 +174,34 @@ final class Settings {
 							'outline' => __( 'Outline', 'advanced-testimonial' ),
 						),
 					),
+					'avatar_shape'  => array(
+						'type'    => 'select',
+						'label'   => __( 'Avatar Shape', 'advanced-testimonial' ),
+						'default' => 'circle',
+						'options' => array(
+							'circle'  => __( 'Circle', 'advanced-testimonial' ),
+							'rounded' => __( 'Rounded', 'advanced-testimonial' ),
+							'square'  => __( 'Square', 'advanced-testimonial' ),
+						),
+					),
+					'star_icon'     => array(
+						'type'    => 'select',
+						'label'   => __( 'Rating Icon', 'advanced-testimonial' ),
+						'default' => 'star',
+						'options' => array(
+							'star'  => __( 'Star', 'advanced-testimonial' ),
+							'heart' => __( 'Heart', 'advanced-testimonial' ),
+						),
+					),
+					'default_rating' => array(
+						'type'        => 'number',
+						'label'       => __( 'Default Rating', 'advanced-testimonial' ),
+						'default'     => 0,
+						'min'         => 0,
+						'max'         => 5,
+						'step'        => 1,
+						'description' => __( 'Used when a testimonial has no rating set (0 = none).', 'advanced-testimonial' ),
+					),
 				),
 			),
 			'performance' => array(
@@ -193,9 +238,9 @@ final class Settings {
 					),
 					'delete_data' => array(
 						'type'        => 'checkbox',
-						'label'       => __( 'Delete Data on Uninstall', 'advanced-testimonial' ),
+						'label'       => __( 'Remove all plugin data when deleting the plugin', 'advanced-testimonial' ),
 						'default'     => 0,
-						'description' => __( 'Remove plugin settings when the plugin is deleted. Testimonials are always kept.', 'advanced-testimonial' ),
+						'description' => __( 'When the plugin is deleted, permanently remove all testimonials, groups, meta, settings and transients. Deactivating never deletes anything. Default: off.', 'advanced-testimonial' ),
 					),
 				),
 			),
@@ -295,14 +340,14 @@ final class Settings {
 			'advanced-testimonial-admin',
 			ADVANCED_TESTIMONIAL_URL . 'assets/css/admin.css',
 			array(),
-			ADVANCED_TESTIMONIAL_VERSION
+			Helpers::asset_version( 'assets/css/admin.css' )
 		);
 
 		wp_enqueue_script(
 			'advanced-testimonial-settings',
 			ADVANCED_TESTIMONIAL_URL . 'assets/js/settings.js',
 			array(),
-			ADVANCED_TESTIMONIAL_VERSION,
+			Helpers::asset_version( 'assets/js/settings.js' ),
 			true
 		);
 	}
@@ -325,6 +370,8 @@ final class Settings {
 		echo '<div class="wrap advanced-testimonial-settings">';
 		echo '<h1>' . esc_html__( 'Advanced Testimonial Settings', 'advanced-testimonial' ) . '</h1>';
 
+		Tools::maybe_notice();
+
 		echo '<form method="post" action="options.php">';
 		settings_fields( self::GROUP );
 
@@ -338,6 +385,10 @@ final class Settings {
 				esc_html( $tab['title'] )
 			);
 		}
+		printf(
+			'<a href="#tools" class="nav-tab" data-tab="tools">%s</a>',
+			esc_html__( 'Tools', 'advanced-testimonial' )
+		);
 		echo '</h2>';
 
 		// Tab panels.
@@ -363,8 +414,16 @@ final class Settings {
 			echo '</div>';
 		}
 
+		echo '<div class="at-settings-save">';
 		submit_button();
+		echo '</div>';
 		echo '</form>';
+
+		// Tools panel — rendered outside the settings form (it has its own forms).
+		echo '<div class="at-settings-panel" id="at-panel-tools" data-panel="tools" style="display:none">';
+		Tools::render_panel();
+		echo '</div>';
+
 		echo '</div>';
 	}
 

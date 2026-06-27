@@ -20,6 +20,9 @@ defined( 'ABSPATH' ) || exit;
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are function-scoped via TemplateLoader::render().
 ?>
 <div class="<?php echo esc_attr( $wrapper_class ); ?>" style="<?php echo esc_attr( $wrapper_style ); ?>" id="<?php echo esc_attr( $instance ); ?>">
+	<?php if ( '' !== $atts['title'] ) : ?>
+		<h3 class="at-title"><?php echo esc_html( $atts['title'] ); ?></h3>
+	<?php endif; ?>
 	<div class="at-masonry">
 		<?php
 		foreach ( $testimonials as $item ) {

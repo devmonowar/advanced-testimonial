@@ -46,6 +46,14 @@
 	box-sizing: border-box;
 }
 
+.at-title {
+	margin: 0 0 var( --at-gap, 24px );
+	font-size: 1.6rem;
+	line-height: 1.3;
+	text-align: center;
+	color: var( --at-text );
+}
+
 .at-visually-hidden {
 	position: absolute !important;
 	width: 1px;
@@ -145,6 +153,17 @@
 	font-weight: 700;
 	font-size: 1.25rem;
 	text-transform: uppercase;
+}
+
+/* Avatar shape */
+.at-avatar-rounded .at-avatar__img,
+.at-avatar-rounded .at-avatar__fallback {
+	border-radius: 12px;
+}
+
+.at-avatar-square .at-avatar__img,
+.at-avatar-square .at-avatar__fallback {
+	border-radius: 0;
 }
 
 .at-card__meta {
@@ -444,6 +463,15 @@
 .at-carousel--spotlight .at-avatar__fallback {
 	width: 72px;
 	height: 72px;
+}
+
+/* ---------- Keyboard focus (accessibility) ---------- */
+.at-wrapper a:focus-visible,
+.at-wrapper button:focus-visible,
+.at-carousel__nav:focus-visible,
+.at-carousel__dot:focus-visible {
+	outline: 2px solid var( --at-primary );
+	outline-offset: 2px;
 }
 
 /* ---------- Empty / RTL ---------- */

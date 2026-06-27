@@ -10,6 +10,7 @@ namespace AdvancedTestimonial\Blocks;
 use AdvancedTestimonial\Admin\Taxonomy;
 use AdvancedTestimonial\Frontend\Assets;
 use AdvancedTestimonial\Frontend\Renderer;
+use AdvancedTestimonial\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,7 +48,7 @@ final class Block {
 			self::EDITOR_HANDLE,
 			ADVANCED_TESTIMONIAL_URL . 'blocks/editor.js',
 			array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-server-side-render', 'wp-i18n' ),
-			ADVANCED_TESTIMONIAL_VERSION,
+			Helpers::asset_version( 'blocks/editor.js' ),
 			true
 		);
 
@@ -85,6 +86,7 @@ final class Block {
 		$width = in_array( $align, array( 'wide', 'full' ), true ) ? $align : '';
 
 		$atts = array(
+			'title'            => isset( $attributes['title'] ) ? $attributes['title'] : '',
 			'layout'           => isset( $attributes['layout'] ) ? $attributes['layout'] : 'grid',
 			'group'            => isset( $attributes['group'] ) ? $attributes['group'] : '',
 			'columns'          => isset( $attributes['columns'] ) ? (int) $attributes['columns'] : 3,
