@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Testimonial 2.0.2\n"
+"Project-Id-Version: Advanced Testimonial 2.0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/advanced-testimonial\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-27T10:53:58+02:00\n"
+"POT-Creation-Date: 2026-06-30T20:03:40+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-testimonial\n"
@@ -158,7 +158,7 @@ msgstr ""
 
 #: admin/DemoLibrary.php:46
 #: admin/DemoLibrary.php:47
-#: admin/DemoLibrary.php:177
+#: admin/DemoLibrary.php:191
 msgid "Demo Library"
 msgstr ""
 
@@ -178,78 +178,86 @@ msgstr ""
 msgid "The demo library is empty right now."
 msgstr ""
 
-#: admin/DemoLibrary.php:178
+#: admin/DemoLibrary.php:192
+msgid "Refresh"
+msgstr ""
+
+#: admin/DemoLibrary.php:195
+msgid "Demo list refreshed from the library."
+msgstr ""
+
+#: admin/DemoLibrary.php:197
 msgid "Import a ready-made set of testimonials with one click. Images are downloaded into your Media Library automatically."
 msgstr ""
 
-#: admin/DemoLibrary.php:182
+#: admin/DemoLibrary.php:201
 msgid "Unable to load the online demo library."
 msgstr ""
 
-#: admin/DemoLibrary.php:184
+#: admin/DemoLibrary.php:203
 msgid "You can still import the bundled starter demo below."
 msgstr ""
 
-#: admin/DemoLibrary.php:216
+#: admin/DemoLibrary.php:235
 msgid "Featured"
 msgstr ""
 
-#: admin/DemoLibrary.php:218
+#: admin/DemoLibrary.php:237
 msgid "New"
 msgstr ""
 
-#: admin/DemoLibrary.php:236
-#: admin/DemoLibrary.php:239
-#: admin/DemoLibrary.php:269
+#: admin/DemoLibrary.php:255
+#: admin/DemoLibrary.php:258
+#: admin/DemoLibrary.php:288
 msgid "Import Demo"
 msgstr ""
 
 #. translators: %s: required plugin version.
-#: admin/DemoLibrary.php:243
+#: admin/DemoLibrary.php:262
 #, php-format
 msgid "Requires Advanced Testimonial %s+"
 msgstr ""
 
-#: admin/DemoLibrary.php:261
-#: admin/Tools.php:245
+#: admin/DemoLibrary.php:280
+#: admin/Tools.php:246
 msgid "Starter Demo"
 msgstr ""
 
-#: admin/DemoLibrary.php:262
+#: admin/DemoLibrary.php:281
 msgid "Six sample testimonials with ratings, companies and images, bundled with the plugin."
 msgstr ""
 
-#: admin/DemoLibrary.php:283
+#: admin/DemoLibrary.php:302
 msgid "You are not allowed to do this."
 msgstr ""
 
-#: admin/DemoLibrary.php:292
+#: admin/DemoLibrary.php:311
 msgid "Unknown demo."
 msgstr ""
 
-#: admin/DemoLibrary.php:328
+#: admin/DemoLibrary.php:347
 msgid "That demo is no longer available."
 msgstr ""
 
-#: admin/DemoLibrary.php:333
+#: admin/DemoLibrary.php:352
 msgid "This demo needs a newer plugin version."
 msgstr ""
 
-#: admin/DemoLibrary.php:338
+#: admin/DemoLibrary.php:357
 msgid "The demo could not be downloaded."
 msgstr ""
 
-#: admin/DemoLibrary.php:342
+#: admin/DemoLibrary.php:361
 msgid "The demo data was invalid."
 msgstr ""
 
 #. translators: %d: number of imported testimonials.
-#: admin/DemoLibrary.php:363
+#: admin/DemoLibrary.php:382
 #, php-format
 msgid "Demo imported — %d testimonials added. Display them with the block or the [advanced_testimonial] shortcode."
 msgstr ""
 
-#: admin/DemoLibrary.php:367
+#: admin/DemoLibrary.php:386
 msgid "Sorry, that demo could not be imported. Please try again."
 msgstr ""
 
@@ -334,7 +342,7 @@ msgid "Add your first testimonial, or import the starter demo to see how everyth
 msgstr ""
 
 #: admin/Notices.php:62
-#: admin/Tools.php:251
+#: admin/Tools.php:252
 msgid "Import Starter Demo"
 msgstr ""
 
@@ -576,7 +584,7 @@ msgid "Group"
 msgstr ""
 
 #: admin/Taxonomy.php:40
-#: admin/Tools.php:275
+#: admin/Tools.php:276
 msgid "Groups"
 msgstr ""
 
@@ -634,121 +642,121 @@ msgstr ""
 msgid "Settings reset to defaults."
 msgstr ""
 
-#: admin/Tools.php:129
-msgid "Testimonial query cache cleared."
+#: admin/Tools.php:130
+msgid "Caches cleared — testimonial queries and the demo library list."
 msgstr ""
 
-#: admin/Tools.php:135
+#: admin/Tools.php:136
 msgid "Debug mode enabled (query cache bypassed)."
 msgstr ""
 
-#: admin/Tools.php:135
+#: admin/Tools.php:136
 msgid "Debug mode disabled."
 msgstr ""
 
-#: admin/Tools.php:139
+#: admin/Tools.php:140
 msgid "Unknown action."
 msgstr ""
 
-#: admin/Tools.php:150
+#: admin/Tools.php:151
 msgid "Please choose a .json file to import."
 msgstr ""
 
-#: admin/Tools.php:157
+#: admin/Tools.php:158
 msgid "The file must be a .json export."
 msgstr ""
 
-#: admin/Tools.php:162
+#: admin/Tools.php:163
 msgid "That file is not a valid Advanced Testimonial export."
 msgstr ""
 
 #. translators: 1: testimonials, 2: groups, 3: images, 4: skipped.
-#: admin/Tools.php:176
+#: admin/Tools.php:177
 #, php-format
 msgid "Import complete: %1$d testimonials, %2$d groups, %3$d images (%4$d skipped)."
 msgstr ""
 
-#: admin/Tools.php:246
+#: admin/Tools.php:247
 msgid "One-click sample content: 6 testimonials, 2 groups, ratings, companies and images. Existing testimonials are skipped."
 msgstr ""
 
-#: admin/Tools.php:255
+#: admin/Tools.php:256
 msgid "Import"
 msgstr ""
 
-#: admin/Tools.php:261
+#: admin/Tools.php:262
 msgid "Existing testimonials:"
 msgstr ""
 
-#: admin/Tools.php:262
+#: admin/Tools.php:263
 msgid "Append (add all)"
 msgstr ""
 
-#: admin/Tools.php:263
+#: admin/Tools.php:264
 msgid "Skip duplicates (by title)"
 msgstr ""
 
-#: admin/Tools.php:264
+#: admin/Tools.php:265
 msgid "Replace matches (by title)"
 msgstr ""
 
-#: admin/Tools.php:265
+#: admin/Tools.php:266
 msgid "Also import settings (if present)"
 msgstr ""
 
-#: admin/Tools.php:266
+#: admin/Tools.php:267
 msgid "Import File"
 msgstr ""
 
-#: admin/Tools.php:270
+#: admin/Tools.php:271
 msgid "Export"
 msgstr ""
 
-#: admin/Tools.php:274
+#: admin/Tools.php:275
 msgid "Testimonials"
 msgstr ""
 
-#: admin/Tools.php:276
+#: admin/Tools.php:277
 msgid "Plugin settings"
 msgstr ""
 
-#: admin/Tools.php:277
+#: admin/Tools.php:278
 msgid "Export (.json)"
 msgstr ""
 
-#: admin/Tools.php:281
+#: admin/Tools.php:282
 msgid "Maintenance"
 msgstr ""
 
-#: admin/Tools.php:283
+#: admin/Tools.php:284
 msgid "Clear Cache"
 msgstr ""
 
-#: admin/Tools.php:284
+#: admin/Tools.php:285
 msgid "Disable Debug Mode"
 msgstr ""
 
-#: admin/Tools.php:284
+#: admin/Tools.php:285
 msgid "Enable Debug Mode"
 msgstr ""
 
-#: admin/Tools.php:285
+#: admin/Tools.php:286
 msgid "Reset Settings"
 msgstr ""
 
-#: admin/Tools.php:287
+#: admin/Tools.php:288
 msgid "Debug mode is ON — query cache is bypassed."
 msgstr ""
 
-#: admin/Tools.php:287
+#: admin/Tools.php:288
 msgid "Reset restores default settings. Testimonials are never deleted."
 msgstr ""
 
-#: admin/Tools.php:291
+#: admin/Tools.php:292
 msgid "System Info"
 msgstr ""
 
-#: admin/Tools.php:311
+#: admin/Tools.php:312
 msgid "Are you sure?"
 msgstr ""
 
@@ -774,26 +782,26 @@ msgstr ""
 msgid "Starter demo file is invalid."
 msgstr ""
 
-#: templates/carousel.php:24
-#: templates/spotlight.php:24
+#: templates/carousel.php:26
+#: templates/spotlight.php:26
 msgid "Customer testimonials"
 msgstr ""
 
-#: templates/carousel.php:28
-#: templates/spotlight.php:28
+#: templates/carousel.php:30
+#: templates/spotlight.php:30
 msgid "slide"
 msgstr ""
 
-#: templates/carousel.php:34
+#: templates/carousel.php:36
 msgid "Previous testimonials"
 msgstr ""
 
-#: templates/carousel.php:37
+#: templates/carousel.php:39
 msgid "Next testimonials"
 msgstr ""
 
-#: templates/carousel.php:40
-#: templates/spotlight.php:40
+#: templates/carousel.php:42
+#: templates/spotlight.php:42
 msgid "Choose testimonial"
 msgstr ""
 
@@ -805,11 +813,11 @@ msgstr ""
 msgid "Visit Website"
 msgstr ""
 
-#: templates/spotlight.php:34
+#: templates/spotlight.php:36
 msgid "Previous testimonial"
 msgstr ""
 
-#: templates/spotlight.php:37
+#: templates/spotlight.php:39
 msgid "Next testimonial"
 msgstr ""
 

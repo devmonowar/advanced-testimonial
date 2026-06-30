@@ -126,7 +126,8 @@ final class Tools {
 
 			case 'clear':
 				Query::bust_cache();
-				$this->redirect_back( 'success', __( 'Testimonial query cache cleared.', 'advanced-testimonial' ) );
+				delete_transient( DemoLibrary::TRANSIENT );
+				$this->redirect_back( 'success', __( 'Caches cleared — testimonial queries and the demo library list.', 'advanced-testimonial' ) );
 				break;
 
 			case 'debug':
