@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,10 @@ No data from your site is sent to the service; only public demo files (JSON and 
 
 == Changelog ==
 
+= 2.0.3 =
+* New: a "Refresh" button on the Demo Library screen to load the latest demos immediately, bypassing the 6-hour cache.
+* Tools → Clear Cache now also clears the cached demo library list.
+
 = 2.0.2 =
 * New: Tools tab — one-click Starter Demo, demo Import/Export, Clear Cache, Reset Settings, Debug Mode and System Info.
 * New: Demo Library — import ready-made testimonial sets (with images) from the online library, with an offline starter fallback.
@@ -106,6 +110,9 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Performance: frontend assets load only when testimonials are present.
 
 == Upgrade Notice ==
+
+= 2.0.3 =
+Adds a Demo Library "Refresh" button and clears the demo cache from Tools → Clear Cache. Recommended update.
 
 = 2.0.2 =
 Adds a Tools tab, Demo Library with one-click imports, optional headings, more style controls and accessibility improvements. Recommended update.

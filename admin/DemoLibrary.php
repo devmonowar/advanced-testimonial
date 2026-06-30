@@ -171,10 +171,29 @@ final class DemoLibrary {
 	 * @return void
 	 */
 	public function page() {
-		$manifest = self::get_manifest();
+		// A nonce-protected "Refresh" link bypasses the 6h manifest cache.
+		$refresh  = isset( $_GET['at_refresh'], $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'at_demo_refresh' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce verified inline.
+		$manifest = self::get_manifest( $refresh );
+
+		$refresh_url = wp_nonce_url(
+			add_query_arg(
+				array(
+					'post_type'  => CPT::POST_TYPE,
+					'page'       => self::PAGE,
+					'at_refresh' => 1,
+				),
+				admin_url( 'edit.php' )
+			),
+			'at_demo_refresh'
+		);
 		?>
 		<div class="wrap at-demo-library">
-			<h1><?php esc_html_e( 'Demo Library', 'advanced-testimonial' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Demo Library', 'advanced-testimonial' ); ?></h1>
+			<a href="<?php echo esc_url( $refresh_url ); ?>" class="page-title-action"><?php esc_html_e( 'Refresh', 'advanced-testimonial' ); ?></a>
+			<hr class="wp-header-end" />
+			<?php if ( $refresh && ! is_wp_error( $manifest ) ) : ?>
+				<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Demo list refreshed from the library.', 'advanced-testimonial' ); ?></p></div>
+			<?php endif; ?>
 			<p><?php esc_html_e( 'Import a ready-made set of testimonials with one click. Images are downloaded into your Media Library automatically.', 'advanced-testimonial' ); ?></p>
 
 			<?php if ( is_wp_error( $manifest ) ) : ?>
