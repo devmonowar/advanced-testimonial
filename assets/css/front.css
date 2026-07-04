@@ -784,3 +784,185 @@
 		overflow-x: auto;
 	}
 }
+
+/* ============================================================
+   Front-end Submission Form — [at_form]
+   ============================================================ */
+
+.at-form-wrap {
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.at-form-title {
+	margin: 0 0 1.25rem;
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: var(--at-text, #1f2937);
+}
+
+.at-form-notice {
+	padding: 0.875rem 1.125rem;
+	border-radius: 8px;
+	margin-bottom: 1.25rem;
+	font-size: 0.9375rem;
+	line-height: 1.5;
+}
+
+.at-form-success {
+	background: #d1fae5;
+	color: #065f46;
+	border: 1px solid #a7f3d0;
+}
+
+.at-form-error {
+	background: #fee2e2;
+	color: #991b1b;
+	border: 1px solid #fca5a5;
+}
+
+.at-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.125rem;
+}
+
+.at-form__field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.at-form__label {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--at-text, #1f2937);
+}
+
+.at-form__required {
+	color: #ef4444;
+	margin-left: 0.15rem;
+}
+
+.at-form__input,
+.at-form__textarea {
+	width: 100%;
+	padding: 0.625rem 0.875rem;
+	border: 1.5px solid #d1d5db;
+	border-radius: 8px;
+	font-size: 0.9375rem;
+	color: var(--at-text, #1f2937);
+	background: #fff;
+	transition: border-color 0.18s;
+	box-sizing: border-box;
+	font-family: inherit;
+}
+
+.at-form__input:focus,
+.at-form__textarea:focus {
+	outline: none;
+	border-color: var(--at-primary, #2563eb);
+	box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+}
+
+.at-form__textarea {
+	resize: vertical;
+	min-height: 110px;
+}
+
+/* Star rating */
+.at-form__stars {
+	display: flex;
+	gap: 0.25rem;
+	align-items: center;
+}
+
+.at-form__star {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	color: #d1d5db;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.15s, transform 0.1s;
+}
+
+.at-form__star svg {
+	width: 26px;
+	height: 26px;
+	fill: currentColor;
+	stroke: none;
+	display: block;
+}
+
+.at-form__star:hover,
+.at-form__star:focus,
+.at-form__star.at-form__star--hover,
+.at-form__star.is-active {
+	color: var(--at-accent, #f59e0b);
+}
+
+.at-form__star:focus {
+	outline: 2px solid var(--at-primary, #2563eb);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+.at-form__star:active {
+	transform: scale(0.92);
+}
+
+/* Submit button */
+.at-form__actions {
+	margin-top: 0.5rem;
+}
+
+.at-form__submit {
+	display: inline-block;
+	padding: 0.7rem 1.75rem;
+	background: var(--at-primary, #2563eb);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.18s, transform 0.1s, box-shadow 0.18s;
+	font-family: inherit;
+}
+
+.at-form__submit:hover {
+	background: #1d4ed8;
+	box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+}
+
+.at-form__submit:focus {
+	outline: 2px solid var(--at-primary, #2563eb);
+	outline-offset: 3px;
+}
+
+.at-form__submit:active {
+	transform: translateY(1px);
+}
+
+/* Honeypot — visually hidden from humans, accessible to bots */
+.at-form__hp {
+	position: absolute;
+	left: -9999px;
+	top: auto;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+@media (max-width: 480px) {
+	.at-form__submit {
+		width: 100%;
+		text-align: center;
+	}
+}

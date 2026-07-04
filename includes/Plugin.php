@@ -57,6 +57,7 @@ final class Plugin {
 
 		// Frontend output layer.
 		( new Frontend\Assets() )->register();
+		( new Frontend\Form() )->register();
 		( new Shortcode\Shortcode() )->register();
 		( new Blocks\Block() )->register();
 

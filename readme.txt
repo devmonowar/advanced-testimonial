@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,7 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 
 * Seven display layouts: Grid, List, Card, Carousel, Marquee, Masonry and Spotlight.
 * A no-build Gutenberg block, an Elementor widget and the `[advanced_testimonial]` shortcode.
+* **Front-end submission form** — add `[at_form]` to any page so visitors can submit testimonials directly from your site. Submissions land as "Pending" for you to review before publishing, with spam protection (nonce, honeypot and rate-limiting) and an optional admin email notification.
 * Rich per-review fields: headline, rating (half-stars supported), company, designation, location, photo, verified badge and website.
 * Group filter tabs, a "Read more" toggle for long reviews and "Load more" batching.
 * Ready-made demos you can import in one click from the built-in Demo Library.
@@ -76,6 +77,12 @@ Copy any file from the plugin's `templates/` folder into an `advanced-testimonia
 
 Yes — a no-build Gutenberg block with a live preview and full inspector controls (layout, group, columns, order, autoplay and show/hide toggles). It also supports Wide and Full alignment.
 
+= How do I collect testimonials from visitors? =
+
+Add the `[at_form]` shortcode to any page. Visitors fill in their name, review, rating and optional details (company, job title, location, email). Each submission is saved as "Pending" so you can review it before it goes live — or turn on auto-publish under **Testimonials → Settings → Submission Form**.
+
+You can control which fields appear, set a custom success message and receive an email notification for every new submission — all from **Testimonials → Settings → Submission Form**.
+
 = Are there hooks for developers? =
 
 Yes. Filters: `advanced_testimonial_query_args`, `advanced_testimonial_item_data`, `advanced_testimonial_review_html`, `advanced_testimonial_output`, `advanced_testimonial_template`. Actions: `advanced_testimonial_before_card`, `advanced_testimonial_after_card`.
@@ -96,6 +103,9 @@ It connects to this service only when you:
 No data from your site is sent to the service; only public demo files (JSON and images) are downloaded. The service is provided by the plugin author. Source code: https://github.com/devmonowar/wp-plugin-demo-library — it is served by GitHub Pages, whose terms and privacy policy apply (https://docs.github.com/en/site-policy).
 
 == Changelog ==
+
+= 2.0.5 =
+* New: a **front-end submission form** — add `[at_form]` to any page so visitors can submit testimonials directly. Submissions are saved as "Pending" by default (optional auto-publish). Built-in spam protection: nonce verification, honeypot field and a per-IP rate limit. Optional admin email notification on each new submission. All options are under the new **Settings → Submission Form** tab. Shortcode attributes: `title`, `success` (custom success message), `group` (auto-assign submissions to a group).
 
 = 2.0.4 =
 * New: an **Elementor widget** — build testimonial sections in Elementor with the same layouts and controls as the block and shortcode.
