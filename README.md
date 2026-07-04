@@ -9,9 +9,10 @@ A modern, lightweight WordPress plugin for managing and displaying customer test
 ## Features
 
 - **Testimonial post type** with hierarchical **Groups** and rich fields: rating, company, designation, website, verified badge, company logo, location, social links.
-- **Six layouts:** Grid, List, Card, Carousel, Masonry, Spotlight.
-- **Shortcode** `[advanced_testimonial]` and a **no-build Gutenberg block** with a live (ServerSideRender) preview.
-- **Settings page** (General / Styles / Performance / Advanced) with full theming via CSS custom properties.
+- **Seven layouts:** Grid, List, Card, Carousel, Marquee, Masonry, Spotlight.
+- **Shortcode** `[advanced_testimonial]`, a **no-build Gutenberg block** with a live (ServerSideRender) preview, and an **Elementor widget**.
+- **Front-end submission form** (`[at_form]`) — visitors submit testimonials that land as Pending for review, with nonce + honeypot + rate-limit spam protection and an optional admin email notification.
+- **Settings page** (General / Styles / Performance / Submission Form / Advanced) with full theming via CSS custom properties.
 - **Schema.org Review** markup, accessibility (ARIA, keyboard), RTL support.
 - **Performance-first:** frontend assets load only when testimonials are present; a tiny vanilla-JS carousel (no jQuery, no external libraries).
 - **Developer friendly:** theme template overrides (`theme/advanced-testimonial/*.php`) and filters.
@@ -23,6 +24,8 @@ A modern, lightweight WordPress plugin for managing and displaying customer test
 ```
 
 Attributes: `layout`, `width` (`wide`/`full`), `columns`, `limit`, `group`, `ids`, `order` (`asc`/`desc`/`random`), `orderby`, `autoplay`, and `show_rating` / `show_image` / `show_company` / `show_designation` / `show_location` / `show_date` / `show_verified` / `show_website`.
+
+Submission form: `[at_form title="Leave a review" group="clients"]` — attributes: `title`, `success` (custom success message), `group` (auto-assign submissions to a group).
 
 ## Architecture
 
@@ -41,7 +44,7 @@ PHP 7.4+ compatible. Coding standard: WordPress-Core (see `phpcs.xml.dist`).
 
 ## Release workflow
 
-1. Bump the version in **3 places**: `advanced-testimonial.php` (header + `ADVANCED_TESTIMONIAL_VERSION`), `blocks/block.json`, and `readme.txt` (`Stable tag` + changelog).
+1. Bump the version in **4 places**: `advanced-testimonial.php` (header + `ADVANCED_TESTIMONIAL_VERSION`), `blocks/block.json`, `composer.json`, and `readme.txt` (`Stable tag` + changelog).
 2. Commit and push to `main`. Wait for **CI** (lint + PHPCS) to pass.
 3. Tag the release: `git tag X.Y.Z && git push origin X.Y.Z`. The **Deploy** workflow publishes it to WordPress.org.
 

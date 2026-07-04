@@ -62,12 +62,14 @@ delete_option( 'advanced_testimonial_settings' );
 delete_option( 'advanced_testimonial_debug' );
 delete_option( 'advanced_testimonial_cache_ver' );
 
-// 4. Delete transients (query cache + one-time tools notices).
+// 4. Delete transients (query cache + form rate limits + one-time tools notices).
 global $wpdb;
 $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off cleanup on uninstall; transients are not cacheable here.
 	"DELETE FROM {$wpdb->options}
 	 WHERE option_name LIKE '\_transient\_at\_q\_%'
 	    OR option_name LIKE '\_transient\_timeout\_at\_q\_%'
+	    OR option_name LIKE '\_transient\_at\_rate\_%'
+	    OR option_name LIKE '\_transient\_timeout\_at\_rate\_%'
 	    OR option_name LIKE '\_transient\_advanced\_testimonial\_%'
 	    OR option_name LIKE '\_transient\_timeout\_advanced\_testimonial\_%'"
 );
