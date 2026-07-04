@@ -115,6 +115,33 @@
 }
 
 /* Demo Library */
+.at-demo-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	margin: 18px 0 4px;
+}
+
+.at-demo-search {
+	min-width: 240px;
+}
+
+.at-demo-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.at-demo-empty {
+	margin: 24px 0;
+	padding: 16px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	color: #646970;
+}
+
 .at-demo-grid {
 	display: grid;
 	grid-template-columns: repeat( auto-fill, minmax( 280px, 1fr ) );

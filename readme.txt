@@ -12,15 +12,26 @@ Showcase customer testimonials and client reviews in beautiful grids, carousels,
 
 == Description ==
 
-Advanced Testimonial is a dedicated testimonial and customer-review management plugin for WordPress. Manage reviews as regular posts, group them, and display them anywhere with a shortcode or Gutenberg block.
+Turn happy customers into your best marketing. Advanced Testimonial helps you collect trust, build social proof and increase conversions by showcasing real client reviews anywhere on your WordPress site — in beautiful grids, carousels, cards and more.
 
-Key ideas:
+Manage reviews like regular posts, group them, and drop them onto any page with a shortcode, a Gutenberg block or an Elementor widget.
 
-* One plugin, one purpose — professional testimonial management, not a generic slider.
-* Lightweight and performance-first: frontend assets load only when needed, no jQuery, no heavy libraries.
-* Multiple display layouts: Grid, List, Card, Carousel, Marquee, Masonry and Spotlight.
-* Schema.org Review markup for richer search results.
-* Translation-ready, accessible, and built on the WordPress Coding Standards.
+= Why Advanced Testimonial? =
+
+* **Build credibility & social proof** — show authentic reviews with star ratings, photos, companies, locations and verified badges.
+* **Increase conversions** — place persuasive testimonials on landing pages, product pages and checkout to turn visitors into customers.
+* **Win in Google** — built-in **Schema.org Review markup** lets search engines show ⭐ star ratings as rich snippets, so your result stands out and earns more clicks.
+* **Fast & lightweight** — frontend assets load only where they are used, with no jQuery and no bloat, so your pages stay fast.
+* **Fits any site** — agencies, SaaS products, WooCommerce shops, restaurants, portfolios, healthcare and more.
+
+= Everything you need =
+
+* Seven display layouts: Grid, List, Card, Carousel, Marquee, Masonry and Spotlight.
+* A no-build Gutenberg block, an Elementor widget and the `[advanced_testimonial]` shortcode.
+* Rich per-review fields: headline, rating (half-stars supported), company, designation, location, photo, verified badge and website.
+* Group filter tabs, a "Read more" toggle for long reviews and "Load more" batching.
+* Ready-made demos you can import in one click from the built-in Demo Library.
+* Translation-ready, accessible (ARIA, keyboard, RTL) and built on the WordPress Coding Standards.
 
 == Installation ==
 
@@ -31,11 +42,11 @@ Key ideas:
 
 == Screenshots ==
 
-1. Grid layout — testimonials in a responsive grid with star ratings and verified badges.
-2. Carousel layout — a lightweight, swipeable slider with navigation and dots.
-3. Spotlight layout — one large featured testimonial.
-4. Gutenberg block with live preview and full inspector controls.
-5. Settings page — colors, layout, performance and advanced options.
+1. Grid layout — customer reviews in a responsive grid with star ratings, headlines and verified badges.
+2. Carousel layout — a lightweight, swipeable slider with navigation arrows and dots.
+3. Marquee layout — a smooth, continuously scrolling row of testimonials with soft edge fades.
+4. Card layout — large, prominent single-column testimonial cards.
+5. Fully responsive — testimonials look great on mobile right out of the box.
 
 == Frequently Asked Questions ==
 
@@ -85,14 +96,16 @@ No data from your site is sent to the service; only public demo files (JSON and 
 == Changelog ==
 
 = 2.0.4 =
-* New: an optional **Headline / Review Title** field per testimonial (e.g. "Amazing staff"), shown above the review with a show/hide toggle in the block and shortcode (`show_headline`). Output with Schema.org review name.
-* New: **Marquee** layout — a smooth, continuously scrolling row of testimonials that pauses on hover, with optional soft **edge fade** and a choice of **scroll direction** (right-to-left or left-to-right). Adjustable scroll speed and card width, set globally in Settings → Styles with an optional per-block override. Fully accessible (honours reduced-motion) and lightweight, no jQuery.
-* New: **half-star ratings** — ratings can now be set in 0.5 steps (e.g. 4.5 stars); the front-end renders a precise half star and the Schema.org `ratingValue` reflects the decimal.
-* New: optional **"Read more"** — long reviews are trimmed to a set number of lines with a Read more / Read less toggle (Settings → Styles sets the line count; enable per block or with `read_more="true"`). Falls back to full text when JavaScript is off.
-* New: optional **"Load more"** — show a batch of testimonials first and reveal more on click, on the Grid, List, Card and Masonry layouts (Settings → Styles sets the batch size; enable per block or with `load_more="true"`). Falls back to all testimonials when JavaScript is off.
-* New: the Marquee **scroll direction** and speed/card-width defaults are now all set in Settings → Styles, with per-block overrides.
-* New: optional **group filter tabs** — let visitors filter testimonials by group (e.g. "All / Clients / Partners") with a click, on the Grid, List, Card and Masonry layouts. Toggle it in the block or with `show_filter="true"`.
-* Fix: **Masonry** layout no longer overlaps cards, and adapts its column count to the available width so it never overcrowds a narrow content area.
+* New: an **Elementor widget** — build testimonial sections in Elementor with the same layouts and controls as the block and shortcode.
+* New: a **Marquee** layout — a smooth, continuously scrolling row of testimonials that pauses on hover, with an optional soft edge fade and a choice of scroll direction (right-to-left or left-to-right). Scroll speed, card width and direction are set globally in Settings → Styles with per-block overrides. Reduced-motion friendly and lightweight, no jQuery.
+* New: an optional per-testimonial **Headline / Review Title** field, shown above the review (block/shortcode `show_headline`), output with the Schema.org review name.
+* New: **half-star ratings** — set any rating in 0.5 steps (e.g. 4.5 stars); the front-end renders a precise half star and the Schema.org `ratingValue` reflects the decimal.
+* New: optional **group filter tabs** so visitors can filter testimonials by group (e.g. "All / Clients / Partners") on the Grid, List, Card and Masonry layouts (`show_filter`).
+* New: optional **"Read more"** for long reviews and **"Load more"** to reveal testimonials in batches — both configurable in Settings → Styles and safe when JavaScript is off.
+* New: the built-in **Demo Library** now has a search box and category filters so you can find a ready-made demo by use case.
+* Fix: the **Carousel** now advances one testimonial per arrow/dot click instead of a whole page.
+* Fix: the settings page keeps the active tab after **Save Changes** instead of jumping back to General.
+* Fix: **Masonry** no longer overlaps cards, and adapts its column count so it never overcrowds a narrow content area.
 * Fix: the "Use Minified Assets" option now falls back to the full CSS/JS when a minified file is not present, instead of failing to load.
 
 = 2.0.3 =
@@ -123,7 +136,7 @@ No data from your site is sent to the service; only public demo files (JSON and 
 == Upgrade Notice ==
 
 = 2.0.4 =
-Adds an optional per-testimonial Headline / Review Title field and a new smooth-scrolling Marquee layout. Recommended update.
+Big update: an Elementor widget, a new Marquee layout, half-star ratings, review headlines, group filters, Read more / Load more, and a searchable Demo Library. Recommended update.
 
 = 2.0.3 =
 Adds a Demo Library "Refresh" button and clears the demo cache from Tools → Clear Cache. Recommended update.

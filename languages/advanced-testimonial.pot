@@ -9,13 +9,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-04T10:10:11+02:00\n"
+"POT-Creation-Date: 2026-07-04T12:21:39+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-testimonial\n"
 
 #. Plugin Name of the plugin
 #: advanced-testimonial.php
+#: includes/Elementor.php:51
+#: includes/Elementor_Widget.php:42
 msgid "Advanced Testimonial"
 msgstr ""
 
@@ -158,106 +160,127 @@ msgstr ""
 
 #: admin/DemoLibrary.php:46
 #: admin/DemoLibrary.php:47
-#: admin/DemoLibrary.php:191
+#: admin/DemoLibrary.php:199
 msgid "Demo Library"
 msgstr ""
 
-#: admin/DemoLibrary.php:107
+#: admin/DemoLibrary.php:115
 msgid "The demo library could not be reached."
 msgstr ""
 
-#: admin/DemoLibrary.php:128
+#: admin/DemoLibrary.php:136
 msgid "The demo library response was not valid."
 msgstr ""
 
-#: admin/DemoLibrary.php:131
+#: admin/DemoLibrary.php:139
 msgid "The demo library is for a different plugin."
 msgstr ""
 
-#: admin/DemoLibrary.php:159
+#: admin/DemoLibrary.php:167
 msgid "The demo library is empty right now."
 msgstr ""
 
-#: admin/DemoLibrary.php:192
+#: admin/DemoLibrary.php:200
 msgid "Refresh"
 msgstr ""
 
-#: admin/DemoLibrary.php:195
+#: admin/DemoLibrary.php:203
 msgid "Demo list refreshed from the library."
 msgstr ""
 
-#: admin/DemoLibrary.php:197
+#: admin/DemoLibrary.php:205
 msgid "Import a ready-made set of testimonials with one click. Images are downloaded into your Media Library automatically."
 msgstr ""
 
-#: admin/DemoLibrary.php:201
+#: admin/DemoLibrary.php:209
 msgid "Unable to load the online demo library."
 msgstr ""
 
-#: admin/DemoLibrary.php:203
+#: admin/DemoLibrary.php:211
 msgid "You can still import the bundled starter demo below."
 msgstr ""
 
-#: admin/DemoLibrary.php:235
+#: admin/DemoLibrary.php:225
+msgid "Search demos…"
+msgstr ""
+
+#: admin/DemoLibrary.php:225
+msgid "Search demos"
+msgstr ""
+
+#: admin/DemoLibrary.php:227
+msgid "Filter demos by category"
+msgstr ""
+
+#: admin/DemoLibrary.php:228
+#: frontend/Renderer.php:327
+msgid "All"
+msgstr ""
+
+#: admin/DemoLibrary.php:242
+msgid "No demos match your search."
+msgstr ""
+
+#: admin/DemoLibrary.php:264
 msgid "Featured"
 msgstr ""
 
-#: admin/DemoLibrary.php:237
+#: admin/DemoLibrary.php:266
 msgid "New"
 msgstr ""
 
-#: admin/DemoLibrary.php:255
-#: admin/DemoLibrary.php:258
-#: admin/DemoLibrary.php:288
+#: admin/DemoLibrary.php:284
+#: admin/DemoLibrary.php:287
+#: admin/DemoLibrary.php:317
 msgid "Import Demo"
 msgstr ""
 
 #. translators: %s: required plugin version.
-#: admin/DemoLibrary.php:262
+#: admin/DemoLibrary.php:291
 #, php-format
 msgid "Requires Advanced Testimonial %s+"
 msgstr ""
 
-#: admin/DemoLibrary.php:280
+#: admin/DemoLibrary.php:309
 #: admin/Tools.php:246
 msgid "Starter Demo"
 msgstr ""
 
-#: admin/DemoLibrary.php:281
+#: admin/DemoLibrary.php:310
 msgid "Six sample testimonials with ratings, companies and images, bundled with the plugin."
 msgstr ""
 
-#: admin/DemoLibrary.php:302
+#: admin/DemoLibrary.php:331
 msgid "You are not allowed to do this."
 msgstr ""
 
-#: admin/DemoLibrary.php:311
+#: admin/DemoLibrary.php:340
 msgid "Unknown demo."
 msgstr ""
 
-#: admin/DemoLibrary.php:347
+#: admin/DemoLibrary.php:376
 msgid "That demo is no longer available."
 msgstr ""
 
-#: admin/DemoLibrary.php:352
+#: admin/DemoLibrary.php:381
 msgid "This demo needs a newer plugin version."
 msgstr ""
 
-#: admin/DemoLibrary.php:357
+#: admin/DemoLibrary.php:386
 msgid "The demo could not be downloaded."
 msgstr ""
 
-#: admin/DemoLibrary.php:361
+#: admin/DemoLibrary.php:390
 msgid "The demo data was invalid."
 msgstr ""
 
 #. translators: %d: number of imported testimonials.
-#: admin/DemoLibrary.php:382
+#: admin/DemoLibrary.php:411
 #, php-format
 msgid "Demo imported — %d testimonials added. Display them with the block or the [advanced_testimonial] shortcode."
 msgstr ""
 
-#: admin/DemoLibrary.php:386
+#: admin/DemoLibrary.php:415
 msgid "Sorry, that demo could not be imported. Please try again."
 msgstr ""
 
@@ -507,16 +530,19 @@ msgid "Marquee Scroll Speed"
 msgstr ""
 
 #: admin/Settings.php:210
+#: includes/Elementor_Widget.php:215
 #: blocks/editor.js:45
 msgid "Slow"
 msgstr ""
 
 #: admin/Settings.php:211
+#: includes/Elementor_Widget.php:216
 #: blocks/editor.js:46
 msgid "Normal"
 msgstr ""
 
 #: admin/Settings.php:212
+#: includes/Elementor_Widget.php:217
 #: blocks/editor.js:47
 msgid "Fast"
 msgstr ""
@@ -538,11 +564,13 @@ msgid "Marquee Scroll Direction"
 msgstr ""
 
 #: admin/Settings.php:230
+#: includes/Elementor_Widget.php:241
 #: blocks/editor.js:52
 msgid "Right to left"
 msgstr ""
 
 #: admin/Settings.php:231
+#: includes/Elementor_Widget.php:242
 #: blocks/editor.js:53
 msgid "Left to right"
 msgstr ""
@@ -828,15 +856,12 @@ msgid "Are you sure?"
 msgstr ""
 
 #: blocks/Block.php:127
+#: includes/Elementor_Widget.php:330
 msgid "All groups"
 msgstr ""
 
 #: frontend/Renderer.php:326
 msgid "Filter testimonials by group"
-msgstr ""
-
-#: frontend/Renderer.php:327
-msgid "All"
 msgstr ""
 
 #: frontend/Renderer.php:353
@@ -859,6 +884,190 @@ msgstr ""
 
 #: includes/Demo.php:236
 msgid "Starter demo file is invalid."
+msgstr ""
+
+#: includes/Elementor_Widget.php:101
+#: includes/Elementor_Widget.php:118
+#: blocks/editor.js:79
+#: blocks/editor.js:86
+msgid "Layout"
+msgstr ""
+
+#: includes/Elementor_Widget.php:109
+#: blocks/editor.js:81
+msgid "Heading (optional)"
+msgstr ""
+
+#: includes/Elementor_Widget.php:122
+#: blocks/editor.js:28
+msgid "Grid"
+msgstr ""
+
+#: includes/Elementor_Widget.php:123
+#: blocks/editor.js:29
+msgid "List"
+msgstr ""
+
+#: includes/Elementor_Widget.php:124
+#: blocks/editor.js:30
+msgid "Card"
+msgstr ""
+
+#: includes/Elementor_Widget.php:125
+#: blocks/editor.js:31
+msgid "Carousel"
+msgstr ""
+
+#: includes/Elementor_Widget.php:126
+#: includes/Elementor_Widget.php:201
+#: blocks/editor.js:32
+#: blocks/editor.js:144
+msgid "Marquee"
+msgstr ""
+
+#: includes/Elementor_Widget.php:127
+#: blocks/editor.js:33
+msgid "Masonry"
+msgstr ""
+
+#: includes/Elementor_Widget.php:128
+#: blocks/editor.js:34
+msgid "Spotlight"
+msgstr ""
+
+#: includes/Elementor_Widget.php:136
+#: blocks/editor.js:92
+msgid "Group"
+msgstr ""
+
+#: includes/Elementor_Widget.php:146
+#: blocks/editor.js:98
+msgid "Columns"
+msgstr ""
+
+#: includes/Elementor_Widget.php:161
+#: blocks/editor.js:105
+msgid "Number to show"
+msgstr ""
+
+#: includes/Elementor_Widget.php:172
+#: blocks/editor.js:112
+msgid "Order"
+msgstr ""
+
+#: includes/Elementor_Widget.php:176
+#: blocks/editor.js:38
+msgid "Newest first"
+msgstr ""
+
+#: includes/Elementor_Widget.php:177
+#: blocks/editor.js:39
+msgid "Oldest first"
+msgstr ""
+
+#: includes/Elementor_Widget.php:178
+#: blocks/editor.js:40
+msgid "Random"
+msgstr ""
+
+#: includes/Elementor_Widget.php:186
+#: blocks/editor.js:118
+msgid "Autoplay seconds (0 = off)"
+msgstr ""
+
+#: includes/Elementor_Widget.php:191
+#: blocks/editor.js:119
+msgid "Carousel and Spotlight only."
+msgstr ""
+
+#: includes/Elementor_Widget.php:210
+#: blocks/editor.js:146
+msgid "Scroll speed"
+msgstr ""
+
+#: includes/Elementor_Widget.php:214
+#: includes/Elementor_Widget.php:240
+#: blocks/editor.js:44
+#: blocks/editor.js:51
+msgid "Default (from settings)"
+msgstr ""
+
+#: includes/Elementor_Widget.php:225
+msgid "Card width (px, 0 = default)"
+msgstr ""
+
+#: includes/Elementor_Widget.php:236
+#: blocks/editor.js:161
+msgid "Direction"
+msgstr ""
+
+#: includes/Elementor_Widget.php:250
+#: blocks/editor.js:166
+msgid "Edge fade"
+msgstr ""
+
+#: includes/Elementor_Widget.php:262
+#: blocks/editor.js:128
+msgid "Display"
+msgstr ""
+
+#: includes/Elementor_Widget.php:268
+#: blocks/editor.js:129
+msgid "Show rating"
+msgstr ""
+
+#: includes/Elementor_Widget.php:269
+#: blocks/editor.js:130
+msgid "Show client photo"
+msgstr ""
+
+#: includes/Elementor_Widget.php:270
+#: blocks/editor.js:131
+msgid "Show company"
+msgstr ""
+
+#: includes/Elementor_Widget.php:271
+#: blocks/editor.js:132
+msgid "Show designation"
+msgstr ""
+
+#: includes/Elementor_Widget.php:272
+#: blocks/editor.js:133
+msgid "Show location"
+msgstr ""
+
+#: includes/Elementor_Widget.php:273
+#: blocks/editor.js:134
+msgid "Show date"
+msgstr ""
+
+#: includes/Elementor_Widget.php:274
+#: blocks/editor.js:135
+msgid "Show verified badge"
+msgstr ""
+
+#: includes/Elementor_Widget.php:275
+#: blocks/editor.js:136
+msgid "Show website button"
+msgstr ""
+
+#: includes/Elementor_Widget.php:276
+#: blocks/editor.js:137
+msgid "Show headline"
+msgstr ""
+
+#: includes/Elementor_Widget.php:294
+msgid "Group filter tabs"
+msgstr ""
+
+#: includes/Elementor_Widget.php:304
+#: blocks/editor.js:139
+msgid "Truncate long reviews (Read more)"
+msgstr ""
+
+#: includes/Elementor_Widget.php:314
+#: blocks/editor.js:140
+msgid "Reveal in batches (Load more)"
 msgstr ""
 
 #: templates/carousel.php:26
@@ -909,139 +1118,8 @@ msgstr ""
 msgid "Next testimonial"
 msgstr ""
 
-#: blocks/editor.js:28
-msgid "Grid"
-msgstr ""
-
-#: blocks/editor.js:29
-msgid "List"
-msgstr ""
-
-#: blocks/editor.js:30
-msgid "Card"
-msgstr ""
-
-#: blocks/editor.js:31
-msgid "Carousel"
-msgstr ""
-
-#: blocks/editor.js:32
-#: blocks/editor.js:144
-msgid "Marquee"
-msgstr ""
-
-#: blocks/editor.js:33
-msgid "Masonry"
-msgstr ""
-
-#: blocks/editor.js:34
-msgid "Spotlight"
-msgstr ""
-
-#: blocks/editor.js:38
-msgid "Newest first"
-msgstr ""
-
-#: blocks/editor.js:39
-msgid "Oldest first"
-msgstr ""
-
-#: blocks/editor.js:40
-msgid "Random"
-msgstr ""
-
-#: blocks/editor.js:44
-#: blocks/editor.js:51
-msgid "Default (from settings)"
-msgstr ""
-
-#: blocks/editor.js:79
-#: blocks/editor.js:86
-msgid "Layout"
-msgstr ""
-
-#: blocks/editor.js:81
-msgid "Heading (optional)"
-msgstr ""
-
-#: blocks/editor.js:92
-msgid "Group"
-msgstr ""
-
-#: blocks/editor.js:98
-msgid "Columns"
-msgstr ""
-
-#: blocks/editor.js:105
-msgid "Number to show"
-msgstr ""
-
-#: blocks/editor.js:112
-msgid "Order"
-msgstr ""
-
-#: blocks/editor.js:118
-msgid "Autoplay seconds (0 = off)"
-msgstr ""
-
-#: blocks/editor.js:119
-msgid "Carousel and Spotlight only."
-msgstr ""
-
-#: blocks/editor.js:128
-msgid "Display"
-msgstr ""
-
-#: blocks/editor.js:129
-msgid "Show rating"
-msgstr ""
-
-#: blocks/editor.js:130
-msgid "Show client photo"
-msgstr ""
-
-#: blocks/editor.js:131
-msgid "Show company"
-msgstr ""
-
-#: blocks/editor.js:132
-msgid "Show designation"
-msgstr ""
-
-#: blocks/editor.js:133
-msgid "Show location"
-msgstr ""
-
-#: blocks/editor.js:134
-msgid "Show date"
-msgstr ""
-
-#: blocks/editor.js:135
-msgid "Show verified badge"
-msgstr ""
-
-#: blocks/editor.js:136
-msgid "Show website button"
-msgstr ""
-
-#: blocks/editor.js:137
-msgid "Show headline"
-msgstr ""
-
 #: blocks/editor.js:138
 msgid "Show group filter tabs"
-msgstr ""
-
-#: blocks/editor.js:139
-msgid "Truncate long reviews (Read more)"
-msgstr ""
-
-#: blocks/editor.js:140
-msgid "Reveal in batches (Load more)"
-msgstr ""
-
-#: blocks/editor.js:146
-msgid "Scroll speed"
 msgstr ""
 
 #: blocks/editor.js:152
@@ -1050,14 +1128,6 @@ msgstr ""
 
 #: blocks/editor.js:153
 msgid "0 = use the global setting."
-msgstr ""
-
-#: blocks/editor.js:161
-msgid "Direction"
-msgstr ""
-
-#: blocks/editor.js:166
-msgid "Edge fade"
 msgstr ""
 
 #: blocks/block.json
