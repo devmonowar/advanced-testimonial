@@ -275,6 +275,71 @@ final class Settings {
 					),
 				),
 			),
+			'submission'  => array(
+				'title'  => __( 'Submission Form', 'advanced-testimonial' ),
+				'fields' => array(
+					'form_enabled'          => array(
+						'type'        => 'checkbox',
+						'label'       => __( 'Enable Submission Form', 'advanced-testimonial' ),
+						'default'     => 1,
+						'description' => __( 'Enable the [at_form] shortcode. Visitors can submit testimonials from the front end.', 'advanced-testimonial' ),
+					),
+					'form_auto_publish'     => array(
+						'type'        => 'checkbox',
+						'label'       => __( 'Auto-Publish Submissions', 'advanced-testimonial' ),
+						'default'     => 0,
+						'description' => __( 'Publish testimonials immediately. When off, they are saved as "Pending" for you to review first (recommended).', 'advanced-testimonial' ),
+					),
+					'form_require_rating'   => array(
+						'type'    => 'checkbox',
+						'label'   => __( 'Require a Rating', 'advanced-testimonial' ),
+						'default' => 0,
+					),
+					'form_show_headline'    => array(
+						'type'    => 'checkbox',
+						'label'   => __( 'Show "Review Title" Field', 'advanced-testimonial' ),
+						'default' => 1,
+					),
+					'form_show_company'     => array(
+						'type'    => 'checkbox',
+						'label'   => __( 'Show "Company" Field', 'advanced-testimonial' ),
+						'default' => 1,
+					),
+					'form_show_designation' => array(
+						'type'    => 'checkbox',
+						'label'   => __( 'Show "Job Title" Field', 'advanced-testimonial' ),
+						'default' => 1,
+					),
+					'form_show_location'    => array(
+						'type'    => 'checkbox',
+						'label'   => __( 'Show "Location" Field', 'advanced-testimonial' ),
+						'default' => 1,
+					),
+					'form_show_email'       => array(
+						'type'        => 'checkbox',
+						'label'       => __( 'Show "Email Address" Field', 'advanced-testimonial' ),
+						'default'     => 1,
+						'description' => __( 'Email is never displayed publicly. Used for admin reference only.', 'advanced-testimonial' ),
+					),
+					'form_show_website'     => array(
+						'type'    => 'checkbox',
+						'label'   => __( 'Show "Website" Field', 'advanced-testimonial' ),
+						'default' => 0,
+					),
+					'form_notify_email'     => array(
+						'type'        => 'text',
+						'label'       => __( 'Notification Email', 'advanced-testimonial' ),
+						'default'     => '',
+						'description' => __( 'Send a notification to this address on each new submission. Leave blank to use the site admin email.', 'advanced-testimonial' ),
+					),
+					'form_success_message'  => array(
+						'type'        => 'text',
+						'label'       => __( 'Success Message', 'advanced-testimonial' ),
+						'default'     => '',
+						'description' => __( 'Message shown after a successful submission. Shortcode attribute "success" overrides this.', 'advanced-testimonial' ),
+					),
+				),
+			),
 			'advanced'    => array(
 				'title'  => __( 'Advanced', 'advanced-testimonial' ),
 				'fields' => array(

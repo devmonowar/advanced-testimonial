@@ -3,7 +3,7 @@
 	"description": "Professional testimonial and customer review management for WordPress.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"require": {
 		"php": ">=7.4"
 	},
