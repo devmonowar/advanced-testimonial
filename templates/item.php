@@ -25,6 +25,14 @@ if ( ! empty( $atts['show_company'] ) && '' !== $item['company'] ) {
 	$at_role[] = $item['company'];
 }
 
+$at_group_slugs = ! empty( $item['groups'] ) ? implode( ' ', array_keys( $item['groups'] ) ) : '';
+
+// Load more: items past the initial batch start collapsed (revealed by JS;
+// shown for everyone when JS is off — the clamp is gated by .at-has-loadmore).
+// Grid/List/Card mark the card itself; Masonry marks its column wrapper instead.
+$at_lm_initial   = isset( $atts['_lm_initial'] ) ? (int) $atts['_lm_initial'] : 0;
+$at_lm_collapsed = ! empty( $atts['load_more'] ) && isset( $at_lm_index ) && $at_lm_index >= $at_lm_initial && 'masonry' !== $atts['layout'];
+
 /**
  * Fires before a testimonial card is rendered.
  *
@@ -33,7 +41,7 @@ if ( ! empty( $atts['show_company'] ) && '' !== $item['company'] ) {
  */
 do_action( 'advanced_testimonial_before_card', $item, $atts );
 ?>
-<article class="at-card"<?php echo $at_review ? ' itemscope itemtype="https://schema.org/Review"' : ''; ?>>
+<article class="at-card<?php echo $at_lm_collapsed ? ' at-lm-collapsed' : ''; ?>"<?php echo $at_review ? ' itemscope itemtype="https://schema.org/Review"' : ''; ?><?php echo '' !== $at_group_slugs ? ' data-at-groups="' . esc_attr( $at_group_slugs ) . '"' : ''; ?>>
 	<div class="at-card__inner">
 
 		<?php if ( $at_review ) : ?>
@@ -55,7 +63,11 @@ do_action( 'advanced_testimonial_before_card', $item, $atts );
 			<?php endif; ?>
 		<?php endif; ?>
 
-		<blockquote class="at-card__review"<?php echo $at_review ? ' itemprop="reviewBody"' : ''; ?>>
+		<?php if ( ! empty( $atts['show_headline'] ) && '' !== $item['headline'] ) : ?>
+			<h4 class="at-card__headline"<?php echo $at_review ? ' itemprop="name"' : ''; ?>><?php echo esc_html( $item['headline'] ); ?></h4>
+		<?php endif; ?>
+
+		<blockquote class="at-card__review<?php echo ! empty( $atts['read_more'] ) ? ' at-card__review--clamp' : ''; ?>"<?php echo $at_review ? ' itemprop="reviewBody"' : ''; ?>>
 			<?php
 			/**
 			 * Filter the testimonial review HTML before output (output is still
@@ -68,6 +80,10 @@ do_action( 'advanced_testimonial_before_card', $item, $atts );
 			echo wp_kses_post( apply_filters( 'advanced_testimonial_review_html', wpautop( $item['review'] ), $item, $atts ) );
 			?>
 		</blockquote>
+
+		<?php if ( ! empty( $atts['read_more'] ) ) : ?>
+			<button type="button" class="at-readmore" aria-expanded="false" data-more="<?php esc_attr_e( 'Read more', 'advanced-testimonial' ); ?>" data-less="<?php esc_attr_e( 'Read less', 'advanced-testimonial' ); ?>"><?php esc_html_e( 'Read more', 'advanced-testimonial' ); ?></button>
+		<?php endif; ?>
 
 		<footer class="at-card__author">
 			<?php if ( '' !== $item['photo'] ) : ?>

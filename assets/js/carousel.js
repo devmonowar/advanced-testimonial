@@ -192,12 +192,196 @@
 		}
 	};
 
+	/**
+	 * Continuous marquee. The item set is rendered twice in the markup, so
+	 * animating the track by -50% loops seamlessly. Duration is derived from
+	 * the track width to keep a constant pixels-per-second speed regardless of
+	 * how many testimonials are shown.
+	 *
+	 * @param {Element} root The [data-at-marquee] element.
+	 */
+	function Marquee( root ) {
+		var track = root.querySelector( '.at-marquee__track' );
+		if ( ! track ) {
+			return;
+		}
+
+		var speed = parseFloat( root.getAttribute( 'data-speed' ) ) || 45; // Pixels per second.
+
+		function apply() {
+			var half     = track.scrollWidth / 2; // One of the two identical halves.
+			var viewport = root.querySelector( '.at-marquee__viewport' );
+			var visible  = viewport ? viewport.clientWidth : root.clientWidth;
+
+			// Content does not overflow: nothing to scroll, just center it.
+			if ( half <= visible ) {
+				root.classList.add( 'at-marquee--static' );
+				return;
+			}
+
+			root.classList.remove( 'at-marquee--static' );
+			track.style.setProperty( '--at-marquee-duration', ( half / speed ).toFixed( 2 ) + 's' );
+		}
+
+		apply();
+
+		var resizeTimer;
+		window.addEventListener( 'resize', function () {
+			window.clearTimeout( resizeTimer );
+			resizeTimer = window.setTimeout( apply, 150 );
+		} );
+	}
+
+	/**
+	 * Group filter tabs. Shows/hides the already-rendered cards by their
+	 * data-at-groups slugs. Works for grid, list, card and masonry layouts.
+	 *
+	 * @param {Element} bar The .at-filter element.
+	 */
+	function Filter( bar ) {
+		var wrap = bar.closest( '.at-wrapper' );
+		if ( ! wrap ) {
+			return;
+		}
+
+		var container = wrap.querySelector( '.at-grid, .at-list, .at-card-layout, .at-masonry' );
+		if ( ! container ) {
+			return;
+		}
+
+		var cards = Array.prototype.slice.call( container.querySelectorAll( '.at-card' ) );
+		var btns  = Array.prototype.slice.call( bar.querySelectorAll( '.at-filter__btn' ) );
+
+		bar.addEventListener( 'click', function ( event ) {
+			var btn = event.target.closest( '.at-filter__btn' );
+			if ( ! btn ) {
+				return;
+			}
+
+			var want = btn.getAttribute( 'data-at-filter' );
+
+			btns.forEach( function ( b ) {
+				var active = b === btn;
+				b.classList.toggle( 'is-active', active );
+				b.setAttribute( 'aria-pressed', active ? 'true' : 'false' );
+			} );
+
+			cards.forEach( function ( card ) {
+				var host   = card.closest( '.at-masonry__item' ) || card;
+				var groups = ( card.getAttribute( 'data-at-groups' ) || '' ).split( ' ' );
+				var show   = '*' === want || groups.indexOf( want ) !== -1;
+				host.style.display = show ? '' : 'none';
+			} );
+		} );
+	}
+
+	/**
+	 * Read more toggles. Clamps long reviews and reveals a toggle only when the
+	 * text actually overflows. Gated by the .at-has-readmore class so visitors
+	 * without JS keep the full review text.
+	 */
+	function initReadMore() {
+		var buttons = document.querySelectorAll( '.at-readmore' );
+		Array.prototype.forEach.call( buttons, function ( btn ) {
+			if ( btn.getAttribute( 'data-at-ready' ) ) {
+				return;
+			}
+			btn.setAttribute( 'data-at-ready', '1' );
+
+			var wrap = btn.closest( '.at-wrapper' );
+			if ( wrap ) {
+				wrap.classList.add( 'at-has-readmore' );
+			}
+
+			var review = btn.previousElementSibling;
+			if ( ! review || review.className.indexOf( 'at-card__review' ) === -1 ) {
+				btn.style.display = 'none';
+				return;
+			}
+
+			// Fits within the clamp already: no toggle needed.
+			if ( review.scrollHeight - review.clientHeight <= 2 ) {
+				review.classList.remove( 'at-card__review--clamp' );
+				if ( btn.parentNode ) {
+					btn.parentNode.removeChild( btn );
+				}
+				return;
+			}
+
+			btn.addEventListener( 'click', function () {
+				var expanded = review.classList.toggle( 'is-expanded' );
+				btn.textContent = expanded ? btn.getAttribute( 'data-less' ) : btn.getAttribute( 'data-more' );
+				btn.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
+			} );
+		} );
+	}
+
+	/**
+	 * Load more. Reveals hidden cards in batches. Gated by .at-has-loadmore so
+	 * visitors without JS see every card and no button.
+	 */
+	function initLoadMore() {
+		var buttons = document.querySelectorAll( '.at-loadmore' );
+		Array.prototype.forEach.call( buttons, function ( btn ) {
+			if ( btn.getAttribute( 'data-at-ready' ) ) {
+				return;
+			}
+			btn.setAttribute( 'data-at-ready', '1' );
+
+			var wrap = btn.closest( '.at-wrapper' );
+			if ( ! wrap ) {
+				return;
+			}
+			wrap.classList.add( 'at-has-loadmore' );
+
+			var container = wrap.querySelector( '.at-grid, .at-list, .at-card-layout, .at-masonry' );
+			if ( ! container ) {
+				return;
+			}
+
+			var batch = parseInt( btn.getAttribute( 'data-batch' ), 10 ) || 6;
+
+			btn.addEventListener( 'click', function () {
+				var hidden = container.querySelectorAll( '.at-lm-collapsed' );
+				var count  = Math.min( batch, hidden.length );
+				for ( var i = 0; i < count; i++ ) {
+					hidden[ i ].classList.remove( 'at-lm-collapsed' );
+				}
+				if ( container.querySelectorAll( '.at-lm-collapsed' ).length === 0 ) {
+					var box = btn.parentNode;
+					if ( box ) {
+						box.style.display = 'none';
+					}
+				}
+			} );
+		} );
+	}
+
 	function init() {
+		initReadMore();
+		initLoadMore();
+
+		var filters = document.querySelectorAll( '.at-filter' );
+		Array.prototype.forEach.call( filters, function ( bar ) {
+			if ( ! bar.getAttribute( 'data-at-ready' ) ) {
+				bar.setAttribute( 'data-at-ready', '1' );
+				new Filter( bar );
+			}
+		} );
+
 		var carousels = document.querySelectorAll( '[data-at-carousel]' );
 		Array.prototype.forEach.call( carousels, function ( root ) {
 			if ( ! root.getAttribute( 'data-at-ready' ) ) {
 				root.setAttribute( 'data-at-ready', '1' );
 				new Carousel( root );
+			}
+		} );
+
+		var marquees = document.querySelectorAll( '[data-at-marquee]' );
+		Array.prototype.forEach.call( marquees, function ( root ) {
+			if ( ! root.getAttribute( 'data-at-ready' ) ) {
+				root.setAttribute( 'data-at-ready', '1' );
+				new Marquee( root );
 			}
 		} );
 	}

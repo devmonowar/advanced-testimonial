@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Testimonial 2.0.3\n"
+"Project-Id-Version: Advanced Testimonial 2.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/advanced-testimonial\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-30T20:03:40+02:00\n"
+"POT-Creation-Date: 2026-07-04T10:10:11+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-testimonial\n"
@@ -56,19 +56,19 @@ msgid "Photo"
 msgstr ""
 
 #: admin/Columns.php:46
-#: admin/MetaBoxes.php:47
+#: admin/MetaBoxes.php:51
 msgid "Company"
 msgstr ""
 
 #: admin/Columns.php:47
-#: admin/MetaBoxes.php:67
+#: admin/MetaBoxes.php:71
 msgid "Rating"
 msgstr ""
 
-#. translators: %d: rating out of 5.
-#: admin/Columns.php:84
+#. translators: %s: rating out of 5, e.g. 4.5.
+#: admin/Columns.php:85
 #, php-format
-msgid "%d out of 5"
+msgid "%s out of 5"
 msgstr ""
 
 #: admin/CPT.php:39
@@ -261,75 +261,77 @@ msgstr ""
 msgid "Sorry, that demo could not be imported. Please try again."
 msgstr ""
 
-#: admin/MetaBoxes.php:51
-msgid "Designation / Job Title"
+#: admin/MetaBoxes.php:47
+msgid "Headline / Review Title"
 msgstr ""
 
 #: admin/MetaBoxes.php:55
-msgid "Location"
+msgid "Designation / Job Title"
 msgstr ""
 
 #: admin/MetaBoxes.php:59
-msgid "Website"
+msgid "Location"
 msgstr ""
 
 #: admin/MetaBoxes.php:63
+msgid "Website"
+msgstr ""
+
+#: admin/MetaBoxes.php:67
 msgid "Email (optional)"
 msgstr ""
 
-#: admin/MetaBoxes.php:71
+#: admin/MetaBoxes.php:75
 msgid "Review Date"
 msgstr ""
 
-#: admin/MetaBoxes.php:75
+#: admin/MetaBoxes.php:79
 msgid "Verified Customer"
 msgstr ""
 
-#: admin/MetaBoxes.php:79
+#: admin/MetaBoxes.php:83
 msgid "Company Logo"
 msgstr ""
 
-#: admin/MetaBoxes.php:83
+#: admin/MetaBoxes.php:87
 msgid "X / Twitter URL"
 msgstr ""
 
-#: admin/MetaBoxes.php:87
+#: admin/MetaBoxes.php:91
 msgid "LinkedIn URL"
 msgstr ""
 
-#: admin/MetaBoxes.php:91
+#: admin/MetaBoxes.php:95
 msgid "Facebook URL"
 msgstr ""
 
-#: admin/MetaBoxes.php:105
+#: admin/MetaBoxes.php:109
 msgid "Testimonial Details"
 msgstr ""
 
-#: admin/MetaBoxes.php:122
+#: admin/MetaBoxes.php:126
 msgid "The post title is the client name, the editor is the review text, and the featured image is the client photo."
 msgstr ""
 
-#: admin/MetaBoxes.php:157
+#: admin/MetaBoxes.php:162
 msgid "No rating"
 msgstr ""
 
-#. translators: %d: number of stars.
-#: admin/MetaBoxes.php:159
+#. translators: %s: star rating value, e.g. 4.5.
+#: admin/MetaBoxes.php:166
 #, php-format
-msgid "%d star"
-msgid_plural "%d stars"
-msgstr[0] ""
-msgstr[1] ""
+msgid "%s stars"
+msgstr ""
 
-#: admin/MetaBoxes.php:165
+#: admin/MetaBoxes.php:173
 msgid "Mark this customer as verified"
 msgstr ""
 
-#: admin/MetaBoxes.php:174
+#: admin/MetaBoxes.php:182
 msgid "Select Logo"
 msgstr ""
 
-#: admin/MetaBoxes.php:175
+#: admin/MetaBoxes.php:183
 msgid "Remove"
 msgstr ""
 
@@ -347,7 +349,7 @@ msgid "Import Starter Demo"
 msgstr ""
 
 #: admin/Settings.php:61
-#: admin/Settings.php:304
+#: admin/Settings.php:352
 msgid "Settings"
 msgstr ""
 
@@ -500,64 +502,129 @@ msgstr ""
 msgid "Used when a testimonial has no rating set (0 = none)."
 msgstr ""
 
-#: admin/Settings.php:208
-msgid "Performance"
+#: admin/Settings.php:207
+msgid "Marquee Scroll Speed"
+msgstr ""
+
+#: admin/Settings.php:210
+#: blocks/editor.js:45
+msgid "Slow"
+msgstr ""
+
+#: admin/Settings.php:211
+#: blocks/editor.js:46
+msgid "Normal"
 msgstr ""
 
 #: admin/Settings.php:212
-msgid "Load Assets Only When Needed"
+#: blocks/editor.js:47
+msgid "Fast"
 msgstr ""
 
 #: admin/Settings.php:214
-msgid "Only enqueue CSS/JS on pages that actually render testimonials."
+msgid "Default speed for the Marquee layout. Each block can override this."
 msgstr ""
 
 #: admin/Settings.php:218
-msgid "Cache Queries"
+msgid "Marquee Card Width (px)"
 msgstr ""
 
-#: admin/Settings.php:220
-msgid "Cache testimonial queries for faster repeat loads."
+#: admin/Settings.php:223
+msgid "Default card width for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:224
-msgid "Use Minified Assets"
+#: admin/Settings.php:227
+msgid "Marquee Scroll Direction"
 msgstr ""
 
-#: admin/Settings.php:226
-msgid "Load .min versions of CSS/JS when available."
+#: admin/Settings.php:230
+#: blocks/editor.js:52
+msgid "Right to left"
 msgstr ""
 
 #: admin/Settings.php:231
-msgid "Advanced"
+#: blocks/editor.js:53
+msgid "Left to right"
 msgstr ""
 
-#: admin/Settings.php:235
-msgid "Custom CSS"
+#: admin/Settings.php:233
+msgid "Default scroll direction for the Marquee layout. Each block can override this."
 msgstr ""
 
 #: admin/Settings.php:237
+msgid "Read More — Lines Shown"
+msgstr ""
+
+#: admin/Settings.php:242
+msgid "When \"Read more\" is enabled on a block, reviews are trimmed to this many lines before the toggle appears."
+msgstr ""
+
+#: admin/Settings.php:246
+msgid "Load More — Batch Size"
+msgstr ""
+
+#: admin/Settings.php:251
+msgid "When \"Load more\" is enabled on a block, this many testimonials are shown at first and revealed per click."
+msgstr ""
+
+#: admin/Settings.php:256
+msgid "Performance"
+msgstr ""
+
+#: admin/Settings.php:260
+msgid "Load Assets Only When Needed"
+msgstr ""
+
+#: admin/Settings.php:262
+msgid "Only enqueue CSS/JS on pages that actually render testimonials."
+msgstr ""
+
+#: admin/Settings.php:266
+msgid "Cache Queries"
+msgstr ""
+
+#: admin/Settings.php:268
+msgid "Cache testimonial queries for faster repeat loads."
+msgstr ""
+
+#: admin/Settings.php:272
+msgid "Use Minified Assets"
+msgstr ""
+
+#: admin/Settings.php:274
+msgid "Load .min versions of CSS/JS when available."
+msgstr ""
+
+#: admin/Settings.php:279
+msgid "Advanced"
+msgstr ""
+
+#: admin/Settings.php:283
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/Settings.php:285
 msgid "Output on the frontend after the plugin styles."
 msgstr ""
 
-#: admin/Settings.php:241
+#: admin/Settings.php:289
 msgid "Remove all plugin data when deleting the plugin"
 msgstr ""
 
-#: admin/Settings.php:243
+#: admin/Settings.php:291
 msgid "When the plugin is deleted, permanently remove all testimonials, groups, meta, settings and transients. Deactivating never deletes anything. Default: off."
 msgstr ""
 
-#: admin/Settings.php:303
-#: admin/Settings.php:371
+#: admin/Settings.php:351
+#: admin/Settings.php:419
 msgid "Advanced Testimonial Settings"
 msgstr ""
 
-#: admin/Settings.php:390
+#: admin/Settings.php:438
 msgid "Tools"
 msgstr ""
 
-#: admin/Settings.php:444
+#: admin/Settings.php:492
 msgid "Enable"
 msgstr ""
 
@@ -760,17 +827,29 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: blocks/Block.php:119
+#: blocks/Block.php:127
 msgid "All groups"
 msgstr ""
 
-#. translators: %d: rating value out of five.
-#: frontend/Renderer.php:298
-#, php-format
-msgid "Rated %d out of 5"
+#: frontend/Renderer.php:326
+msgid "Filter testimonials by group"
 msgstr ""
 
-#: frontend/Renderer.php:387
+#: frontend/Renderer.php:327
+msgid "All"
+msgstr ""
+
+#: frontend/Renderer.php:353
+msgid "Load more"
+msgstr ""
+
+#. translators: %s: rating value out of five, e.g. 4.5.
+#: frontend/Renderer.php:422
+#, php-format
+msgid "Rated %s out of 5"
+msgstr ""
+
+#: frontend/Renderer.php:524
 msgid "No testimonials found for the selected options."
 msgstr ""
 
@@ -783,6 +862,7 @@ msgid "Starter demo file is invalid."
 msgstr ""
 
 #: templates/carousel.php:26
+#: templates/marquee.php:40
 #: templates/spotlight.php:26
 msgid "Customer testimonials"
 msgstr ""
@@ -805,11 +885,19 @@ msgstr ""
 msgid "Choose testimonial"
 msgstr ""
 
-#: templates/item.php:87
+#: templates/item.php:85
+msgid "Read more"
+msgstr ""
+
+#: templates/item.php:85
+msgid "Read less"
+msgstr ""
+
+#: templates/item.php:103
 msgid "Verified customer"
 msgstr ""
 
-#: templates/item.php:113
+#: templates/item.php:129
 msgid "Visit Website"
 msgstr ""
 
@@ -838,92 +926,138 @@ msgid "Carousel"
 msgstr ""
 
 #: blocks/editor.js:32
-msgid "Masonry"
+#: blocks/editor.js:144
+msgid "Marquee"
 msgstr ""
 
 #: blocks/editor.js:33
+msgid "Masonry"
+msgstr ""
+
+#: blocks/editor.js:34
 msgid "Spotlight"
 msgstr ""
 
-#: blocks/editor.js:37
+#: blocks/editor.js:38
 msgid "Newest first"
 msgstr ""
 
-#: blocks/editor.js:38
+#: blocks/editor.js:39
 msgid "Oldest first"
 msgstr ""
 
-#: blocks/editor.js:39
+#: blocks/editor.js:40
 msgid "Random"
 msgstr ""
 
-#: blocks/editor.js:65
-#: blocks/editor.js:72
+#: blocks/editor.js:44
+#: blocks/editor.js:51
+msgid "Default (from settings)"
+msgstr ""
+
+#: blocks/editor.js:79
+#: blocks/editor.js:86
 msgid "Layout"
 msgstr ""
 
-#: blocks/editor.js:67
+#: blocks/editor.js:81
 msgid "Heading (optional)"
 msgstr ""
 
-#: blocks/editor.js:78
+#: blocks/editor.js:92
 msgid "Group"
 msgstr ""
 
-#: blocks/editor.js:84
+#: blocks/editor.js:98
 msgid "Columns"
 msgstr ""
 
-#: blocks/editor.js:91
+#: blocks/editor.js:105
 msgid "Number to show"
 msgstr ""
 
-#: blocks/editor.js:98
+#: blocks/editor.js:112
 msgid "Order"
 msgstr ""
 
-#: blocks/editor.js:104
+#: blocks/editor.js:118
 msgid "Autoplay seconds (0 = off)"
 msgstr ""
 
-#: blocks/editor.js:105
+#: blocks/editor.js:119
 msgid "Carousel and Spotlight only."
 msgstr ""
 
-#: blocks/editor.js:114
+#: blocks/editor.js:128
 msgid "Display"
 msgstr ""
 
-#: blocks/editor.js:115
+#: blocks/editor.js:129
 msgid "Show rating"
 msgstr ""
 
-#: blocks/editor.js:116
+#: blocks/editor.js:130
 msgid "Show client photo"
 msgstr ""
 
-#: blocks/editor.js:117
+#: blocks/editor.js:131
 msgid "Show company"
 msgstr ""
 
-#: blocks/editor.js:118
+#: blocks/editor.js:132
 msgid "Show designation"
 msgstr ""
 
-#: blocks/editor.js:119
+#: blocks/editor.js:133
 msgid "Show location"
 msgstr ""
 
-#: blocks/editor.js:120
+#: blocks/editor.js:134
 msgid "Show date"
 msgstr ""
 
-#: blocks/editor.js:121
+#: blocks/editor.js:135
 msgid "Show verified badge"
 msgstr ""
 
-#: blocks/editor.js:122
+#: blocks/editor.js:136
 msgid "Show website button"
+msgstr ""
+
+#: blocks/editor.js:137
+msgid "Show headline"
+msgstr ""
+
+#: blocks/editor.js:138
+msgid "Show group filter tabs"
+msgstr ""
+
+#: blocks/editor.js:139
+msgid "Truncate long reviews (Read more)"
+msgstr ""
+
+#: blocks/editor.js:140
+msgid "Reveal in batches (Load more)"
+msgstr ""
+
+#: blocks/editor.js:146
+msgid "Scroll speed"
+msgstr ""
+
+#: blocks/editor.js:152
+msgid "Card width (px)"
+msgstr ""
+
+#: blocks/editor.js:153
+msgid "0 = use the global setting."
+msgstr ""
+
+#: blocks/editor.js:161
+msgid "Direction"
+msgstr ""
+
+#: blocks/editor.js:166
+msgid "Edge fade"
 msgstr ""
 
 #: blocks/block.json

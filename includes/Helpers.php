@@ -52,38 +52,44 @@ final class Helpers {
 	}
 
 	/**
-	 * Clamp a value to a valid 0-5 rating.
+	 * Clamp a value to a valid 0-5 rating, rounded to the nearest half-star.
 	 *
 	 * @param mixed $value Raw rating value.
-	 * @return int Rating between 0 and 5 (0 means "no rating").
+	 * @return float Rating between 0 and 5 in 0.5 steps (0 means "no rating").
 	 */
 	public static function clamp_rating( $value ) {
-		$rating = (int) $value;
+		$rating = (float) $value;
 
 		if ( $rating < 0 ) {
-			$rating = 0;
+			$rating = 0.0;
 		}
 
 		if ( $rating > 5 ) {
-			$rating = 5;
+			$rating = 5.0;
 		}
 
-		return $rating;
+		return round( $rating * 2 ) / 2;
 	}
 
 	/**
-	 * Render a compact star string for admin/list contexts.
+	 * Render a compact star string for admin/list contexts (supports half stars).
 	 *
-	 * @param int $rating Rating from 0 to 5.
-	 * @return string Filled/empty star glyphs, already safe for output.
+	 * @param mixed $rating Rating from 0 to 5.
+	 * @return string Filled/half/empty star glyphs, already safe for output.
 	 */
 	public static function stars_text( $rating ) {
 		$rating = self::clamp_rating( $rating );
 
-		if ( 0 === $rating ) {
+		if ( $rating <= 0 ) {
 			return '';
 		}
 
-		return str_repeat( "\xE2\x98\x85", $rating ) . str_repeat( "\xE2\x98\x86", 5 - $rating );
+		$full  = (int) floor( $rating );
+		$half  = ( $rating - $full ) >= 0.5;
+		$empty = 5 - $full - ( $half ? 1 : 0 );
+
+		return str_repeat( "\xE2\x98\x85", $full )
+			. ( $half ? "\xC2\xBD" : '' )
+			. str_repeat( "\xE2\x98\x86", max( 0, $empty ) );
 	}
 }

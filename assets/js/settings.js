@@ -32,22 +32,51 @@
 			}
 		}
 
+		function store( key ) {
+			try {
+				window.sessionStorage.setItem( 'atSettingsTab', key );
+			} catch ( e ) {}
+		}
+
 		Array.prototype.forEach.call( tabs, function ( tab ) {
 			tab.addEventListener( 'click', function ( event ) {
 				event.preventDefault();
 				var key = tab.getAttribute( 'data-tab' );
 				activate( key );
+				store( key );
 				if ( window.history && window.history.replaceState ) {
 					window.history.replaceState( null, '', '#' + key );
 				}
 			} );
 		} );
 
+		// Remember the active tab across the Save round-trip: options.php
+		// redirects back without the hash, which would otherwise reset to the
+		// first (General) tab.
+		var form = document.querySelector( 'form[action="options.php"]' );
+		if ( form ) {
+			form.addEventListener( 'submit', function () {
+				var active = document.querySelector( '.at-settings-tabs .nav-tab.nav-tab-active' );
+				if ( active ) {
+					store( active.getAttribute( 'data-tab' ) );
+				}
+			} );
+		}
+
 		var hash = window.location.hash.replace( '#', '' );
-		if ( hash ) {
-			var match = document.querySelector( '.at-settings-tabs .nav-tab[data-tab="' + hash + '"]' );
-			if ( match ) {
-				activate( hash );
+		if ( hash && document.querySelector( '.at-settings-tabs .nav-tab[data-tab="' + hash + '"]' ) ) {
+			activate( hash );
+			return;
+		}
+
+		// Just saved: restore the tab the change was made on.
+		if ( window.location.search.indexOf( 'settings-updated' ) !== -1 ) {
+			var saved = null;
+			try {
+				saved = window.sessionStorage.getItem( 'atSettingsTab' );
+			} catch ( e ) {}
+			if ( saved && document.querySelector( '.at-settings-tabs .nav-tab[data-tab="' + saved + '"]' ) ) {
+				activate( saved );
 			}
 		}
 	}
