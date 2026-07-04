@@ -60,6 +60,9 @@ final class Plugin {
 		( new Shortcode\Shortcode() )->register();
 		( new Blocks\Block() )->register();
 
+		// Elementor widget (registers only when Elementor is active).
+		( new Elementor() )->register();
+
 		// Invalidate cached queries whenever testimonials change.
 		add_action( 'save_post_' . Admin\CPT::POST_TYPE, array( Frontend\Query::class, 'bust_cache' ) );
 		add_action( 'deleted_post', array( Frontend\Query::class, 'bust_cache' ) );

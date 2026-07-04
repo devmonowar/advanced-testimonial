@@ -51,8 +51,10 @@
 		return Math.max( 1, Math.min( pv, this.slides.length ) );
 	};
 
-	Carousel.prototype.pages = function () {
-		return Math.ceil( this.slides.length / this.perView() );
+	// Highest first-visible index — the carousel steps one item at a time, so
+	// the last position shows the final "perView" slides.
+	Carousel.prototype.maxIndex = function () {
+		return Math.max( 0, this.slides.length - this.perView() );
 	};
 
 	Carousel.prototype.layout = function () {
@@ -64,8 +66,8 @@
 			slide.style.maxWidth = basis;
 		} );
 
-		if ( this.index > this.pages() - 1 ) {
-			this.index = this.pages() - 1;
+		if ( this.index > this.maxIndex() ) {
+			this.index = this.maxIndex();
 		}
 
 		this.buildDots();
@@ -73,7 +75,7 @@
 	};
 
 	Carousel.prototype.update = function () {
-		this.track.style.transform = 'translateX(-' + ( this.index * 100 ) + '%)';
+		this.track.style.transform = 'translateX(-' + ( this.index * ( 100 / this.perView() ) ) + '%)';
 
 		if ( this.dotsWrap ) {
 			Array.prototype.forEach.call( this.dotsWrap.children, function ( dot, i ) {
@@ -88,9 +90,14 @@
 		}
 	};
 
-	Carousel.prototype.goTo = function ( page ) {
-		var total = this.pages();
-		this.index = ( page + total ) % total;
+	Carousel.prototype.goTo = function ( index ) {
+		var max = this.maxIndex();
+		if ( index > max ) {
+			index = 0;
+		} else if ( index < 0 ) {
+			index = max;
+		}
+		this.index = index;
 		this.update();
 	};
 
@@ -108,7 +115,7 @@
 		}
 
 		this.dotsWrap.innerHTML = '';
-		var total = this.pages();
+		var total = this.maxIndex() + 1;
 
 		if ( total <= 1 ) {
 			return;
@@ -178,7 +185,7 @@
 	};
 
 	Carousel.prototype.startAutoplay = function () {
-		if ( ! this.autoplay || reduceMotion || this.pages() <= 1 ) {
+		if ( ! this.autoplay || reduceMotion || this.maxIndex() < 1 ) {
 			return;
 		}
 		this.stopAutoplay();

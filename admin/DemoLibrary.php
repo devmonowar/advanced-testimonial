@@ -67,6 +67,14 @@ final class DemoLibrary {
 			array(),
 			Helpers::asset_version( 'assets/css/admin.css' )
 		);
+
+		wp_enqueue_script(
+			'advanced-testimonial-demo-library',
+			ADVANCED_TESTIMONIAL_URL . 'assets/js/demo-library.js',
+			array(),
+			Helpers::asset_version( 'assets/js/demo-library.js' ),
+			true
+		);
 	}
 
 	/**
@@ -205,6 +213,25 @@ final class DemoLibrary {
 					<?php $this->bundled_card(); ?>
 				</div>
 			<?php else : ?>
+				<?php
+				$categories = array();
+				foreach ( $manifest['demos'] as $demo ) {
+					if ( '' !== $demo['category'] ) {
+						$categories[ strtolower( $demo['category'] ) ] = $demo['category'];
+					}
+				}
+				?>
+				<div class="at-demo-toolbar">
+					<input type="search" class="at-demo-search regular-text" placeholder="<?php esc_attr_e( 'Search demos…', 'advanced-testimonial' ); ?>" aria-label="<?php esc_attr_e( 'Search demos', 'advanced-testimonial' ); ?>" />
+					<?php if ( count( $categories ) > 1 ) : ?>
+						<div class="at-demo-filters" role="group" aria-label="<?php esc_attr_e( 'Filter demos by category', 'advanced-testimonial' ); ?>">
+							<button type="button" class="button button-primary is-active" data-cat="*"><?php esc_html_e( 'All', 'advanced-testimonial' ); ?></button>
+							<?php foreach ( $categories as $cat_slug => $cat_label ) : ?>
+								<button type="button" class="button" data-cat="<?php echo esc_attr( $cat_slug ); ?>"><?php echo esc_html( $cat_label ); ?></button>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+				</div>
 				<div class="at-demo-grid">
 					<?php
 					foreach ( $manifest['demos'] as $demo ) {
@@ -212,6 +239,7 @@ final class DemoLibrary {
 					}
 					?>
 				</div>
+				<p class="at-demo-empty" hidden><?php esc_html_e( 'No demos match your search.', 'advanced-testimonial' ); ?></p>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -225,8 +253,9 @@ final class DemoLibrary {
 	 */
 	private function card( $demo ) {
 		$can_import = '' === $demo['requires'] || version_compare( ADVANCED_TESTIMONIAL_VERSION, $demo['requires'], '>=' );
+		$haystack   = strtolower( trim( $demo['name'] . ' ' . $demo['description'] . ' ' . $demo['category'] . ' ' . implode( ' ', $demo['tags'] ) ) );
 		?>
-		<div class="at-demo-card">
+		<div class="at-demo-card" data-category="<?php echo esc_attr( strtolower( $demo['category'] ) ); ?>" data-search="<?php echo esc_attr( $haystack ); ?>">
 			<div class="at-demo-card__preview">
 				<?php if ( $demo['preview'] ) : ?>
 					<img src="<?php echo esc_url( $demo['preview'] ); ?>" alt="<?php echo esc_attr( $demo['name'] ); ?>" loading="lazy" />

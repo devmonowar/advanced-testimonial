@@ -57,8 +57,18 @@
 		if ( form ) {
 			form.addEventListener( 'submit', function () {
 				var active = document.querySelector( '.at-settings-tabs .nav-tab.nav-tab-active' );
-				if ( active ) {
-					store( active.getAttribute( 'data-tab' ) );
+				if ( ! active ) {
+					return;
+				}
+				var key = active.getAttribute( 'data-tab' );
+				store( key );
+
+				// Also carry the tab through the save via the referer hash, so
+				// WordPress redirects back to "…#tab" and the hash restore below
+				// picks it up — works even if sessionStorage is unavailable.
+				var ref = form.querySelector( 'input[name="_wp_http_referer"]' );
+				if ( ref ) {
+					ref.value = ref.value.split( '#' )[ 0 ] + '#' + key;
 				}
 			} );
 		}
