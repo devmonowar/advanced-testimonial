@@ -23,11 +23,13 @@ defined( 'ABSPATH' ) || exit;
 	<?php if ( '' !== $atts['title'] ) : ?>
 		<h3 class="at-title"><?php echo esc_html( $atts['title'] ); ?></h3>
 	<?php endif; ?>
+	<?php echo $filter_bar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built and escaped in Renderer::filter_bar_html(). ?>
 	<div class="at-list">
 		<?php
-		foreach ( $testimonials as $item ) {
+		foreach ( $testimonials as $at_lm_index => $item ) {
 			include $item_template;
 		}
 		?>
 	</div>
+	<?php echo $load_more_bar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built and escaped in Renderer::load_more_html(). ?>
 </div>

@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Key ideas:
 
 * One plugin, one purpose — professional testimonial management, not a generic slider.
 * Lightweight and performance-first: frontend assets load only when needed, no jQuery, no heavy libraries.
-* Multiple display layouts: Grid, List, Card, Carousel, Masonry and Spotlight.
+* Multiple display layouts: Grid, List, Card, Carousel, Marquee, Masonry and Spotlight.
 * Schema.org Review markup for richer search results.
 * Translation-ready, accessible, and built on the WordPress Coding Standards.
 
@@ -45,7 +45,7 @@ Use the `[advanced_testimonial]` shortcode anywhere, or add the **Advanced Testi
 
 = Which layouts are available? =
 
-Grid, List, Card, Carousel, Masonry and Spotlight. Set the `layout` attribute, or pick it in the block.
+Grid, List, Card, Carousel, Marquee, Masonry and Spotlight. Set the `layout` attribute, or pick it in the block.
 
 = How do I group testimonials? =
 
@@ -84,6 +84,17 @@ No data from your site is sent to the service; only public demo files (JSON and 
 
 == Changelog ==
 
+= 2.0.4 =
+* New: an optional **Headline / Review Title** field per testimonial (e.g. "Amazing staff"), shown above the review with a show/hide toggle in the block and shortcode (`show_headline`). Output with Schema.org review name.
+* New: **Marquee** layout — a smooth, continuously scrolling row of testimonials that pauses on hover, with optional soft **edge fade** and a choice of **scroll direction** (right-to-left or left-to-right). Adjustable scroll speed and card width, set globally in Settings → Styles with an optional per-block override. Fully accessible (honours reduced-motion) and lightweight, no jQuery.
+* New: **half-star ratings** — ratings can now be set in 0.5 steps (e.g. 4.5 stars); the front-end renders a precise half star and the Schema.org `ratingValue` reflects the decimal.
+* New: optional **"Read more"** — long reviews are trimmed to a set number of lines with a Read more / Read less toggle (Settings → Styles sets the line count; enable per block or with `read_more="true"`). Falls back to full text when JavaScript is off.
+* New: optional **"Load more"** — show a batch of testimonials first and reveal more on click, on the Grid, List, Card and Masonry layouts (Settings → Styles sets the batch size; enable per block or with `load_more="true"`). Falls back to all testimonials when JavaScript is off.
+* New: the Marquee **scroll direction** and speed/card-width defaults are now all set in Settings → Styles, with per-block overrides.
+* New: optional **group filter tabs** — let visitors filter testimonials by group (e.g. "All / Clients / Partners") with a click, on the Grid, List, Card and Masonry layouts. Toggle it in the block or with `show_filter="true"`.
+* Fix: **Masonry** layout no longer overlaps cards, and adapts its column count to the available width so it never overcrowds a narrow content area.
+* Fix: the "Use Minified Assets" option now falls back to the full CSS/JS when a minified file is not present, instead of failing to load.
+
 = 2.0.3 =
 * New: a "Refresh" button on the Demo Library screen to load the latest demos immediately, bypassing the 6-hour cache.
 * Tools → Clear Cache now also clears the cached demo library list.
@@ -110,6 +121,9 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Performance: frontend assets load only when testimonials are present.
 
 == Upgrade Notice ==
+
+= 2.0.4 =
+Adds an optional per-testimonial Headline / Review Title field and a new smooth-scrolling Marquee layout. Recommended update.
 
 = 2.0.3 =
 Adds a Demo Library "Refresh" button and clears the demo cache from Tools → Clear Cache. Recommended update.

@@ -102,6 +102,14 @@ final class Block {
 			'show_date'        => (bool) ( $attributes['showDate'] ?? false ),
 			'show_verified'    => (bool) ( $attributes['showVerified'] ?? true ),
 			'show_website'     => (bool) ( $attributes['showWebsite'] ?? true ),
+			'show_headline'    => (bool) ( $attributes['showHeadline'] ?? true ),
+			'show_filter'      => (bool) ( $attributes['showFilter'] ?? false ),
+			'read_more'        => (bool) ( $attributes['readMore'] ?? false ),
+			'load_more'        => (bool) ( $attributes['loadMore'] ?? false ),
+			'speed'            => isset( $attributes['speed'] ) ? (string) $attributes['speed'] : '',
+			'card_width'       => isset( $attributes['cardWidth'] ) ? (int) $attributes['cardWidth'] : 0,
+			'fade'             => (bool) ( $attributes['fade'] ?? true ),
+			'direction'        => isset( $attributes['direction'] ) ? (string) $attributes['direction'] : '',
 		);
 
 		return Renderer::render( $atts );

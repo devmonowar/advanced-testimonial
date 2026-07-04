@@ -18,6 +18,7 @@
 	--at-shadow: 0 2px 10px rgba( 0, 0, 0, 0.06 );
 	color: var( --at-text );
 	box-sizing: border-box;
+	margin-bottom: 2rem;
 }
 
 .at-wrapper *,
@@ -83,6 +84,19 @@
 	box-shadow: var( --at-shadow );
 }
 
+.at-card__headline {
+	margin: 0 0 6px;
+	font-size: 1.15rem;
+	font-weight: 700;
+	line-height: 1.3;
+	color: var( --at-text );
+}
+
+.at-card-layout .at-card__headline,
+.at-carousel--spotlight .at-card__headline {
+	font-size: 1.35rem;
+}
+
 .at-card__review {
 	margin: 0;
 	padding: 0;
@@ -119,6 +133,30 @@
 
 .at-star.is-empty {
 	fill: #d6dae0;
+}
+
+/* Half star: empty base with an accent-filled copy clipped to the left half. */
+.at-star--half {
+	position: relative;
+}
+
+.at-star__bg,
+.at-star__fg {
+	width: 18px;
+	height: 18px;
+	display: block;
+}
+
+.at-star__bg {
+	fill: #d6dae0;
+}
+
+.at-star__fg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	fill: var( --at-accent );
+	clip-path: inset( 0 50% 0 0 );
 }
 
 /* ---------- Author ---------- */
@@ -341,6 +379,9 @@
 
 /* ---------- Masonry ---------- */
 .at-masonry {
+	/* column-width lets the count shrink to fit narrow containers; column-count
+	   caps it, so a wide "columns" value never overcrowds a slim content area. */
+	column-width: 260px;
 	column-count: var( --at-columns, 3 );
 	column-gap: var( --at-gap, 24px );
 }
@@ -348,6 +389,13 @@
 .at-masonry__item {
 	break-inside: avoid;
 	margin-bottom: var( --at-gap, 24px );
+}
+
+/* Cards flow at their natural height here; the shared equal-height rule would
+   make each card fill the whole column and overlap its neighbours. */
+.at-masonry .at-card,
+.at-masonry .at-card__inner {
+	height: auto;
 }
 
 /* ---------- Carousel ---------- */
@@ -465,6 +513,200 @@
 	height: 72px;
 }
 
+/* ---------- Read more ---------- */
+/* Scoped + explicit resets so theme button styles (background, box, border)
+   never apply — it stays a plain text link. */
+.at-wrapper .at-readmore {
+	display: none;
+	align-self: flex-start;
+	margin-top: 6px;
+	padding: 0;
+	border: 0;
+	background: none;
+	box-shadow: none;
+	color: var( --at-primary );
+	font: inherit;
+	font-weight: 600;
+	line-height: 1.3;
+	cursor: pointer;
+}
+
+.at-wrapper .at-readmore:hover,
+.at-wrapper .at-readmore:focus {
+	background: none;
+	box-shadow: none;
+	text-decoration: underline;
+	opacity: 0.75;
+}
+
+/* Clamp + button activate only after JS adds .at-has-readmore, so visitors
+   without JS keep the full review text and no dead toggle. */
+.at-has-readmore .at-readmore {
+	display: inline-block;
+}
+
+.at-has-readmore .at-card__review--clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: var( --at-clamp, 4 );
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.at-has-readmore .at-card__review--clamp.is-expanded {
+	display: block;
+	-webkit-line-clamp: unset;
+	overflow: visible;
+}
+
+/* ---------- Load more ---------- */
+.at-loadmore-wrap {
+	display: none;
+	margin-top: var( --at-gap, 24px );
+	text-align: center;
+}
+
+/* Activated by JS; without it every card stays visible and the button hidden. */
+.at-has-loadmore .at-loadmore-wrap {
+	display: block;
+}
+
+.at-has-loadmore .at-lm-collapsed {
+	display: none;
+}
+
+.at-wrapper .at-loadmore {
+	display: inline-block;
+	padding: 10px 26px;
+	border: 1px solid var( --at-primary );
+	border-radius: 999px;
+	background: var( --at-primary );
+	color: #fff;
+	font: inherit;
+	font-weight: 600;
+	line-height: 1.2;
+	cursor: pointer;
+	transition: opacity 0.15s ease;
+}
+
+.at-wrapper .at-loadmore:hover,
+.at-wrapper .at-loadmore:focus {
+	background: var( --at-primary );
+	color: #fff;
+	opacity: 0.88;
+}
+
+/* ---------- Group filter tabs ---------- */
+.at-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: var( --at-gap, 24px );
+}
+
+.at-filter__btn {
+	padding: 7px 16px;
+	border: 1px solid #e5e7eb;
+	border-radius: 999px;
+	background: #fff;
+	color: var( --at-text );
+	font-size: 0.9rem;
+	line-height: 1.2;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.at-filter__btn:hover {
+	border-color: var( --at-primary );
+}
+
+.at-filter__btn.is-active {
+	background: var( --at-primary );
+	border-color: var( --at-primary );
+	color: #fff;
+}
+
+/* ---------- Marquee (continuous scroll) ---------- */
+.at-marquee {
+	position: relative;
+}
+
+.at-marquee__viewport {
+	overflow: hidden;
+}
+
+.at-marquee__track {
+	display: flex;
+	width: max-content;
+	padding: 8px 0;
+	will-change: transform;
+	animation: at-marquee-scroll var( --at-marquee-duration, 40s ) linear infinite;
+}
+
+.at-marquee__slide {
+	flex: 0 0 auto;
+	width: var( --at-marquee-item, 340px );
+	max-width: 80vw;
+	height: auto;
+	margin-inline-end: var( --at-gap, 24px );
+	box-sizing: border-box;
+}
+
+.at-marquee__slide,
+.at-marquee__slide .at-card,
+.at-marquee__slide .at-card__inner {
+	height: 100%;
+}
+
+/* Pause while hovered or when a link inside is focused. */
+.at-marquee:hover .at-marquee__track,
+.at-marquee:focus-within .at-marquee__track {
+	animation-play-state: paused;
+}
+
+/* JS adds this when the items do not overflow the row (nothing to scroll). */
+.at-marquee--static .at-marquee__track {
+	width: 100%;
+	animation: none;
+	justify-content: center;
+}
+
+/* Edge fade — masks both sides to transparent, so it works on any theme
+   background (no assumed fill colour). */
+.at-marquee--fade .at-marquee__viewport {
+	-webkit-mask-image: linear-gradient( to right, transparent, #000 8%, #000 92%, transparent );
+	mask-image: linear-gradient( to right, transparent, #000 8%, #000 92%, transparent );
+}
+
+/* Reverse direction (content scrolls left → right). */
+.at-marquee--reverse .at-marquee__track {
+	animation-direction: reverse;
+}
+
+@keyframes at-marquee-scroll {
+	from {
+		transform: translateX( 0 );
+	}
+
+	to {
+		transform: translateX( -50% );
+	}
+}
+
+/* RTL: flow in the opposite direction. */
+.at-rtl .at-marquee__track {
+	animation-name: at-marquee-scroll-rtl;
+}
+
+@keyframes at-marquee-scroll-rtl {
+	from {
+		transform: translateX( 0 );
+	}
+
+	to {
+		transform: translateX( 50% );
+	}
+}
+
 /* ---------- Keyboard focus (accessibility) ---------- */
 .at-wrapper a:focus-visible,
 .at-wrapper button:focus-visible,
@@ -529,5 +771,16 @@
 @media ( prefers-reduced-motion: reduce ) {
 	.at-carousel__track {
 		transition: none;
+	}
+
+	/* Stop the marquee and let users scroll the strip manually instead. */
+	.at-marquee__track {
+		animation: none;
+		width: 100%;
+		flex-wrap: nowrap;
+	}
+
+	.at-marquee__viewport {
+		overflow-x: auto;
 	}
 }

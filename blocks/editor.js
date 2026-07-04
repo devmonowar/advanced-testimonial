@@ -29,6 +29,7 @@
 		{ label: __( 'List', 'advanced-testimonial' ), value: 'list' },
 		{ label: __( 'Card', 'advanced-testimonial' ), value: 'card' },
 		{ label: __( 'Carousel', 'advanced-testimonial' ), value: 'carousel' },
+		{ label: __( 'Marquee', 'advanced-testimonial' ), value: 'marquee' },
 		{ label: __( 'Masonry', 'advanced-testimonial' ), value: 'masonry' },
 		{ label: __( 'Spotlight', 'advanced-testimonial' ), value: 'spotlight' }
 	];
@@ -37,6 +38,19 @@
 		{ label: __( 'Newest first', 'advanced-testimonial' ), value: 'desc' },
 		{ label: __( 'Oldest first', 'advanced-testimonial' ), value: 'asc' },
 		{ label: __( 'Random', 'advanced-testimonial' ), value: 'random' }
+	];
+
+	var speedOptions = [
+		{ label: __( 'Default (from settings)', 'advanced-testimonial' ), value: '' },
+		{ label: __( 'Slow', 'advanced-testimonial' ), value: 'slow' },
+		{ label: __( 'Normal', 'advanced-testimonial' ), value: 'normal' },
+		{ label: __( 'Fast', 'advanced-testimonial' ), value: 'fast' }
+	];
+
+	var directionOptions = [
+		{ label: __( 'Default (from settings)', 'advanced-testimonial' ), value: '' },
+		{ label: __( 'Right to left', 'advanced-testimonial' ), value: 'left' },
+		{ label: __( 'Left to right', 'advanced-testimonial' ), value: 'right' }
 	];
 
 	function toggle( props, attr, label ) {
@@ -119,8 +133,38 @@
 					toggle( props, 'showLocation', __( 'Show location', 'advanced-testimonial' ) ),
 					toggle( props, 'showDate', __( 'Show date', 'advanced-testimonial' ) ),
 					toggle( props, 'showVerified', __( 'Show verified badge', 'advanced-testimonial' ) ),
-					toggle( props, 'showWebsite', __( 'Show website button', 'advanced-testimonial' ) )
-				)
+					toggle( props, 'showWebsite', __( 'Show website button', 'advanced-testimonial' ) ),
+					toggle( props, 'showHeadline', __( 'Show headline', 'advanced-testimonial' ) ),
+					toggle( props, 'showFilter', __( 'Show group filter tabs', 'advanced-testimonial' ) ),
+					toggle( props, 'readMore', __( 'Truncate long reviews (Read more)', 'advanced-testimonial' ) ),
+					toggle( props, 'loadMore', __( 'Reveal in batches (Load more)', 'advanced-testimonial' ) )
+				),
+				a.layout === 'marquee' ? el(
+					PanelBody,
+					{ title: __( 'Marquee', 'advanced-testimonial' ), initialOpen: true },
+					el( SelectControl, {
+						label: __( 'Scroll speed', 'advanced-testimonial' ),
+						value: a.speed,
+						options: speedOptions,
+						onChange: function ( v ) { set( { speed: v } ); }
+					} ),
+					el( RangeControl, {
+						label: __( 'Card width (px)', 'advanced-testimonial' ),
+						help: __( '0 = use the global setting.', 'advanced-testimonial' ),
+						value: a.cardWidth,
+						min: 0,
+						max: 600,
+						step: 10,
+						onChange: function ( v ) { set( { cardWidth: v } ); }
+					} ),
+					el( SelectControl, {
+						label: __( 'Direction', 'advanced-testimonial' ),
+						value: a.direction,
+						options: directionOptions,
+						onChange: function ( v ) { set( { direction: v } ); }
+					} ),
+					toggle( props, 'fade', __( 'Edge fade', 'advanced-testimonial' ) )
+				) : null
 			);
 
 			var preview = el( ServerSideRender, {

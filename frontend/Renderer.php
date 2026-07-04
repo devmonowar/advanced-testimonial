@@ -8,6 +8,7 @@
 namespace AdvancedTestimonial\Frontend;
 
 use AdvancedTestimonial\Admin\Settings;
+use AdvancedTestimonial\Admin\Taxonomy;
 use AdvancedTestimonial\Admin\Tools;
 use AdvancedTestimonial\Helpers;
 
@@ -21,7 +22,7 @@ final class Renderer {
 	/**
 	 * Allowed layouts.
 	 */
-	const LAYOUTS = array( 'grid', 'list', 'card', 'carousel', 'masonry', 'spotlight' );
+	const LAYOUTS = array( 'grid', 'list', 'card', 'carousel', 'marquee', 'masonry', 'spotlight' );
 
 	/**
 	 * Running instance counter for unique ids.
@@ -54,7 +55,15 @@ final class Renderer {
 			'show_date'        => false,
 			'show_verified'    => true,
 			'show_website'     => true,
+			'show_headline'    => true,
+			'show_filter'      => false,
+			'read_more'        => false,
+			'load_more'        => false,
 			'autoplay'         => 0,
+			'speed'            => '',
+			'card_width'       => 0,
+			'fade'             => true,
+			'direction'        => '',
 		);
 	}
 
@@ -97,6 +106,8 @@ final class Renderer {
 			'instance'      => 'at-' . self::$instances,
 			'wrapper_class' => self::wrapper_class( $atts ),
 			'wrapper_style' => self::wrapper_style( $atts ),
+			'filter_bar'    => self::filter_bar_html( $items, $atts ),
+			'load_more_bar' => self::load_more_html( $items, $atts ),
 		);
 
 		$html = $loader->render( $layout_template, $data );
@@ -152,12 +163,41 @@ final class Renderer {
 			$atts['ids'] = array();
 		}
 
-		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website' ) as $flag ) {
+		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website', 'show_headline', 'show_filter', 'fade', 'read_more', 'load_more' ) as $flag ) {
 			$atts[ $flag ] = self::to_bool( $atts[ $flag ] );
 		}
 
 		$atts['autoplay'] = absint( $atts['autoplay'] );
-		$atts['cache']    = (bool) Settings::get( 'cache_queries' ) && ! get_option( Tools::DEBUG_OPTION );
+
+		// Marquee scroll speed and card width: a per-instance value overrides the
+		// global setting; an empty/zero value inherits the Styles defaults.
+		$speed_map    = array(
+			'slow'   => 25,
+			'normal' => 45,
+			'fast'   => 75,
+		);
+		$speed_preset = strtolower( (string) $atts['speed'] );
+		if ( ! isset( $speed_map[ $speed_preset ] ) ) {
+			$speed_preset = (string) Settings::get( 'marquee_speed', 'normal' );
+		}
+		$atts['marquee_speed'] = isset( $speed_map[ $speed_preset ] ) ? $speed_map[ $speed_preset ] : 45;
+
+		$card_width = (int) $atts['card_width'];
+		if ( $card_width <= 0 ) {
+			$card_width = (int) Settings::get( 'marquee_width', 340 );
+		}
+		$atts['marquee_item'] = max( 200, min( 600, $card_width ) );
+
+		$direction = strtolower( (string) $atts['direction'] );
+		if ( ! in_array( $direction, array( 'left', 'right' ), true ) ) {
+			$direction = strtolower( (string) Settings::get( 'marquee_direction', 'left' ) );
+		}
+		$atts['direction'] = in_array( $direction, array( 'left', 'right' ), true ) ? $direction : 'left';
+
+		// Load more: how many items to show initially / reveal per click.
+		$atts['_lm_initial'] = ! empty( $atts['load_more'] ) ? max( 1, (int) Settings::get( 'load_more_count', 6 ) ) : 0;
+
+		$atts['cache'] = (bool) Settings::get( 'cache_queries' ) && ! get_option( Tools::DEBUG_OPTION );
 
 		return $atts;
 	}
@@ -190,7 +230,7 @@ final class Renderer {
 		};
 
 		$rating = Helpers::clamp_rating( $meta( 'rating' ) );
-		if ( 0 === $rating ) {
+		if ( $rating <= 0 ) {
 			$rating = Helpers::clamp_rating( Settings::get( 'default_rating', 0 ) );
 		}
 
@@ -205,6 +245,7 @@ final class Renderer {
 		$item = array(
 			'id'          => $id,
 			'name'        => get_the_title( $id ),
+			'headline'    => (string) $meta( 'headline' ),
 			'review'      => $post->post_content,
 			'rating'      => $rating,
 			'company'     => (string) $meta( 'company' ),
@@ -218,6 +259,7 @@ final class Renderer {
 			'logo'        => self::logo_html( (int) $meta( 'company_logo' ) ),
 			'stars'       => self::stars_html( $rating ),
 			'socials'     => $socials,
+			'groups'      => self::item_groups( $id ),
 		);
 
 		/**
@@ -228,6 +270,87 @@ final class Renderer {
 		 * @param array    $atts Display attributes.
 		 */
 		return apply_filters( 'advanced_testimonial_item_data', $item, $post, $atts );
+	}
+
+	/**
+	 * Groups (taxonomy terms) a testimonial belongs to, as slug => name.
+	 *
+	 * @param int $id Post ID.
+	 * @return array<string,string>
+	 */
+	private static function item_groups( $id ) {
+		$terms = get_the_terms( $id, Taxonomy::TAXONOMY );
+		$out   = array();
+
+		if ( is_array( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$out[ $term->slug ] = $term->name;
+			}
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Build the group-filter tab bar. Returns an empty string unless filtering
+	 * is enabled, the layout is a non-slider grid type, and the displayed items
+	 * span at least two distinct groups (otherwise there is nothing to filter).
+	 *
+	 * @param array $items Prepared testimonial items.
+	 * @param array $atts  Display attributes.
+	 * @return string
+	 */
+	private static function filter_bar_html( array $items, array $atts ) {
+		$filterable = array( 'grid', 'list', 'card', 'masonry' );
+
+		if ( empty( $atts['show_filter'] ) || ! in_array( $atts['layout'], $filterable, true ) ) {
+			return '';
+		}
+
+		$groups = array();
+		foreach ( $items as $item ) {
+			if ( empty( $item['groups'] ) ) {
+				continue;
+			}
+			foreach ( $item['groups'] as $slug => $name ) {
+				if ( ! isset( $groups[ $slug ] ) ) {
+					$groups[ $slug ] = $name;
+				}
+			}
+		}
+
+		if ( count( $groups ) < 2 ) {
+			return '';
+		}
+
+		$out  = '<div class="at-filter" role="group" aria-label="' . esc_attr__( 'Filter testimonials by group', 'advanced-testimonial' ) . '">';
+		$out .= '<button type="button" class="at-filter__btn is-active" data-at-filter="*" aria-pressed="true">' . esc_html__( 'All', 'advanced-testimonial' ) . '</button>';
+		foreach ( $groups as $slug => $name ) {
+			$out .= '<button type="button" class="at-filter__btn" data-at-filter="' . esc_attr( $slug ) . '" aria-pressed="false">' . esc_html( $name ) . '</button>';
+		}
+		$out .= '</div>';
+
+		return $out;
+	}
+
+	/**
+	 * Build the "Load more" button. Returns an empty string unless load-more is
+	 * enabled, the layout is a non-slider grid type, and there are more items
+	 * than the initial batch.
+	 *
+	 * @param array $items Prepared testimonial items.
+	 * @param array $atts  Display attributes.
+	 * @return string
+	 */
+	private static function load_more_html( array $items, array $atts ) {
+		$ok      = array( 'grid', 'list', 'card', 'masonry' );
+		$initial = (int) $atts['_lm_initial'];
+
+		if ( empty( $atts['load_more'] ) || ! in_array( $atts['layout'], $ok, true ) || $initial < 1 || count( $items ) <= $initial ) {
+			return '';
+		}
+
+		return '<div class="at-loadmore-wrap"><button type="button" class="at-loadmore" data-at-loadmore data-batch="' . esc_attr( $initial ) . '">' . esc_html__( 'Load more', 'advanced-testimonial' ) . '</button></div>';
 	}
 
 	/**
@@ -282,20 +405,21 @@ final class Renderer {
 	}
 
 	/**
-	 * Build accessible star-rating markup.
+	 * Build accessible star-rating markup (supports half stars, e.g. 4.5).
 	 *
-	 * @param int $rating Rating 0-5.
+	 * @param mixed $rating Rating 0-5 (0.5 steps).
 	 * @return string
 	 */
 	public static function stars_html( $rating ) {
 		$rating = Helpers::clamp_rating( $rating );
 
-		if ( 0 === $rating ) {
+		if ( $rating <= 0 ) {
 			return '';
 		}
 
-		/* translators: %d: rating value out of five. */
-		$label = sprintf( __( 'Rated %d out of 5', 'advanced-testimonial' ), $rating );
+		$display = rtrim( rtrim( number_format( $rating, 1 ), '0' ), '.' );
+		/* translators: %s: rating value out of five, e.g. 4.5. */
+		$label = sprintf( __( 'Rated %s out of 5', 'advanced-testimonial' ), $display );
 
 		$icons = array(
 			'star'  => 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z',
@@ -304,10 +428,22 @@ final class Renderer {
 		$icon  = (string) Settings::get( 'star_icon', 'star' );
 		$path  = isset( $icons[ $icon ] ) ? $icons[ $icon ] : $icons['star'];
 
+		$svg = static function ( $cls ) use ( $path ) {
+			return '<svg class="' . esc_attr( $cls ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' . esc_attr( $path ) . '"/></svg>';
+		};
+
+		$full = (int) floor( $rating );
+		$half = ( $rating - $full ) >= 0.5;
+
 		$out = '<div class="at-stars" role="img" aria-label="' . esc_attr( $label ) . '">';
 		for ( $i = 1; $i <= 5; $i++ ) {
-			$state = ( $i <= $rating ) ? 'is-filled' : 'is-empty';
-			$out  .= '<svg class="at-star ' . esc_attr( $state ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' . esc_attr( $path ) . '"/></svg>';
+			if ( $i <= $full ) {
+				$out .= $svg( 'at-star is-filled' );
+			} elseif ( $half && $i === $full + 1 ) {
+				$out .= '<span class="at-star at-star--half">' . $svg( 'at-star__bg' ) . $svg( 'at-star__fg' ) . '</span>';
+			} else {
+				$out .= $svg( 'at-star is-empty' );
+			}
 		}
 		$out .= '</div>';
 
@@ -363,6 +499,7 @@ final class Renderer {
 			'--at-gap'     => (int) Settings::get( 'spacing', 24 ) . 'px',
 			'--at-columns' => (int) $atts['columns'],
 			'--at-shadow'  => isset( $shadows[ $shadow_key ] ) ? $shadows[ $shadow_key ] : $shadows['soft'],
+			'--at-clamp'   => max( 2, (int) Settings::get( 'readmore_lines', 4 ) ),
 		);
 
 		$style = '';

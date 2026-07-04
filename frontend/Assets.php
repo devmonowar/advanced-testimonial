@@ -46,7 +46,7 @@ final class Assets {
 			return;
 		}
 
-		$min = Settings::get( 'use_minified' ) ? '.min' : '';
+		$min = self::min_suffix( 'assets/css/front.css' );
 
 		wp_register_style(
 			self::STYLE,
@@ -54,6 +54,24 @@ final class Assets {
 			array(),
 			Helpers::asset_version( 'assets/css/front' . $min . '.css' )
 		);
+	}
+
+	/**
+	 * Resolve the ".min" suffix for an asset, honouring the "Use Minified
+	 * Assets" setting only when the minified file actually exists — otherwise
+	 * it falls back to the full file so enabling the option never 404s.
+	 *
+	 * @param string $relative Path to the full asset, e.g. assets/css/front.css.
+	 * @return string Either ".min" or an empty string.
+	 */
+	private static function min_suffix( $relative ) {
+		if ( ! Settings::get( 'use_minified' ) ) {
+			return '';
+		}
+
+		$min = preg_replace( '/\.(css|js)$/', '.min.$1', $relative );
+
+		return ( $min && is_readable( ADVANCED_TESTIMONIAL_DIR . $min ) ) ? '.min' : '';
 	}
 
 	/**
@@ -66,7 +84,7 @@ final class Assets {
 			return;
 		}
 
-		$min = Settings::get( 'use_minified' ) ? '.min' : '';
+		$min = self::min_suffix( 'assets/js/carousel.js' );
 
 		wp_register_script(
 			self::SCRIPT_CAROUSEL,
@@ -111,7 +129,7 @@ final class Assets {
 			wp_enqueue_style( self::STYLE );
 		}
 
-		$needs_js = in_array( $atts['layout'], array( 'carousel', 'spotlight' ), true );
+		$needs_js = in_array( $atts['layout'], array( 'carousel', 'spotlight', 'marquee' ), true ) || ! empty( $atts['show_filter'] ) || ! empty( $atts['read_more'] ) || ! empty( $atts['load_more'] );
 		if ( $needs_js && Settings::get( 'enable_js', 1 ) ) {
 			wp_enqueue_script( self::SCRIPT_CAROUSEL );
 		}

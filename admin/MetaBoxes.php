@@ -43,6 +43,10 @@ final class MetaBoxes {
 	 */
 	public static function fields() {
 		return array(
+			'headline'        => array(
+				'label' => __( 'Headline / Review Title', 'advanced-testimonial' ),
+				'type'  => 'text',
+			),
 			'company'         => array(
 				'label' => __( 'Company', 'advanced-testimonial' ),
 				'type'  => 'text',
@@ -153,10 +157,14 @@ final class MetaBoxes {
 
 		switch ( $field['type'] ) {
 			case 'rating':
+				$rating_val = Helpers::clamp_rating( $value );
 				echo '<select id="' . esc_attr( $id ) . '" name="' . esc_attr( $key ) . '">';
-				echo '<option value="0"' . selected( (int) $value, 0, false ) . '>' . esc_html__( 'No rating', 'advanced-testimonial' ) . '</option>';
-				for ( $i = 1; $i <= 5; $i++ ) {
-					echo '<option value="' . esc_attr( $i ) . '"' . selected( (int) $value, $i, false ) . '>' . esc_html( sprintf( /* translators: %d: number of stars. */ _n( '%d star', '%d stars', $i, 'advanced-testimonial' ), $i ) ) . '</option>';
+				echo '<option value="0"' . selected( $rating_val, 0.0, false ) . '>' . esc_html__( 'No rating', 'advanced-testimonial' ) . '</option>';
+				foreach ( array( 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 ) as $step ) {
+					$disp = rtrim( rtrim( number_format( (float) $step, 1 ), '0' ), '.' );
+					/* translators: %s: star rating value, e.g. 4.5. */
+					$label = sprintf( __( '%s stars', 'advanced-testimonial' ), $disp );
+					echo '<option value="' . esc_attr( $step ) . '"' . selected( $rating_val, (float) $step, false ) . '>' . esc_html( $label ) . '</option>';
 				}
 				echo '</select>';
 				break;

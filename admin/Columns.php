@@ -74,14 +74,15 @@ final class Columns {
 				break;
 
 			case 'at_rating':
-				$rating = (int) get_post_meta( $post_id, Helpers::meta_key( 'rating' ), true );
+				$rating = Helpers::clamp_rating( get_post_meta( $post_id, Helpers::meta_key( 'rating' ), true ) );
 				$stars  = Helpers::stars_text( $rating );
 
 				if ( '' === $stars ) {
 					echo '<span aria-hidden="true">&mdash;</span>';
 				} else {
-					/* translators: %d: rating out of 5. */
-					echo '<span class="at-col-rating" title="' . esc_attr( sprintf( __( '%d out of 5', 'advanced-testimonial' ), $rating ) ) . '">' . esc_html( $stars ) . '</span>';
+					$rating_disp = rtrim( rtrim( number_format( $rating, 1 ), '0' ), '.' );
+					/* translators: %s: rating out of 5, e.g. 4.5. */
+					echo '<span class="at-col-rating" title="' . esc_attr( sprintf( __( '%s out of 5', 'advanced-testimonial' ), $rating_disp ) ) . '">' . esc_html( $stars ) . '</span>';
 				}
 				break;
 		}
