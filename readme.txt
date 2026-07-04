@@ -47,6 +47,8 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 3. Marquee layout — a smooth, continuously scrolling row of testimonials with soft edge fades.
 4. Card layout — large, prominent single-column testimonial cards.
 5. Fully responsive — testimonials look great on mobile right out of the box.
+6. Marquee layout in action — animated preview of the continuous scroll with edge fades.
+7. Group filter tabs in action — click any tab to instantly filter testimonials by group.
 
 == Frequently Asked Questions ==
 
