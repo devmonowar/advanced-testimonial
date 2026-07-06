@@ -47,6 +47,10 @@ final class MetaBoxes {
 				'label' => __( 'Headline / Review Title', 'advanced-testimonial' ),
 				'type'  => 'text',
 			),
+			'video'           => array(
+				'label' => __( 'Video URL (YouTube, Vimeo or MP4)', 'advanced-testimonial' ),
+				'type'  => 'url',
+			),
 			'company'         => array(
 				'label' => __( 'Company', 'advanced-testimonial' ),
 				'type'  => 'text',

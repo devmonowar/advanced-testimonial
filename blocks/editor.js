@@ -148,6 +148,7 @@
 					toggle( props, 'showVerified', __( 'Show verified badge', 'advanced-testimonial' ) ),
 					toggle( props, 'showWebsite', __( 'Show website button', 'advanced-testimonial' ) ),
 					toggle( props, 'showHeadline', __( 'Show headline', 'advanced-testimonial' ) ),
+					toggle( props, 'showVideo', __( 'Show video', 'advanced-testimonial' ) ),
 					toggle( props, 'showFilter', __( 'Show group filter tabs', 'advanced-testimonial' ) ),
 					toggle( props, 'readMore', __( 'Truncate long reviews (Read more)', 'advanced-testimonial' ) ),
 					toggle( props, 'loadMore', __( 'Reveal in batches (Load more)', 'advanced-testimonial' ) )
