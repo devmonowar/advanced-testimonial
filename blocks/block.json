@@ -20,6 +20,8 @@
 		"columns": { "type": "number", "default": 3 },
 		"limit": { "type": "number", "default": 9 },
 		"order": { "type": "string", "default": "desc" },
+		"orderby": { "type": "string", "default": "date" },
+		"verifiedOnly": { "type": "boolean", "default": false },
 		"autoplay": { "type": "number", "default": 0 },
 		"showRating": { "type": "boolean", "default": true },
 		"showImage": { "type": "boolean", "default": true },

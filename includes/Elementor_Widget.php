@@ -167,16 +167,40 @@ class Elementor_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
+			'orderby',
+			array(
+				'label'   => __( 'Order by', 'advanced-testimonial' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'date',
+				'options' => array(
+					'date'   => __( 'Date', 'advanced-testimonial' ),
+					'rating' => __( 'Rating', 'advanced-testimonial' ),
+					'title'  => __( 'Title', 'advanced-testimonial' ),
+				),
+			)
+		);
+
+		$this->add_control(
 			'order',
 			array(
 				'label'   => __( 'Order', 'advanced-testimonial' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'desc',
 				'options' => array(
-					'desc'   => __( 'Newest first', 'advanced-testimonial' ),
-					'asc'    => __( 'Oldest first', 'advanced-testimonial' ),
+					'desc'   => __( 'Descending (newest / highest first)', 'advanced-testimonial' ),
+					'asc'    => __( 'Ascending (oldest / lowest first)', 'advanced-testimonial' ),
 					'random' => __( 'Random', 'advanced-testimonial' ),
 				),
+			)
+		);
+
+		$this->add_control(
+			'verified_only',
+			array(
+				'label'        => __( 'Verified only', 'advanced-testimonial' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
 			)
 		);
 
@@ -366,6 +390,8 @@ class Elementor_Widget extends Widget_Base {
 			'columns'          => $columns,
 			'limit'            => isset( $s['limit'] ) ? (int) $s['limit'] : 9,
 			'order'            => isset( $s['order'] ) ? $s['order'] : 'desc',
+			'orderby'          => isset( $s['orderby'] ) ? $s['orderby'] : 'date',
+			'verified'         => $is_on( 'verified_only', false ),
 			'autoplay'         => isset( $s['autoplay'] ) ? (int) $s['autoplay'] : 0,
 			'speed'            => isset( $s['speed'] ) ? $s['speed'] : '',
 			'card_width'       => isset( $s['card_width'] ) ? (int) $s['card_width'] : 0,

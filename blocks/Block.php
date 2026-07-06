@@ -92,6 +92,8 @@ final class Block {
 			'columns'          => isset( $attributes['columns'] ) ? (int) $attributes['columns'] : 3,
 			'limit'            => isset( $attributes['limit'] ) ? (int) $attributes['limit'] : 9,
 			'order'            => isset( $attributes['order'] ) ? $attributes['order'] : 'desc',
+			'orderby'          => isset( $attributes['orderby'] ) ? $attributes['orderby'] : 'date',
+			'verified'         => (bool) ( $attributes['verifiedOnly'] ?? false ),
 			'autoplay'         => isset( $attributes['autoplay'] ) ? (int) $attributes['autoplay'] : 0,
 			'width'            => $width,
 			'show_rating'      => (bool) ( $attributes['showRating'] ?? true ),
