@@ -105,6 +105,7 @@ final class Block {
 			'show_verified'    => (bool) ( $attributes['showVerified'] ?? true ),
 			'show_website'     => (bool) ( $attributes['showWebsite'] ?? true ),
 			'show_headline'    => (bool) ( $attributes['showHeadline'] ?? true ),
+			'show_video'       => (bool) ( $attributes['showVideo'] ?? true ),
 			'show_filter'      => (bool) ( $attributes['showFilter'] ?? false ),
 			'read_more'        => (bool) ( $attributes['readMore'] ?? false ),
 			'load_more'        => (bool) ( $attributes['loadMore'] ?? false ),

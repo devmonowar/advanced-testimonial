@@ -28,6 +28,11 @@ final class Assets {
 	const SCRIPT_CAROUSEL = 'advanced-testimonial-carousel';
 
 	/**
+	 * Video lightbox script handle.
+	 */
+	const SCRIPT_VIDEO = 'advanced-testimonial-video';
+
+	/**
 	 * Hook into WordPress.
 	 *
 	 * @return void
@@ -96,6 +101,41 @@ final class Assets {
 	}
 
 	/**
+	 * Register the video lightbox script handle (idempotent).
+	 *
+	 * @return void
+	 */
+	public static function register_script_video() {
+		if ( wp_script_is( self::SCRIPT_VIDEO, 'registered' ) ) {
+			return;
+		}
+
+		$min = self::min_suffix( 'assets/js/video.js' );
+
+		wp_register_script(
+			self::SCRIPT_VIDEO,
+			ADVANCED_TESTIMONIAL_URL . 'assets/js/video' . $min . '.js',
+			array(),
+			Helpers::asset_version( 'assets/js/video' . $min . '.js' ),
+			true
+		);
+	}
+
+	/**
+	 * Enqueue the video lightbox script. Called by the renderer only when a
+	 * testimonial in the current output actually has a video.
+	 *
+	 * @return void
+	 */
+	public static function enqueue_video() {
+		self::register_script_video();
+
+		if ( Settings::get( 'enable_js', 1 ) ) {
+			wp_enqueue_script( self::SCRIPT_VIDEO );
+		}
+	}
+
+	/**
 	 * Runs on wp_enqueue_scripts: register handles, attach custom CSS, and
 	 * optionally load the stylesheet globally when conditional loading is off.
 	 *
@@ -104,6 +144,7 @@ final class Assets {
 	public function on_enqueue_scripts() {
 		self::register_style();
 		self::register_script();
+		self::register_script_video();
 
 		$custom = trim( (string) Settings::get( 'custom_css', '' ) );
 		if ( '' !== $custom ) {

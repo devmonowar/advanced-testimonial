@@ -12,6 +12,7 @@ A modern, lightweight WordPress plugin for managing and displaying customer test
 - **Seven layouts:** Grid, List, Card, Carousel, Marquee, Masonry, Spotlight.
 - **Shortcode** `[advanced_testimonial]`, a **no-build Gutenberg block** with a live (ServerSideRender) preview, and an **Elementor widget**.
 - **Front-end submission form** (`[at_form]`) — visitors submit testimonials that land as Pending for review, with nonce + honeypot + rate-limit spam protection and an optional admin email notification.
+- **Video testimonials** — a per-testimonial Video URL (YouTube / Vimeo / MP4); cards show a play button and the video opens in a lightbox, with nothing loaded until the visitor clicks play.
 - **Settings page** (General / Styles / Performance / Submission Form / Advanced) with full theming via CSS custom properties.
 - **Schema.org Review** markup, accessibility (ARIA, keyboard), RTL support.
 - **Performance-first:** frontend assets load only when testimonials are present; a tiny vanilla-JS carousel (no jQuery, no external libraries).
@@ -23,7 +24,7 @@ A modern, lightweight WordPress plugin for managing and displaying customer test
 [advanced_testimonial layout="grid" columns="3" group="clients" limit="9" order="desc"]
 ```
 
-Attributes: `layout`, `width` (`wide`/`full`), `columns`, `limit`, `group`, `ids`, `order` (`asc`/`desc`/`random`), `orderby` (`date`/`title`/`menu_order`/`rating`), `verified` (`1` = verified only), `autoplay`, and `show_rating` / `show_image` / `show_company` / `show_designation` / `show_location` / `show_date` / `show_verified` / `show_website`.
+Attributes: `layout`, `width` (`wide`/`full`), `columns`, `limit`, `group`, `ids`, `order` (`asc`/`desc`/`random`), `orderby` (`date`/`title`/`menu_order`/`rating`), `verified` (`1` = verified only), `autoplay`, and `show_rating` / `show_image` / `show_company` / `show_designation` / `show_location` / `show_date` / `show_verified` / `show_website` / `show_video`.
 
 Submission form: `[at_form title="Leave a review" group="clients"]` — attributes: `title`, `success` (custom success message), `group` (auto-assign submissions to a group).
 

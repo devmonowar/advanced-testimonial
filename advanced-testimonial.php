@@ -3,7 +3,7 @@
  * Plugin Name:       Advanced Testimonial
  * Plugin URI:        https://wordpress.org/plugins/advanced-testimonial/
  * Description:       Showcase customer testimonials and reviews in beautiful grids, carousels, cards and more. Lightweight, block-ready and built for social proof.
- * Version:           2.0.5
+ * Version:           2.0.6
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            devmonowar
@@ -20,7 +20,7 @@ namespace AdvancedTestimonial;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ADVANCED_TESTIMONIAL_VERSION', '2.0.5' );
+define( 'ADVANCED_TESTIMONIAL_VERSION', '2.0.6' );
 define( 'ADVANCED_TESTIMONIAL_FILE', __FILE__ );
 define( 'ADVANCED_TESTIMONIAL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ADVANCED_TESTIMONIAL_URL', plugin_dir_url( __FILE__ ) );

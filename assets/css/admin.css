@@ -117,14 +117,15 @@
 /* Demo Library */
 .at-demo-toolbar {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 14px;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
 	margin: 18px 0 4px;
 }
 
 .at-demo-search {
-	min-width: 240px;
+	width: 100%;
+	max-width: 480px;
 }
 
 .at-demo-filters {
@@ -144,10 +145,10 @@
 
 .at-demo-grid {
 	display: grid;
-	grid-template-columns: repeat( auto-fill, minmax( 280px, 1fr ) );
+	grid-template-columns: repeat( auto-fill, minmax( 300px, 1fr ) );
 	gap: 20px;
 	margin-top: 16px;
-	max-width: 1120px;
+	max-width: 1600px;
 }
 
 .at-demo-card {

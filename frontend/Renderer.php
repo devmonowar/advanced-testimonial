@@ -57,6 +57,7 @@ final class Renderer {
 			'show_verified'    => true,
 			'show_website'     => true,
 			'show_headline'    => true,
+			'show_video'       => true,
 			'show_filter'      => false,
 			'read_more'        => false,
 			'load_more'        => false,
@@ -96,6 +97,14 @@ final class Renderer {
 		$item_template = $loader->locate( 'item' );
 
 		Assets::enqueue_front( $atts );
+
+		// Video lightbox script: only when this output actually contains one.
+		foreach ( $items as $it ) {
+			if ( ! empty( $it['video'] ) ) {
+				Assets::enqueue_video();
+				break;
+			}
+		}
 
 		++self::$instances;
 
@@ -164,7 +173,7 @@ final class Renderer {
 			$atts['ids'] = array();
 		}
 
-		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website', 'show_headline', 'show_filter', 'fade', 'read_more', 'load_more', 'verified' ) as $flag ) {
+		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website', 'show_headline', 'show_video', 'show_filter', 'fade', 'read_more', 'load_more', 'verified' ) as $flag ) {
 			$atts[ $flag ] = self::to_bool( $atts[ $flag ] );
 		}
 
@@ -261,6 +270,7 @@ final class Renderer {
 			'stars'       => self::stars_html( $rating ),
 			'socials'     => $socials,
 			'groups'      => self::item_groups( $id ),
+			'video'       => $atts['show_video'] ? self::video_html( $post, (string) $meta( 'video' ) ) : '',
 		);
 
 		/**
@@ -403,6 +413,44 @@ final class Renderer {
 				'alt'     => '',
 			)
 		);
+	}
+
+	/**
+	 * Build the video thumbnail + play button markup.
+	 *
+	 * The actual player (iframe / <video>) is only created by video.js when
+	 * the visitor clicks play, so nothing external loads on page render.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @param string   $url  Raw video URL from post meta.
+	 * @return string Empty string when there is no (valid) video.
+	 */
+	private static function video_html( $post, $url ) {
+		$video = Helpers::parse_video( $url );
+
+		if ( null === $video ) {
+			return '';
+		}
+
+		// Thumbnail: the parser's own (YouTube) or the client photo as fallback.
+		$thumb = $video['thumbnail'];
+		if ( '' === $thumb && has_post_thumbnail( $post ) ) {
+			$thumb = (string) wp_get_attachment_image_url( get_post_thumbnail_id( $post ), 'large' );
+		}
+
+		$thumb_html = $thumb
+			? '<img class="at-video__thumb" src="' . esc_url( $thumb ) . '" alt="" loading="lazy" />'
+			: '<span class="at-video__thumb at-video__thumb--placeholder"></span>';
+
+		/* translators: %s: client name. */
+		$label = sprintf( __( 'Play video testimonial from %s', 'advanced-testimonial' ), get_the_title( $post ) );
+
+		return '<div class="at-video" data-at-video-type="' . esc_attr( $video['type'] ) . '" data-at-video-src="' . esc_url( $video['embed'] ) . '">'
+			. '<button type="button" class="at-video__play" aria-label="' . esc_attr( $label ) . '">'
+			. $thumb_html
+			. '<span class="at-video__btn" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l10.54-6.86a1.05 1.05 0 0 0 0-1.76L9.56 4.26A1.04 1.04 0 0 0 8 5.14Z"/></svg></span>'
+			. '</button>'
+			. '</div>';
 	}
 
 	/**

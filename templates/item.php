@@ -50,6 +50,10 @@ do_action( 'advanced_testimonial_before_card', $item, $atts );
 			</div>
 		<?php endif; ?>
 
+		<?php if ( ! empty( $item['video'] ) ) : ?>
+			<div class="at-card__video"><?php echo $item['video']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- prepared safe markup. ?></div>
+		<?php endif; ?>
+
 		<?php if ( $at_has_rating ) : ?>
 			<?php if ( $at_review ) : ?>
 				<div class="at-card__rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">

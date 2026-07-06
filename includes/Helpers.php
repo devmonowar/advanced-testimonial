@@ -72,6 +72,58 @@ final class Helpers {
 	}
 
 	/**
+	 * Parse a testimonial video URL into an embeddable descriptor.
+	 *
+	 * Supports YouTube (watch / youtu.be / shorts / embed), Vimeo and
+	 * self-hosted video files (mp4 / webm / ogv).
+	 *
+	 * @param string $url Raw video URL.
+	 * @return array{type:string,embed:string,thumbnail:string}|null Descriptor,
+	 *         or null when the URL is empty or not recognised.
+	 */
+	public static function parse_video( $url ) {
+		$url = trim( (string) $url );
+
+		if ( '' === $url ) {
+			return null;
+		}
+
+		// YouTube: watch?v=ID, youtu.be/ID, /shorts/ID, /embed/ID.
+		if ( preg_match( '#(?:youtube\.com/(?:watch\?v=|shorts/|embed/)|youtu\.be/)([A-Za-z0-9_-]{6,20})#', $url, $m ) ) {
+			return array(
+				'type'      => 'youtube',
+				'embed'     => 'https://www.youtube-nocookie.com/embed/' . $m[1] . '?autoplay=1&rel=0',
+				'thumbnail' => 'https://img.youtube.com/vi/' . $m[1] . '/hqdefault.jpg',
+			);
+		}
+
+		// Vimeo: vimeo.com/ID (optionally with an unlisted hash suffix).
+		if ( preg_match( '#vimeo\.com/(?:video/)?(\d+)(?:/([a-f0-9]+))?#', $url, $m ) ) {
+			$embed = 'https://player.vimeo.com/video/' . $m[1] . '?autoplay=1';
+			if ( ! empty( $m[2] ) ) {
+				$embed .= '&h=' . $m[2];
+			}
+			return array(
+				'type'      => 'vimeo',
+				'embed'     => $embed,
+				'thumbnail' => '', // Vimeo thumbnails need an API call; the renderer falls back to the client photo.
+			);
+		}
+
+		// Self-hosted file.
+		$path = (string) wp_parse_url( $url, PHP_URL_PATH );
+		if ( preg_match( '/\.(mp4|webm|ogv)$/i', $path ) ) {
+			return array(
+				'type'      => 'file',
+				'embed'     => $url,
+				'thumbnail' => '',
+			);
+		}
+
+		return null;
+	}
+
+	/**
 	 * Render a compact star string for admin/list contexts (supports half stars).
 	 *
 	 * @param mixed $rating Rating from 0 to 5.

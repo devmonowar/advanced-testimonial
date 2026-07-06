@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,9 +29,11 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 * Seven display layouts: Grid, List, Card, Carousel, Marquee, Masonry and Spotlight.
 * A no-build Gutenberg block, an Elementor widget and the `[advanced_testimonial]` shortcode.
 * **Front-end submission form** — add `[at_form]` to any page so visitors can submit testimonials directly from your site. Submissions land as "Pending" for you to review before publishing, with spam protection (nonce, honeypot and rate-limiting) and an optional admin email notification.
-* Rich per-review fields: headline, rating (half-stars supported), company, designation, location, photo, verified badge and website.
+* **Video testimonials** — paste a YouTube, Vimeo or self-hosted MP4 link on any testimonial; the card shows a play button and the video opens in a lightbox.
+* Rich per-review fields: headline, rating (half-stars supported), company, designation, location, photo, company logo, review date, verified badge, website and social links (X/Twitter, LinkedIn, Facebook).
 * Group filter tabs, a "Read more" toggle for long reviews and "Load more" batching.
 * Ready-made demos you can import in one click from the built-in Demo Library.
+* Handy Tools tab: one-click starter demo, JSON import/export of your testimonials, clear cache, reset settings and system info.
 * Translation-ready, accessible (ARIA, keyboard, RTL) and built on the WordPress Coding Standards.
 
 == Installation ==
@@ -45,11 +47,14 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 
 1. Grid layout — customer reviews in a responsive grid with star ratings, headlines and verified badges.
 2. Carousel layout — a lightweight, swipeable slider with navigation arrows and dots.
-3. Marquee layout — a smooth, continuously scrolling row of testimonials with soft edge fades.
-4. Card layout — large, prominent single-column testimonial cards.
-5. Fully responsive — testimonials look great on mobile right out of the box.
-6. Marquee layout in action — animated preview of the continuous scroll with edge fades.
-7. Group filter tabs in action — click any tab to instantly filter testimonials by group.
+3. Card layout — large, prominent single-column testimonial cards.
+4. Fully responsive — testimonials look great on mobile right out of the box.
+5. Marquee layout in action — animated preview of the continuous scroll with edge fades.
+6. Group filter tabs in action — click any tab to instantly filter testimonials by group.
+7. Testimonial edit screen — every review field (rating, company, logo, video, socials and more) in one clean meta box.
+8. Front-end submission form — visitors submit reviews with built-in spam protection; you approve them from a Pending queue.
+9. Demo Library — browse ready-made testimonial sets by category and import one (with images) in a single click.
+10. Video testimonials — cards show a play button; the video opens in a lightbox (YouTube, Vimeo or self-hosted MP4).
 
 == Frequently Asked Questions ==
 
@@ -59,7 +64,7 @@ Use the `[advanced_testimonial]` shortcode anywhere, or add the **Advanced Testi
 
 = Which layouts are available? =
 
-Grid, List, Card, Carousel, Marquee, Masonry and Spotlight. Set the `layout` attribute, or pick it in the block.
+Grid, List, Card, Carousel, Marquee, Masonry and Spotlight. Set the `layout` attribute, or pick it in the block. The Marquee layout also has its own scroll speed, direction and card width controls (global defaults in Settings → Styles, with per-block overrides).
 
 = How do I group testimonials? =
 
@@ -67,7 +72,19 @@ Create groups under **Testimonials → Groups**, assign testimonials to them, th
 
 = Can I change the colors and styling? =
 
-Yes. Go to **Testimonials → Settings → Styles** for primary/accent/text colors, border radius, spacing, card shadow and button style. Add your own rules under **Advanced → Custom CSS**.
+Yes. Go to **Testimonials → Settings → Styles** for primary/accent/text colors, border radius, spacing, card shadow, button style, avatar shape (circle/rounded/square), rating icon (star or heart) and a default rating for reviews without one. Add your own rules under **Advanced → Custom CSS**.
+
+= Can I display specific testimonials only? =
+
+Yes — pass their post IDs with the `ids` attribute: `[advanced_testimonial ids="12,34,56"]`. They are shown in the order you list them.
+
+= Can I add video testimonials? =
+
+Yes. Paste a YouTube, Vimeo or self-hosted MP4 URL in the testimonial's **Video URL** field. The card then shows a video thumbnail with a play button, and the video opens in a lightbox when clicked — nothing loads from YouTube or Vimeo until the visitor actually clicks play. Hide videos on a specific block or shortcode with `show_video="0"`.
+
+= How do I show my best reviews first? =
+
+Sort by rating with `[advanced_testimonial orderby="rating"]` (highest first), and show only verified reviews with `verified="1"`. Both options are also available in the block and the Elementor widget.
 
 = How do I override the templates? =
 
@@ -86,6 +103,22 @@ The Demo Library loads ready-made testimonial sets from a free online service pr
 Add the `[at_form]` shortcode to any page. Visitors fill in their name, review, rating and optional details (company, job title, location, email). Each submission is saved as "Pending" so you can review it before it goes live — or turn on auto-publish under **Testimonials → Settings → Submission Form**.
 
 You can control which fields appear, set a custom success message and receive an email notification for every new submission — all from **Testimonials → Settings → Submission Form**.
+
+= Can I import or export my testimonials? =
+
+Yes. **Testimonials → Settings → Tools** has a one-click JSON **Export** of your testimonials, groups and (optionally) plugin settings, and an **Import** that restores them on any site — handy for backups, staging or moving between sites. The same tab also offers a one-click starter demo, clear cache and reset settings.
+
+= Will my data be deleted if I uninstall the plugin? =
+
+No. Deactivating or deleting the plugin never removes your testimonials by default. If you *want* a full clean-up, enable "Remove all plugin data when deleting the plugin" under **Settings → Advanced** first — only then does deleting the plugin remove testimonials, groups, settings and transients.
+
+= Do I need Elementor to use this plugin? =
+
+No. The shortcode and the Gutenberg block work with any theme. If Elementor is installed, an **Advanced Testimonial** widget appears in the Elementor panel automatically — with the same layouts and controls.
+
+= Will it slow down my site? =
+
+No. CSS/JS load only on pages that actually display testimonials, there is no jQuery and no external libraries, queries are cached, and you can serve minified assets — all configurable under **Settings → Performance**.
 
 = Are there hooks for developers? =
 
@@ -106,50 +139,51 @@ It connects to this service only when you:
 
 No data from your site is sent to the service; only public demo files (JSON and images) are downloaded. The service is provided by the plugin author. Source code: https://github.com/devmonowar/wp-plugin-demo-library — it is served by GitHub Pages, whose terms and privacy policy apply (https://docs.github.com/en/site-policy).
 
+**Video testimonials (optional):** if you add a YouTube or Vimeo URL to a testimonial, the visitor's browser connects to those services — YouTube thumbnails are loaded from img.youtube.com, and the player (youtube-nocookie.com or player.vimeo.com) is only embedded after the visitor clicks play. No connection is made if you don't use video, and nothing is sent to these services by your site itself. YouTube is provided by Google (terms: https://www.youtube.com/t/terms — privacy: https://policies.google.com/privacy); Vimeo terms: https://vimeo.com/terms — privacy: https://vimeo.com/privacy.
+
 == Changelog ==
 
+= 2.0.6 =
+* New: video testimonials — paste a YouTube, Vimeo or self-hosted MP4 URL and the card shows a play button that opens the video in a lightbox (`show_video` to toggle).
+* New: sort by rating (`orderby="rating"`) and show verified reviews only (`verified="1"`) — in the shortcode, block and Elementor widget.
+* Improved: Demo Library screen — full-width search above the category filters and a wider demo grid.
+
 = 2.0.5 =
-* New: a **front-end submission form** — add `[at_form]` to any page so visitors can submit testimonials directly. Submissions are saved as "Pending" by default (optional auto-publish). Built-in spam protection: nonce verification, honeypot field and a per-IP rate limit. Optional admin email notification on each new submission. All options are under the new **Settings → Submission Form** tab. Shortcode attributes: `title`, `success` (custom success message), `group` (auto-assign submissions to a group).
+* New: front-end submission form — add `[at_form]` to any page. Spam protection (nonce, honeypot, rate limit), Pending-review queue, optional admin email notification, and a new Settings → Submission Form tab.
 
 = 2.0.4 =
-* New: an **Elementor widget** — build testimonial sections in Elementor with the same layouts and controls as the block and shortcode.
-* New: a **Marquee** layout — a smooth, continuously scrolling row of testimonials that pauses on hover, with an optional soft edge fade and a choice of scroll direction (right-to-left or left-to-right). Scroll speed, card width and direction are set globally in Settings → Styles with per-block overrides. Reduced-motion friendly and lightweight, no jQuery.
-* New: an optional per-testimonial **Headline / Review Title** field, shown above the review (block/shortcode `show_headline`), output with the Schema.org review name.
-* New: **half-star ratings** — set any rating in 0.5 steps (e.g. 4.5 stars); the front-end renders a precise half star and the Schema.org `ratingValue` reflects the decimal.
-* New: optional **group filter tabs** so visitors can filter testimonials by group (e.g. "All / Clients / Partners") on the Grid, List, Card and Masonry layouts (`show_filter`).
-* New: optional **"Read more"** for long reviews and **"Load more"** to reveal testimonials in batches — both configurable in Settings → Styles and safe when JavaScript is off.
-* New: the built-in **Demo Library** now has a search box and category filters so you can find a ready-made demo by use case.
-* Fix: the **Carousel** now advances one testimonial per arrow/dot click instead of a whole page.
-* Fix: the settings page keeps the active tab after **Save Changes** instead of jumping back to General.
-* Fix: **Masonry** no longer overlaps cards, and adapts its column count so it never overcrowds a narrow content area.
-* Fix: the "Use Minified Assets" option now falls back to the full CSS/JS when a minified file is not present, instead of failing to load.
+* New: Elementor widget.
+* New: Marquee layout with scroll speed, direction and card-width controls.
+* New: Headline / Review Title field per testimonial.
+* New: half-star ratings (0.5 steps, e.g. 4.5).
+* New: group filter tabs (`show_filter`).
+* New: "Read more" for long reviews and "Load more" batching.
+* New: Demo Library search box and category filters.
+* Fix: carousel arrows advance one testimonial per click; settings page keeps the active tab after saving; Masonry no longer overlaps cards; minified assets fall back to the full files when missing.
 
 = 2.0.3 =
-* New: a "Refresh" button on the Demo Library screen to load the latest demos immediately, bypassing the 6-hour cache.
-* Tools → Clear Cache now also clears the cached demo library list.
+* New: Demo Library "Refresh" button; Clear Cache also clears the demo list cache.
 
 = 2.0.2 =
-* New: Tools tab — one-click Starter Demo, demo Import/Export, Clear Cache, Reset Settings, Debug Mode and System Info.
-* New: Demo Library — import ready-made testimonial sets (with images) from the online library, with an offline starter fallback.
-* New: optional heading via the `title` shortcode attribute / block control, rendered inside the testimonials wrapper so it always aligns with the content.
-* New: style settings — Avatar Shape, Rating Icon (star or heart) and Default Rating.
-* New: click-to-copy shortcodes on the Groups list and a per-testimonial row action; a "Settings" link on the Plugins screen; a testimonial-specific menu icon; and an empty-state call to action.
-* Accessibility: carousel/slide ARIA roles, screen-reader slide labels, corrected dot semantics, and visible keyboard focus styles.
-* Developer hooks: new `advanced_testimonial_before_card` / `advanced_testimonial_after_card` actions and an `advanced_testimonial_review_html` filter, plus documented filters and template-override / FAQ docs.
-* Uninstall: an opt-in "Remove all plugin data when deleting the plugin" option that removes testimonials, groups, meta, options and transients.
-* Assets are versioned by file modification time so updates always bust browser caches.
-* Verified clean against the WordPress Coding Standards, Plugin Check and i18n.
+* New: Tools tab — starter demo, JSON import/export, clear cache, reset settings, debug mode and system info.
+* New: Demo Library — one-click demo imports with images.
+* New: optional heading (`title` attribute), avatar shape, rating icon and default rating settings.
+* New: developer hooks and an opt-in uninstall clean-up option.
+* Improved: accessibility (ARIA roles, keyboard focus styles) and admin conveniences (click-to-copy shortcodes, Settings link).
 
 = 2.0.1 =
-* Complete rewrite from the ground up as a dedicated testimonial and customer-review plugin.
-* New: testimonial post type with groups and rich review fields (rating, company, designation, verified badge, logo, location, socials).
-* New: six display layouts — Grid, List, Card, Carousel, Masonry and Spotlight.
-* New: `[advanced_testimonial]` shortcode and a no-build Gutenberg block with live preview.
-* New: Settings page (General, Styles, Performance, Advanced) with full theming controls.
-* New: Schema.org Review markup, accessibility, RTL support and lightweight vanilla-JS carousel (no jQuery).
-* Performance: frontend assets load only when testimonials are present.
+* Complete rewrite as a dedicated testimonial and customer-review plugin.
+* Testimonial post type with groups and rich review fields.
+* Six display layouts, `[advanced_testimonial]` shortcode and a no-build Gutenberg block.
+* Settings page with full theming controls, Schema.org Review markup, accessibility, RTL and a lightweight vanilla-JS carousel.
 
 == Upgrade Notice ==
+
+= 2.0.6 =
+Adds video testimonials (YouTube, Vimeo or MP4 in a lightbox), rating sort and a verified-only filter. Recommended update.
+
+= 2.0.5 =
+Adds a front-end submission form with spam protection and a Pending-review queue. Recommended update.
 
 = 2.0.4 =
 Big update: an Elementor widget, a new Marquee layout, half-star ratings, review headlines, group filters, Read more / Load more, and a searchable Demo Library. Recommended update.

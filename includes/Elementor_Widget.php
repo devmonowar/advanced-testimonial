@@ -298,6 +298,7 @@ class Elementor_Widget extends Widget_Base {
 			'show_verified'    => __( 'Show verified badge', 'advanced-testimonial' ),
 			'show_website'     => __( 'Show website button', 'advanced-testimonial' ),
 			'show_headline'    => __( 'Show headline', 'advanced-testimonial' ),
+			'show_video'       => __( 'Show video', 'advanced-testimonial' ),
 		);
 
 		foreach ( $toggles as $key => $label ) {
@@ -406,6 +407,7 @@ class Elementor_Widget extends Widget_Base {
 			'show_verified'    => $is_on( 'show_verified', true ),
 			'show_website'     => $is_on( 'show_website', true ),
 			'show_headline'    => $is_on( 'show_headline', true ),
+			'show_video'       => $is_on( 'show_video', true ),
 			'show_filter'      => $is_on( 'show_filter', false ),
 			'read_more'        => $is_on( 'read_more', false ),
 			'load_more'        => $is_on( 'load_more', false ),
