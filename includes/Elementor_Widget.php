@@ -131,6 +131,19 @@ class Elementor_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
+			'card_style',
+			array(
+				'label'   => __( 'Card style', 'advanced-testimonial' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => array_merge(
+					array( '' => __( 'Default (from settings)', 'advanced-testimonial' ) ),
+					Renderer::card_styles()
+				),
+			)
+		);
+
+		$this->add_control(
 			'group',
 			array(
 				'label'   => __( 'Group', 'advanced-testimonial' ),
@@ -387,6 +400,7 @@ class Elementor_Widget extends Widget_Base {
 		$atts = array(
 			'title'            => isset( $s['title'] ) ? $s['title'] : '',
 			'layout'           => isset( $s['layout'] ) ? $s['layout'] : 'grid',
+			'style'            => isset( $s['card_style'] ) ? $s['card_style'] : '',
 			'group'            => isset( $s['group'] ) ? $s['group'] : '',
 			'columns'          => $columns,
 			'limit'            => isset( $s['limit'] ) ? (int) $s['limit'] : 9,

@@ -32,6 +32,36 @@ final class Renderer {
 	private static $instances = 0;
 
 	/**
+	 * Available card skins as slug => label.
+	 *
+	 * The single source of truth: the shortcode/block/Elementor whitelists,
+	 * the Settings dropdown and the wrapper class all read this list, so a
+	 * new skin only needs an entry here plus its CSS block in front.css.
+	 *
+	 * @return array<string,string>
+	 */
+	public static function card_styles() {
+		$styles = array(
+			'classic'  => __( 'Classic', 'advanced-testimonial' ),
+			'modern'   => __( 'Modern', 'advanced-testimonial' ),
+			'minimal'  => __( 'Minimal', 'advanced-testimonial' ),
+			'bubble'   => __( 'Bubble', 'advanced-testimonial' ),
+			'bold'     => __( 'Bold', 'advanced-testimonial' ),
+			'glass'    => __( 'Glass', 'advanced-testimonial' ),
+			'gradient' => __( 'Gradient', 'advanced-testimonial' ),
+			'outline'  => __( 'Outline', 'advanced-testimonial' ),
+			'retro'    => __( 'Retro', 'advanced-testimonial' ),
+		);
+
+		/**
+		 * Filter the available card skins.
+		 *
+		 * @param array<string,string> $styles Slug => label.
+		 */
+		return apply_filters( 'advanced_testimonial_card_styles', $styles );
+	}
+
+	/**
 	 * Default display attributes.
 	 *
 	 * @return array<string,mixed>
@@ -39,6 +69,7 @@ final class Renderer {
 	public static function defaults() {
 		return array(
 			'layout'           => 'grid',
+			'style'            => '',
 			'title'            => '',
 			'width'            => '',
 			'columns'          => 3,
@@ -141,6 +172,14 @@ final class Renderer {
 		$atts = wp_parse_args( $atts, self::defaults() );
 
 		$atts['layout'] = in_array( $atts['layout'], self::LAYOUTS, true ) ? $atts['layout'] : 'grid';
+
+		// Card skin: per-instance value, falling back to the global setting.
+		$skins = self::card_styles();
+		$style = strtolower( (string) $atts['style'] );
+		if ( ! isset( $skins[ $style ] ) ) {
+			$style = strtolower( (string) Settings::get( 'card_style', 'classic' ) );
+		}
+		$atts['style'] = isset( $skins[ $style ] ) ? $style : 'classic';
 
 		$atts['title'] = sanitize_text_field( (string) $atts['title'] );
 
@@ -509,6 +548,7 @@ final class Renderer {
 		$classes = array(
 			'at-wrapper',
 			'at-layout-' . $atts['layout'],
+			'at-style-' . sanitize_html_class( $atts['style'] ),
 			'at-shadow-' . sanitize_html_class( (string) Settings::get( 'card_shadow', 'soft' ) ),
 			'at-btn-' . sanitize_html_class( (string) Settings::get( 'button_style', 'filled' ) ),
 			'at-avatar-' . sanitize_html_class( (string) Settings::get( 'avatar_shape', 'circle' ) ),

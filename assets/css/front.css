@@ -1127,3 +1127,192 @@
 body.at-video-modal-open {
 	overflow: hidden;
 }
+
+/* ============================================================
+   Card skins — .at-style-{name}
+   Base (.at-card__inner) IS the "classic" skin; each skin below
+   only overrides the card look, never the markup. Adding a new
+   skin = one entry in Renderer::card_styles() + a block here.
+   ============================================================ */
+
+/* --- Modern: primary-tinted card, no border, big quote mark --- */
+.at-style-modern .at-card__inner {
+	background: #eef3fd;
+	background: color-mix( in srgb, var( --at-primary ) 8%, #ffffff );
+	border: none;
+}
+
+.at-style-modern .at-card__review {
+	position: relative;
+	padding-top: 30px;
+}
+
+.at-style-modern .at-card__review::before {
+	content: '\201C';
+	position: absolute;
+	top: -8px;
+	left: 0;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 58px;
+	line-height: 1;
+	color: var( --at-primary );
+}
+
+/* --- Minimal: no box at all, just an accent rule + serif quote --- */
+.at-style-minimal .at-card__inner {
+	background: transparent;
+	border: none;
+	border-left: 3px solid var( --at-primary );
+	border-radius: 0;
+	box-shadow: none;
+	padding: 10px 10px 10px 24px;
+}
+
+.at-style-minimal.at-rtl .at-card__inner {
+	border-left: none;
+	border-right: 3px solid var( --at-primary );
+	padding: 10px 24px 10px 10px;
+}
+
+.at-style-minimal .at-card__review {
+	font-family: Georgia, 'Times New Roman', serif;
+	font-style: italic;
+	font-size: 1.05rem;
+}
+
+/* --- Bubble: review inside a chat bubble, author as the "sender" --- */
+.at-style-bubble .at-card__inner {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0 0 6px;
+}
+
+.at-style-bubble .at-card__review {
+	position: relative;
+	background: #f1f3f6;
+	border-radius: 16px;
+	border-bottom-left-radius: 4px;
+	padding: 16px 20px;
+}
+
+.at-style-bubble .at-card__review::after {
+	content: '';
+	position: absolute;
+	left: 16px;
+	bottom: -9px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px 12px 0 0;
+	border-color: #f1f3f6 transparent transparent transparent;
+}
+
+.at-style-bubble.at-rtl .at-card__review {
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 4px;
+}
+
+.at-style-bubble.at-rtl .at-card__review::after {
+	left: auto;
+	right: 16px;
+	border-width: 10px 0 0 12px;
+	border-color: #f1f3f6 transparent transparent transparent;
+}
+
+.at-style-bubble .at-card__author {
+	padding-left: 6px;
+}
+
+/* --- Bold: dark card, big confident typography --- */
+.at-style-bold .at-card__inner {
+	background: #111827;
+	border: none;
+}
+
+.at-style-bold .at-card__headline,
+.at-style-bold .at-card__name {
+	color: #ffffff;
+}
+
+.at-style-bold .at-card__review {
+	color: #e5e7eb;
+	font-size: 1.08rem;
+	font-weight: 500;
+	line-height: 1.6;
+}
+
+.at-style-bold .at-card__role,
+.at-style-bold .at-card__location,
+.at-style-bold .at-card__date {
+	color: #9ca3af;
+}
+
+.at-style-bold .at-social {
+	background: rgba( 255, 255, 255, 0.12 );
+	color: #ffffff;
+}
+
+.at-style-bold .at-social:hover {
+	background: var( --at-primary );
+}
+
+.at-style-bold .at-btn-outline .at-btn,
+.at-style-bold.at-btn-outline .at-btn {
+	color: #ffffff;
+	border-color: rgba( 255, 255, 255, 0.4 );
+}
+
+.at-style-bold .at-card__logo .at-logo__img {
+	filter: brightness( 0 ) invert( 1 );
+	opacity: 0.75;
+}
+
+/* --- Glass: frosted translucent card (shines on colored sections) --- */
+.at-style-glass .at-card__inner {
+	background: rgba( 255, 255, 255, 0.55 );
+	-webkit-backdrop-filter: blur( 12px );
+	backdrop-filter: blur( 12px );
+	border: 1px solid rgba( 255, 255, 255, 0.65 );
+	box-shadow: 0 8px 32px rgba( 31, 41, 55, 0.12 );
+}
+
+/* --- Gradient: primary-to-accent gradient border frame --- */
+.at-style-gradient .at-card__inner {
+	border: 2px solid transparent;
+	background:
+		linear-gradient( #ffffff, #ffffff ) padding-box,
+		linear-gradient( 135deg, var( --at-primary ), var( --at-accent ) ) border-box;
+}
+
+/* --- Outline: flat, transparent, just a confident primary border --- */
+.at-style-outline .at-card__inner {
+	background: transparent;
+	border: 2px solid var( --at-primary );
+	box-shadow: none;
+}
+
+/* --- Retro: neo-brutalist — thick ink border + hard offset shadow --- */
+.at-style-retro .at-card__inner {
+	background: #ffffff;
+	border: 2px solid #111827;
+	box-shadow: 5px 5px 0 #111827;
+	transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.at-style-retro .at-card:hover .at-card__inner {
+	transform: translate( -2px, -2px );
+	box-shadow: 7px 7px 0 #111827;
+}
+
+.at-style-retro .at-avatar__img,
+.at-style-retro .at-avatar__fallback {
+	border: 2px solid #111827;
+}
+
+.at-style-retro .at-btn-filled .at-btn {
+	border: 2px solid #111827;
+	box-shadow: 3px 3px 0 #111827;
+	border-radius: 6px;
+}

@@ -16,6 +16,7 @@
 	"attributes": {
 		"title": { "type": "string", "default": "" },
 		"layout": { "type": "string", "default": "grid" },
+		"cardStyle": { "type": "string", "default": "" },
 		"group": { "type": "string", "default": "" },
 		"columns": { "type": "number", "default": 3 },
 		"limit": { "type": "number", "default": 9 },

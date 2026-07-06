@@ -59,6 +59,7 @@ final class Block {
 			'advancedTestimonialBlock',
 			array(
 				'groups' => $this->group_options(),
+				'styles' => $this->style_options(),
 			)
 		);
 
@@ -88,6 +89,7 @@ final class Block {
 		$atts = array(
 			'title'            => isset( $attributes['title'] ) ? $attributes['title'] : '',
 			'layout'           => isset( $attributes['layout'] ) ? $attributes['layout'] : 'grid',
+			'style'            => isset( $attributes['cardStyle'] ) ? $attributes['cardStyle'] : '',
 			'group'            => isset( $attributes['group'] ) ? $attributes['group'] : '',
 			'columns'          => isset( $attributes['columns'] ) ? (int) $attributes['columns'] : 3,
 			'limit'            => isset( $attributes['limit'] ) ? (int) $attributes['limit'] : 9,
@@ -116,6 +118,29 @@ final class Block {
 		);
 
 		return Renderer::render( $atts );
+	}
+
+	/**
+	 * Build card style options for the editor select control.
+	 *
+	 * @return array<int,array<string,string>>
+	 */
+	private function style_options() {
+		$options = array(
+			array(
+				'value' => '',
+				'label' => __( 'Default (from settings)', 'advanced-testimonial' ),
+			),
+		);
+
+		foreach ( Renderer::card_styles() as $slug => $label ) {
+			$options[] = array(
+				'value' => $slug,
+				'label' => $label,
+			);
+		}
+
+		return $options;
 	}
 
 	/**
