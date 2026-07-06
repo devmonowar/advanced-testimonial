@@ -48,7 +48,7 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 
 1. Grid layout — customer reviews in a responsive grid with star ratings, headlines and verified badges.
 2. Carousel layout — a lightweight, swipeable slider with navigation arrows and dots.
-3. Card layout — large, prominent single-column testimonial cards.
+3. Nine card styles — the same testimonial in Modern, Minimal, Bubble, Bold, Gradient and Retro; mix any style with any layout.
 4. Fully responsive — testimonials look great on mobile right out of the box.
 5. Marquee layout in action — animated preview of the continuous scroll with edge fades.
 6. Group filter tabs in action — click any tab to instantly filter testimonials by group.
@@ -97,7 +97,7 @@ Copy any file from the plugin's `templates/` folder into an `advanced-testimonia
 
 = Does it work in the block editor? =
 
-Yes — a no-build Gutenberg block with a live preview and full inspector controls (layout, group, columns, order, autoplay and show/hide toggles). It also supports Wide and Full alignment.
+Yes — a no-build Gutenberg block with a live preview and full inspector controls (layout, card style, group, columns, order, autoplay and show/hide toggles). It also supports Wide and Full alignment.
 
 = Where do the demos come from? =
 
