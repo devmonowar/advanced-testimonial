@@ -24,6 +24,8 @@
 
 	var data = window.advancedTestimonialBlock || { groups: [ { value: '', label: 'All groups' } ] };
 
+	var styleOptions = data.styles || [ { value: '', label: __( 'Default (from settings)', 'advanced-testimonial' ) } ];
+
 	var layoutOptions = [
 		{ label: __( 'Grid', 'advanced-testimonial' ), value: 'grid' },
 		{ label: __( 'List', 'advanced-testimonial' ), value: 'list' },
@@ -93,6 +95,12 @@
 						value: a.layout,
 						options: layoutOptions,
 						onChange: function ( v ) { set( { layout: v } ); }
+					} ),
+					el( SelectControl, {
+						label: __( 'Card style', 'advanced-testimonial' ),
+						value: a.cardStyle,
+						options: styleOptions,
+						onChange: function ( v ) { set( { cardStyle: v } ); }
 					} ),
 					el( SelectControl, {
 						label: __( 'Group', 'advanced-testimonial' ),

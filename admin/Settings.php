@@ -122,6 +122,13 @@ final class Settings {
 			'styles'      => array(
 				'title'  => __( 'Styles', 'advanced-testimonial' ),
 				'fields' => array(
+					'card_style'    => array(
+						'type'        => 'select',
+						'label'       => __( 'Card Style', 'advanced-testimonial' ),
+						'default'     => 'classic',
+						'options'     => \AdvancedTestimonial\Frontend\Renderer::card_styles(),
+						'description' => __( 'Default look of the testimonial cards. Each block or shortcode can override it with the style attribute.', 'advanced-testimonial' ),
+					),
 					'primary_color' => array(
 						'type'    => 'color',
 						'label'   => __( 'Primary Color', 'advanced-testimonial' ),

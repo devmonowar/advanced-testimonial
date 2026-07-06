@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T19:06:57+02:00\n"
+"POT-Creation-Date: 2026-07-06T20:10:19+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-testimonial\n"
@@ -65,9 +65,9 @@ msgstr ""
 
 #: admin/Columns.php:47
 #: admin/MetaBoxes.php:75
-#: includes/Elementor_Widget.php:177
+#: includes/Elementor_Widget.php:190
 #: templates/form.php:67
-#: blocks/editor.js:39
+#: blocks/editor.js:41
 msgid "Rating"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgid "Filter demos by category"
 msgstr ""
 
 #: admin/DemoLibrary.php:228
-#: frontend/Renderer.php:338
+#: frontend/Renderer.php:377
 msgid "All"
 msgstr ""
 
@@ -382,7 +382,7 @@ msgid "Import Starter Demo"
 msgstr ""
 
 #: admin/Settings.php:61
-#: admin/Settings.php:417
+#: admin/Settings.php:424
 msgid "Settings"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgid "Thumbnail"
 msgstr ""
 
 #: admin/Settings.php:83
-#: admin/Settings.php:164
+#: admin/Settings.php:171
 msgid "Medium"
 msgstr ""
 
@@ -448,289 +448,298 @@ msgid "Styles"
 msgstr ""
 
 #: admin/Settings.php:127
-msgid "Primary Color"
+msgid "Card Style"
 msgstr ""
 
-#: admin/Settings.php:132
-msgid "Secondary / Accent Color"
+#: admin/Settings.php:130
+msgid "Default look of the testimonial cards. Each block or shortcode can override it with the style attribute."
 msgstr ""
 
 #: admin/Settings.php:134
+msgid "Primary Color"
+msgstr ""
+
+#: admin/Settings.php:139
+msgid "Secondary / Accent Color"
+msgstr ""
+
+#: admin/Settings.php:141
 msgid "Used for rating stars and accents."
 msgstr ""
 
-#: admin/Settings.php:138
+#: admin/Settings.php:145
 msgid "Text Color"
 msgstr ""
 
-#: admin/Settings.php:143
+#: admin/Settings.php:150
 msgid "Border Radius (px)"
 msgstr ""
 
-#: admin/Settings.php:151
+#: admin/Settings.php:158
 msgid "Spacing / Gap (px)"
 msgstr ""
 
-#: admin/Settings.php:159
+#: admin/Settings.php:166
 msgid "Card Shadow"
 msgstr ""
 
-#: admin/Settings.php:162
+#: admin/Settings.php:169
 msgid "None"
 msgstr ""
 
-#: admin/Settings.php:163
+#: admin/Settings.php:170
 msgid "Soft"
 msgstr ""
 
-#: admin/Settings.php:165
+#: admin/Settings.php:172
 msgid "Strong"
 msgstr ""
 
-#: admin/Settings.php:170
+#: admin/Settings.php:177
 msgid "Button Style"
 msgstr ""
 
-#: admin/Settings.php:173
+#: admin/Settings.php:180
 msgid "Filled"
 msgstr ""
 
-#: admin/Settings.php:174
+#: admin/Settings.php:181
+#: frontend/Renderer.php:52
 msgid "Outline"
 msgstr ""
 
-#: admin/Settings.php:179
+#: admin/Settings.php:186
 msgid "Avatar Shape"
 msgstr ""
 
-#: admin/Settings.php:182
+#: admin/Settings.php:189
 msgid "Circle"
 msgstr ""
 
-#: admin/Settings.php:183
+#: admin/Settings.php:190
 msgid "Rounded"
 msgstr ""
 
-#: admin/Settings.php:184
+#: admin/Settings.php:191
 msgid "Square"
 msgstr ""
 
-#: admin/Settings.php:189
+#: admin/Settings.php:196
 msgid "Rating Icon"
 msgstr ""
 
-#: admin/Settings.php:192
+#: admin/Settings.php:199
 msgid "Star"
 msgstr ""
 
-#: admin/Settings.php:193
+#: admin/Settings.php:200
 msgid "Heart"
 msgstr ""
 
-#: admin/Settings.php:198
+#: admin/Settings.php:205
 msgid "Default Rating"
 msgstr ""
 
-#: admin/Settings.php:203
+#: admin/Settings.php:210
 msgid "Used when a testimonial has no rating set (0 = none)."
 msgstr ""
 
-#: admin/Settings.php:207
+#: admin/Settings.php:214
 msgid "Marquee Scroll Speed"
 msgstr ""
 
-#: admin/Settings.php:210
-#: includes/Elementor_Widget.php:239
-#: blocks/editor.js:51
+#: admin/Settings.php:217
+#: includes/Elementor_Widget.php:252
+#: blocks/editor.js:53
 msgid "Slow"
 msgstr ""
 
-#: admin/Settings.php:211
-#: includes/Elementor_Widget.php:240
-#: blocks/editor.js:52
+#: admin/Settings.php:218
+#: includes/Elementor_Widget.php:253
+#: blocks/editor.js:54
 msgid "Normal"
 msgstr ""
 
-#: admin/Settings.php:212
-#: includes/Elementor_Widget.php:241
-#: blocks/editor.js:53
+#: admin/Settings.php:219
+#: includes/Elementor_Widget.php:254
+#: blocks/editor.js:55
 msgid "Fast"
 msgstr ""
 
-#: admin/Settings.php:214
+#: admin/Settings.php:221
 msgid "Default speed for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:218
+#: admin/Settings.php:225
 msgid "Marquee Card Width (px)"
 msgstr ""
 
-#: admin/Settings.php:223
+#: admin/Settings.php:230
 msgid "Default card width for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:227
+#: admin/Settings.php:234
 msgid "Marquee Scroll Direction"
 msgstr ""
 
-#: admin/Settings.php:230
-#: includes/Elementor_Widget.php:265
-#: blocks/editor.js:58
+#: admin/Settings.php:237
+#: includes/Elementor_Widget.php:278
+#: blocks/editor.js:60
 msgid "Right to left"
 msgstr ""
 
-#: admin/Settings.php:231
-#: includes/Elementor_Widget.php:266
-#: blocks/editor.js:59
+#: admin/Settings.php:238
+#: includes/Elementor_Widget.php:279
+#: blocks/editor.js:61
 msgid "Left to right"
 msgstr ""
 
-#: admin/Settings.php:233
+#: admin/Settings.php:240
 msgid "Default scroll direction for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:237
+#: admin/Settings.php:244
 msgid "Read More — Lines Shown"
 msgstr ""
 
-#: admin/Settings.php:242
+#: admin/Settings.php:249
 msgid "When \"Read more\" is enabled on a block, reviews are trimmed to this many lines before the toggle appears."
 msgstr ""
 
-#: admin/Settings.php:246
+#: admin/Settings.php:253
 msgid "Load More — Batch Size"
 msgstr ""
 
-#: admin/Settings.php:251
+#: admin/Settings.php:258
 msgid "When \"Load more\" is enabled on a block, this many testimonials are shown at first and revealed per click."
 msgstr ""
 
-#: admin/Settings.php:256
+#: admin/Settings.php:263
 msgid "Performance"
 msgstr ""
 
-#: admin/Settings.php:260
+#: admin/Settings.php:267
 msgid "Load Assets Only When Needed"
 msgstr ""
 
-#: admin/Settings.php:262
+#: admin/Settings.php:269
 msgid "Only enqueue CSS/JS on pages that actually render testimonials."
 msgstr ""
 
-#: admin/Settings.php:266
+#: admin/Settings.php:273
 msgid "Cache Queries"
 msgstr ""
 
-#: admin/Settings.php:268
+#: admin/Settings.php:275
 msgid "Cache testimonial queries for faster repeat loads."
 msgstr ""
 
-#: admin/Settings.php:272
+#: admin/Settings.php:279
 msgid "Use Minified Assets"
 msgstr ""
 
-#: admin/Settings.php:274
+#: admin/Settings.php:281
 msgid "Load .min versions of CSS/JS when available."
 msgstr ""
 
-#: admin/Settings.php:279
+#: admin/Settings.php:286
 msgid "Submission Form"
 msgstr ""
 
-#: admin/Settings.php:283
+#: admin/Settings.php:290
 msgid "Enable Submission Form"
 msgstr ""
 
-#: admin/Settings.php:285
+#: admin/Settings.php:292
 msgid "Enable the [at_form] shortcode. Visitors can submit testimonials from the front end."
 msgstr ""
 
-#: admin/Settings.php:289
+#: admin/Settings.php:296
 msgid "Auto-Publish Submissions"
 msgstr ""
 
-#: admin/Settings.php:291
+#: admin/Settings.php:298
 msgid "Publish testimonials immediately. When off, they are saved as \"Pending\" for you to review first (recommended)."
 msgstr ""
 
-#: admin/Settings.php:295
+#: admin/Settings.php:302
 msgid "Require a Rating"
 msgstr ""
 
-#: admin/Settings.php:300
+#: admin/Settings.php:307
 msgid "Show \"Review Title\" Field"
 msgstr ""
 
-#: admin/Settings.php:305
+#: admin/Settings.php:312
 msgid "Show \"Company\" Field"
 msgstr ""
 
-#: admin/Settings.php:310
+#: admin/Settings.php:317
 msgid "Show \"Job Title\" Field"
 msgstr ""
 
-#: admin/Settings.php:315
+#: admin/Settings.php:322
 msgid "Show \"Location\" Field"
 msgstr ""
 
-#: admin/Settings.php:320
+#: admin/Settings.php:327
 msgid "Show \"Email Address\" Field"
 msgstr ""
 
-#: admin/Settings.php:322
+#: admin/Settings.php:329
 msgid "Email is never displayed publicly. Used for admin reference only."
 msgstr ""
 
-#: admin/Settings.php:326
+#: admin/Settings.php:333
 msgid "Show \"Website\" Field"
 msgstr ""
 
-#: admin/Settings.php:331
+#: admin/Settings.php:338
 msgid "Notification Email"
 msgstr ""
 
-#: admin/Settings.php:333
+#: admin/Settings.php:340
 msgid "Send a notification to this address on each new submission. Leave blank to use the site admin email."
 msgstr ""
 
-#: admin/Settings.php:337
+#: admin/Settings.php:344
 msgid "Success Message"
 msgstr ""
 
-#: admin/Settings.php:339
+#: admin/Settings.php:346
 msgid "Message shown after a successful submission. Shortcode attribute \"success\" overrides this."
 msgstr ""
 
-#: admin/Settings.php:344
+#: admin/Settings.php:351
 msgid "Advanced"
 msgstr ""
 
-#: admin/Settings.php:348
+#: admin/Settings.php:355
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/Settings.php:350
+#: admin/Settings.php:357
 msgid "Output on the frontend after the plugin styles."
 msgstr ""
 
-#: admin/Settings.php:354
+#: admin/Settings.php:361
 msgid "Remove all plugin data when deleting the plugin"
 msgstr ""
 
-#: admin/Settings.php:356
+#: admin/Settings.php:363
 msgid "When the plugin is deleted, permanently remove all testimonials, groups, meta, settings and transients. Deactivating never deletes anything. Default: off."
 msgstr ""
 
-#: admin/Settings.php:416
-#: admin/Settings.php:484
+#: admin/Settings.php:423
+#: admin/Settings.php:491
 msgid "Advanced Testimonial Settings"
 msgstr ""
 
-#: admin/Settings.php:503
+#: admin/Settings.php:510
 msgid "Tools"
 msgstr ""
 
-#: admin/Settings.php:557
+#: admin/Settings.php:564
 msgid "Enable"
 msgstr ""
 
@@ -933,8 +942,18 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: blocks/Block.php:130
-#: includes/Elementor_Widget.php:355
+#: blocks/Block.php:132
+#: includes/Elementor_Widget.php:140
+#: includes/Elementor_Widget.php:251
+#: includes/Elementor_Widget.php:277
+#: blocks/editor.js:27
+#: blocks/editor.js:52
+#: blocks/editor.js:59
+msgid "Default (from settings)"
+msgstr ""
+
+#: blocks/Block.php:155
+#: includes/Elementor_Widget.php:368
 msgid "All groups"
 msgstr ""
 
@@ -966,27 +985,59 @@ msgid ""
 "%4$s"
 msgstr ""
 
-#: frontend/Renderer.php:337
+#: frontend/Renderer.php:45
+msgid "Classic"
+msgstr ""
+
+#: frontend/Renderer.php:46
+msgid "Modern"
+msgstr ""
+
+#: frontend/Renderer.php:47
+msgid "Minimal"
+msgstr ""
+
+#: frontend/Renderer.php:48
+msgid "Bubble"
+msgstr ""
+
+#: frontend/Renderer.php:49
+msgid "Bold"
+msgstr ""
+
+#: frontend/Renderer.php:50
+msgid "Glass"
+msgstr ""
+
+#: frontend/Renderer.php:51
+msgid "Gradient"
+msgstr ""
+
+#: frontend/Renderer.php:53
+msgid "Retro"
+msgstr ""
+
+#: frontend/Renderer.php:376
 msgid "Filter testimonials by group"
 msgstr ""
 
-#: frontend/Renderer.php:364
+#: frontend/Renderer.php:403
 msgid "Load more"
 msgstr ""
 
 #. translators: %s: client name.
-#: frontend/Renderer.php:446
+#: frontend/Renderer.php:485
 #, php-format
 msgid "Play video testimonial from %s"
 msgstr ""
 
 #. translators: %s: rating value out of five, e.g. 4.5.
-#: frontend/Renderer.php:471
+#: frontend/Renderer.php:510
 #, php-format
 msgid "Rated %s out of 5"
 msgstr ""
 
-#: frontend/Renderer.php:573
+#: frontend/Renderer.php:613
 msgid "No testimonials found for the selected options."
 msgstr ""
 
@@ -1000,210 +1051,208 @@ msgstr ""
 
 #: includes/Elementor_Widget.php:101
 #: includes/Elementor_Widget.php:118
-#: blocks/editor.js:85
-#: blocks/editor.js:92
+#: blocks/editor.js:87
+#: blocks/editor.js:94
 msgid "Layout"
 msgstr ""
 
 #: includes/Elementor_Widget.php:109
-#: blocks/editor.js:87
+#: blocks/editor.js:89
 msgid "Heading (optional)"
 msgstr ""
 
 #: includes/Elementor_Widget.php:122
-#: blocks/editor.js:28
+#: blocks/editor.js:30
 msgid "Grid"
 msgstr ""
 
 #: includes/Elementor_Widget.php:123
-#: blocks/editor.js:29
+#: blocks/editor.js:31
 msgid "List"
 msgstr ""
 
 #: includes/Elementor_Widget.php:124
-#: blocks/editor.js:30
+#: blocks/editor.js:32
 msgid "Card"
 msgstr ""
 
 #: includes/Elementor_Widget.php:125
-#: blocks/editor.js:31
+#: blocks/editor.js:33
 msgid "Carousel"
 msgstr ""
 
 #: includes/Elementor_Widget.php:126
-#: includes/Elementor_Widget.php:225
-#: blocks/editor.js:32
-#: blocks/editor.js:158
+#: includes/Elementor_Widget.php:238
+#: blocks/editor.js:34
+#: blocks/editor.js:166
 msgid "Marquee"
 msgstr ""
 
 #: includes/Elementor_Widget.php:127
-#: blocks/editor.js:33
+#: blocks/editor.js:35
 msgid "Masonry"
 msgstr ""
 
 #: includes/Elementor_Widget.php:128
-#: blocks/editor.js:34
+#: blocks/editor.js:36
 msgid "Spotlight"
 msgstr ""
 
 #: includes/Elementor_Widget.php:136
-#: blocks/editor.js:98
+#: blocks/editor.js:100
+msgid "Card style"
+msgstr ""
+
+#: includes/Elementor_Widget.php:149
+#: blocks/editor.js:106
 msgid "Group"
 msgstr ""
 
-#: includes/Elementor_Widget.php:146
-#: blocks/editor.js:104
+#: includes/Elementor_Widget.php:159
+#: blocks/editor.js:112
 msgid "Columns"
 msgstr ""
 
-#: includes/Elementor_Widget.php:161
-#: blocks/editor.js:111
+#: includes/Elementor_Widget.php:174
+#: blocks/editor.js:119
 msgid "Number to show"
 msgstr ""
 
-#: includes/Elementor_Widget.php:172
-#: blocks/editor.js:118
+#: includes/Elementor_Widget.php:185
+#: blocks/editor.js:126
 msgid "Order by"
 msgstr ""
 
-#: includes/Elementor_Widget.php:176
-#: blocks/editor.js:38
+#: includes/Elementor_Widget.php:189
+#: blocks/editor.js:40
 msgid "Date"
 msgstr ""
 
-#: includes/Elementor_Widget.php:178
-#: blocks/editor.js:40
+#: includes/Elementor_Widget.php:191
+#: blocks/editor.js:42
 msgid "Title"
 msgstr ""
 
-#: includes/Elementor_Widget.php:186
-#: blocks/editor.js:124
+#: includes/Elementor_Widget.php:199
+#: blocks/editor.js:132
 msgid "Order"
 msgstr ""
 
-#: includes/Elementor_Widget.php:190
-#: blocks/editor.js:44
+#: includes/Elementor_Widget.php:203
+#: blocks/editor.js:46
 msgid "Descending (newest / highest first)"
 msgstr ""
 
-#: includes/Elementor_Widget.php:191
-#: blocks/editor.js:45
+#: includes/Elementor_Widget.php:204
+#: blocks/editor.js:47
 msgid "Ascending (oldest / lowest first)"
 msgstr ""
 
-#: includes/Elementor_Widget.php:192
-#: blocks/editor.js:46
+#: includes/Elementor_Widget.php:205
+#: blocks/editor.js:48
 msgid "Random"
 msgstr ""
 
-#: includes/Elementor_Widget.php:200
-#: blocks/editor.js:129
+#: includes/Elementor_Widget.php:213
+#: blocks/editor.js:137
 msgid "Verified only"
 msgstr ""
 
-#: includes/Elementor_Widget.php:210
-#: blocks/editor.js:131
+#: includes/Elementor_Widget.php:223
+#: blocks/editor.js:139
 msgid "Autoplay seconds (0 = off)"
 msgstr ""
 
-#: includes/Elementor_Widget.php:215
-#: blocks/editor.js:132
+#: includes/Elementor_Widget.php:228
+#: blocks/editor.js:140
 msgid "Carousel and Spotlight only."
 msgstr ""
 
-#: includes/Elementor_Widget.php:234
-#: blocks/editor.js:160
+#: includes/Elementor_Widget.php:247
+#: blocks/editor.js:168
 msgid "Scroll speed"
 msgstr ""
 
-#: includes/Elementor_Widget.php:238
-#: includes/Elementor_Widget.php:264
-#: blocks/editor.js:50
-#: blocks/editor.js:57
-msgid "Default (from settings)"
-msgstr ""
-
-#: includes/Elementor_Widget.php:249
+#: includes/Elementor_Widget.php:262
 msgid "Card width (px, 0 = default)"
 msgstr ""
 
-#: includes/Elementor_Widget.php:260
-#: blocks/editor.js:175
+#: includes/Elementor_Widget.php:273
+#: blocks/editor.js:183
 msgid "Direction"
 msgstr ""
 
-#: includes/Elementor_Widget.php:274
-#: blocks/editor.js:180
+#: includes/Elementor_Widget.php:287
+#: blocks/editor.js:188
 msgid "Edge fade"
-msgstr ""
-
-#: includes/Elementor_Widget.php:286
-#: blocks/editor.js:141
-msgid "Display"
-msgstr ""
-
-#: includes/Elementor_Widget.php:292
-#: blocks/editor.js:142
-msgid "Show rating"
-msgstr ""
-
-#: includes/Elementor_Widget.php:293
-#: blocks/editor.js:143
-msgid "Show client photo"
-msgstr ""
-
-#: includes/Elementor_Widget.php:294
-#: blocks/editor.js:144
-msgid "Show company"
-msgstr ""
-
-#: includes/Elementor_Widget.php:295
-#: blocks/editor.js:145
-msgid "Show designation"
-msgstr ""
-
-#: includes/Elementor_Widget.php:296
-#: blocks/editor.js:146
-msgid "Show location"
-msgstr ""
-
-#: includes/Elementor_Widget.php:297
-#: blocks/editor.js:147
-msgid "Show date"
-msgstr ""
-
-#: includes/Elementor_Widget.php:298
-#: blocks/editor.js:148
-msgid "Show verified badge"
 msgstr ""
 
 #: includes/Elementor_Widget.php:299
 #: blocks/editor.js:149
+msgid "Display"
+msgstr ""
+
+#: includes/Elementor_Widget.php:305
+#: blocks/editor.js:150
+msgid "Show rating"
+msgstr ""
+
+#: includes/Elementor_Widget.php:306
+#: blocks/editor.js:151
+msgid "Show client photo"
+msgstr ""
+
+#: includes/Elementor_Widget.php:307
+#: blocks/editor.js:152
+msgid "Show company"
+msgstr ""
+
+#: includes/Elementor_Widget.php:308
+#: blocks/editor.js:153
+msgid "Show designation"
+msgstr ""
+
+#: includes/Elementor_Widget.php:309
+#: blocks/editor.js:154
+msgid "Show location"
+msgstr ""
+
+#: includes/Elementor_Widget.php:310
+#: blocks/editor.js:155
+msgid "Show date"
+msgstr ""
+
+#: includes/Elementor_Widget.php:311
+#: blocks/editor.js:156
+msgid "Show verified badge"
+msgstr ""
+
+#: includes/Elementor_Widget.php:312
+#: blocks/editor.js:157
 msgid "Show website button"
 msgstr ""
 
-#: includes/Elementor_Widget.php:300
-#: blocks/editor.js:150
+#: includes/Elementor_Widget.php:313
+#: blocks/editor.js:158
 msgid "Show headline"
 msgstr ""
 
-#: includes/Elementor_Widget.php:301
-#: blocks/editor.js:151
+#: includes/Elementor_Widget.php:314
+#: blocks/editor.js:159
 msgid "Show video"
 msgstr ""
 
-#: includes/Elementor_Widget.php:319
+#: includes/Elementor_Widget.php:332
 msgid "Group filter tabs"
 msgstr ""
 
-#: includes/Elementor_Widget.php:329
-#: blocks/editor.js:153
+#: includes/Elementor_Widget.php:342
+#: blocks/editor.js:161
 msgid "Truncate long reviews (Read more)"
 msgstr ""
 
-#: includes/Elementor_Widget.php:339
-#: blocks/editor.js:154
+#: includes/Elementor_Widget.php:352
+#: blocks/editor.js:162
 msgid "Reveal in batches (Load more)"
 msgstr ""
 
@@ -1311,15 +1360,15 @@ msgstr ""
 msgid "Next testimonial"
 msgstr ""
 
-#: blocks/editor.js:152
+#: blocks/editor.js:160
 msgid "Show group filter tabs"
 msgstr ""
 
-#: blocks/editor.js:166
+#: blocks/editor.js:174
 msgid "Card width (px)"
 msgstr ""
 
-#: blocks/editor.js:167
+#: blocks/editor.js:175
 msgid "0 = use the global setting."
 msgstr ""
 

@@ -27,6 +27,7 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 = Everything you need =
 
 * Seven display layouts: Grid, List, Card, Carousel, Marquee, Masonry and Spotlight.
+* **Nine card styles** — Classic, Modern, Minimal, Bubble, Bold, Glass, Gradient, Outline and Retro. Mix any style with any layout, per block or site-wide.
 * A no-build Gutenberg block, an Elementor widget and the `[advanced_testimonial]` shortcode.
 * **Front-end submission form** — add `[at_form]` to any page so visitors can submit testimonials directly from your site. Submissions land as "Pending" for you to review before publishing, with spam protection (nonce, honeypot and rate-limiting) and an optional admin email notification.
 * **Video testimonials** — paste a YouTube, Vimeo or self-hosted MP4 link on any testimonial; the card shows a play button and the video opens in a lightbox.
@@ -73,6 +74,10 @@ Create groups under **Testimonials → Groups**, assign testimonials to them, th
 = Can I change the colors and styling? =
 
 Yes. Go to **Testimonials → Settings → Styles** for primary/accent/text colors, border radius, spacing, card shadow, button style, avatar shape (circle/rounded/square), rating icon (star or heart) and a default rating for reviews without one. Add your own rules under **Advanced → Custom CSS**.
+
+= Can the cards look different on different pages? =
+
+Yes — pick from nine card styles (Classic, Modern, Minimal, Bubble, Bold, Glass, Gradient, Outline, Retro) with the `style` attribute, e.g. `[advanced_testimonial style="modern"]`. Every shortcode, block or Elementor widget can use its own style — even two different styles on the same page. Set the site-wide default under **Settings → Styles → Card Style**.
 
 = Can I display specific testimonials only? =
 
@@ -122,7 +127,7 @@ No. CSS/JS load only on pages that actually display testimonials, there is no jQ
 
 = Are there hooks for developers? =
 
-Yes. Filters: `advanced_testimonial_query_args`, `advanced_testimonial_item_data`, `advanced_testimonial_review_html`, `advanced_testimonial_output`, `advanced_testimonial_template`. Actions: `advanced_testimonial_before_card`, `advanced_testimonial_after_card`.
+Yes. Filters: `advanced_testimonial_query_args`, `advanced_testimonial_item_data`, `advanced_testimonial_review_html`, `advanced_testimonial_output`, `advanced_testimonial_template`, `advanced_testimonial_card_styles` (register your own card style). Actions: `advanced_testimonial_before_card`, `advanced_testimonial_after_card`.
 
 = Is it accessible and translation-ready? =
 
@@ -144,6 +149,7 @@ No data from your site is sent to the service; only public demo files (JSON and 
 == Changelog ==
 
 = 2.0.6 =
+* New: nine card styles — Classic, Modern, Minimal, Bubble, Bold, Glass, Gradient, Outline and Retro (`style` attribute, per block or site-wide default).
 * New: video testimonials — paste a YouTube, Vimeo or self-hosted MP4 URL and the card shows a play button that opens the video in a lightbox (`show_video` to toggle).
 * New: sort by rating (`orderby="rating"`) and show verified reviews only (`verified="1"`) — in the shortcode, block and Elementor widget.
 * Improved: Demo Library screen — full-width search above the category filters and a wider demo grid.
@@ -180,7 +186,7 @@ No data from your site is sent to the service; only public demo files (JSON and 
 == Upgrade Notice ==
 
 = 2.0.6 =
-Adds video testimonials (YouTube, Vimeo or MP4 in a lightbox), rating sort and a verified-only filter. Recommended update.
+Adds nine card styles, video testimonials (YouTube, Vimeo or MP4 in a lightbox), rating sort and a verified-only filter. Recommended update.
 
 = 2.0.5 =
 Adds a front-end submission form with spam protection and a Pending-review queue. Recommended update.
