@@ -34,9 +34,15 @@
 		{ label: __( 'Spotlight', 'advanced-testimonial' ), value: 'spotlight' }
 	];
 
+	var orderbyOptions = [
+		{ label: __( 'Date', 'advanced-testimonial' ), value: 'date' },
+		{ label: __( 'Rating', 'advanced-testimonial' ), value: 'rating' },
+		{ label: __( 'Title', 'advanced-testimonial' ), value: 'title' }
+	];
+
 	var orderOptions = [
-		{ label: __( 'Newest first', 'advanced-testimonial' ), value: 'desc' },
-		{ label: __( 'Oldest first', 'advanced-testimonial' ), value: 'asc' },
+		{ label: __( 'Descending (newest / highest first)', 'advanced-testimonial' ), value: 'desc' },
+		{ label: __( 'Ascending (oldest / lowest first)', 'advanced-testimonial' ), value: 'asc' },
 		{ label: __( 'Random', 'advanced-testimonial' ), value: 'random' }
 	];
 
@@ -109,11 +115,18 @@
 						onChange: function ( v ) { set( { limit: v } ); }
 					} ),
 					el( SelectControl, {
+						label: __( 'Order by', 'advanced-testimonial' ),
+						value: a.orderby,
+						options: orderbyOptions,
+						onChange: function ( v ) { set( { orderby: v } ); }
+					} ),
+					el( SelectControl, {
 						label: __( 'Order', 'advanced-testimonial' ),
 						value: a.order,
 						options: orderOptions,
 						onChange: function ( v ) { set( { order: v } ); }
 					} ),
+					toggle( props, 'verifiedOnly', __( 'Verified only', 'advanced-testimonial' ) ),
 					el( RangeControl, {
 						label: __( 'Autoplay seconds (0 = off)', 'advanced-testimonial' ),
 						help: __( 'Carousel and Spotlight only.', 'advanced-testimonial' ),

@@ -23,7 +23,7 @@ A modern, lightweight WordPress plugin for managing and displaying customer test
 [advanced_testimonial layout="grid" columns="3" group="clients" limit="9" order="desc"]
 ```
 
-Attributes: `layout`, `width` (`wide`/`full`), `columns`, `limit`, `group`, `ids`, `order` (`asc`/`desc`/`random`), `orderby`, `autoplay`, and `show_rating` / `show_image` / `show_company` / `show_designation` / `show_location` / `show_date` / `show_verified` / `show_website`.
+Attributes: `layout`, `width` (`wide`/`full`), `columns`, `limit`, `group`, `ids`, `order` (`asc`/`desc`/`random`), `orderby` (`date`/`title`/`menu_order`/`rating`), `verified` (`1` = verified only), `autoplay`, and `show_rating` / `show_image` / `show_company` / `show_designation` / `show_location` / `show_date` / `show_verified` / `show_website`.
 
 Submission form: `[at_form title="Leave a review" group="clients"]` — attributes: `title`, `success` (custom success message), `group` (auto-assign submissions to a group).
 

@@ -10,6 +10,7 @@ namespace AdvancedTestimonial\Frontend;
 use AdvancedTestimonial\Admin\CPT;
 use AdvancedTestimonial\Admin\Taxonomy;
 use AdvancedTestimonial\Admin\Settings;
+use AdvancedTestimonial\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -64,9 +65,47 @@ final class Query {
 
 		if ( 'random' === $atts['order'] ) {
 			$args['orderby'] = 'rand';
+		} elseif ( 'rating' === $atts['orderby'] ) {
+			// Order by the rating meta. The OR/NOT EXISTS clause keeps
+			// unrated testimonials in the results (sorted last) instead of
+			// the INNER JOIN a plain meta_key sort would force.
+			$order              = ( 'asc' === $atts['order'] ) ? 'ASC' : 'DESC';
+			$args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- intentional, scoped display.
+				'relation'  => 'OR',
+				'at_rating' => array(
+					'key'     => Helpers::meta_key( 'rating' ),
+					'type'    => 'DECIMAL(3,1)',
+					'compare' => 'EXISTS',
+				),
+				array(
+					'key'     => Helpers::meta_key( 'rating' ),
+					'compare' => 'NOT EXISTS',
+				),
+			);
+			$args['orderby']    = array(
+				'at_rating' => $order,
+				'date'      => 'DESC',
+			);
 		} else {
 			$args['orderby'] = $atts['orderby'];
 			$args['order']   = ( 'asc' === $atts['order'] ) ? 'ASC' : 'DESC';
+		}
+
+		if ( ! empty( $atts['verified'] ) ) {
+			$verified_clause = array(
+				'key'   => Helpers::meta_key( 'verified' ),
+				'value' => '1',
+			);
+			if ( isset( $args['meta_query'] ) ) {
+				// Combine with the rating sort clause: (rating OR no rating) AND verified.
+				$args['meta_query'] = array(
+					'relation' => 'AND',
+					$args['meta_query'],
+					$verified_clause,
+				);
+			} else {
+				$args['meta_query'] = array( $verified_clause ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- intentional, scoped display.
+			}
 		}
 
 		if ( ! empty( $atts['ids'] ) ) {

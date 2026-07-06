@@ -77,6 +77,10 @@ Copy any file from the plugin's `templates/` folder into an `advanced-testimonia
 
 Yes — a no-build Gutenberg block with a live preview and full inspector controls (layout, group, columns, order, autoplay and show/hide toggles). It also supports Wide and Full alignment.
 
+= Where do the demos come from? =
+
+The Demo Library loads ready-made testimonial sets from a free online service provided by the plugin author, hosted on GitHub Pages: https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/ — you can browse every demo there. It is only contacted when you open the **Demo Library** screen or click **Import Demo** — no data from your site is ever sent to it; only public demo files (JSON and images) are downloaded into your Media Library. See the "External services" section below for full details and source code links. The plugin works completely without it — the Demo Library is optional.
+
 = How do I collect testimonials from visitors? =
 
 Add the `[at_form]` shortcode to any page. Visitors fill in their name, review, rating and optional details (company, job title, location, email). Each submission is saved as "Pending" so you can review it before it goes live — or turn on auto-publish under **Testimonials → Settings → Submission Form**.

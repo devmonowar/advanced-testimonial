@@ -47,6 +47,7 @@ final class Renderer {
 			'ids'              => '',
 			'order'            => 'desc',
 			'orderby'          => 'date',
+			'verified'         => false,
 			'show_rating'      => true,
 			'show_image'       => true,
 			'show_company'     => true,
@@ -153,7 +154,7 @@ final class Renderer {
 		$order           = strtolower( (string) $atts['order'] );
 		$atts['order']   = in_array( $order, array( 'asc', 'desc', 'random' ), true ) ? $order : 'desc';
 		$orderby         = strtolower( (string) $atts['orderby'] );
-		$atts['orderby'] = in_array( $orderby, array( 'date', 'title', 'menu_order', 'rand' ), true ) ? $orderby : 'date';
+		$atts['orderby'] = in_array( $orderby, array( 'date', 'title', 'menu_order', 'rand', 'rating' ), true ) ? $orderby : 'date';
 
 		$atts['group'] = sanitize_text_field( (string) $atts['group'] );
 
@@ -163,7 +164,7 @@ final class Renderer {
 			$atts['ids'] = array();
 		}
 
-		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website', 'show_headline', 'show_filter', 'fade', 'read_more', 'load_more' ) as $flag ) {
+		foreach ( array( 'show_rating', 'show_image', 'show_company', 'show_designation', 'show_location', 'show_date', 'show_verified', 'show_website', 'show_headline', 'show_filter', 'fade', 'read_more', 'load_more', 'verified' ) as $flag ) {
 			$atts[ $flag ] = self::to_bool( $atts[ $flag ] );
 		}
 
