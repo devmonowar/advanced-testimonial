@@ -16,6 +16,8 @@ Turn happy customers into your best marketing. Advanced Testimonial helps you co
 
 Manage reviews like regular posts, group them, and drop them onto any page with a shortcode, a Gutenberg block or an Elementor widget.
 
+**[Browse the demo gallery](https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/)** — see every ready-made demo you can import in one click · **[Development on GitHub](https://github.com/devmonowar/advanced-testimonial)** — report issues or contribute.
+
 = Why Advanced Testimonial? =
 
 * **Build credibility & social proof** — show authentic reviews with star ratings, photos, companies, locations and verified badges.
@@ -101,7 +103,7 @@ Yes — a no-build Gutenberg block with a live preview and full inspector contro
 
 = Where do the demos come from? =
 
-The Demo Library loads ready-made testimonial sets from a free online service provided by the plugin author, hosted on GitHub Pages: https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/ — you can browse every demo there. It is only contacted when you open the **Demo Library** screen or click **Import Demo** — no data from your site is ever sent to it; only public demo files (JSON and images) are downloaded into your Media Library. See the "External services" section below for full details and source code links. The plugin works completely without it — the Demo Library is optional.
+The Demo Library loads ready-made testimonial sets from a free online service provided by the plugin author, hosted on GitHub Pages — [browse every demo here](https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/). It is only contacted when you open the **Demo Library** screen or click **Import Demo** — no data from your site is ever sent to it; only public demo files (JSON and images) are downloaded into your Media Library. See the "External services" section below for full details and source code links. The plugin works completely without it — the Demo Library is optional.
 
 = How do I collect testimonials from visitors? =
 
@@ -135,16 +137,16 @@ Yes — ARIA roles, keyboard navigation, visible focus styles, RTL support, and 
 
 == External services ==
 
-This plugin includes an optional **Demo Library** that loads ready-made testimonial sets from a remote service hosted on GitHub Pages: https://devmonowar.github.io/wp-plugin-demo-library/
+This plugin includes an optional **Demo Library** that loads ready-made testimonial sets from a remote service hosted on GitHub Pages: [devmonowar.github.io/wp-plugin-demo-library](https://devmonowar.github.io/wp-plugin-demo-library/)
 
 It connects to this service only when you:
 
 * open the **Demo Library** screen — to download the list of demos and show their preview images; and
 * click **Import Demo** — to download that demo's testimonials and images into your site's Media Library.
 
-No data from your site is sent to the service; only public demo files (JSON and images) are downloaded. The service is provided by the plugin author. Source code: https://github.com/devmonowar/wp-plugin-demo-library — it is served by GitHub Pages, whose terms and privacy policy apply (https://docs.github.com/en/site-policy).
+No data from your site is sent to the service; only public demo files (JSON and images) are downloaded. The service is provided by the plugin author. [Source code on GitHub](https://github.com/devmonowar/wp-plugin-demo-library) — it is served by GitHub Pages, whose [terms and privacy policy](https://docs.github.com/en/site-policy) apply.
 
-**Video testimonials (optional):** if you add a YouTube or Vimeo URL to a testimonial, the visitor's browser connects to those services — YouTube thumbnails are loaded from img.youtube.com, and the player (youtube-nocookie.com or player.vimeo.com) is only embedded after the visitor clicks play. No connection is made if you don't use video, and nothing is sent to these services by your site itself. YouTube is provided by Google (terms: https://www.youtube.com/t/terms — privacy: https://policies.google.com/privacy); Vimeo terms: https://vimeo.com/terms — privacy: https://vimeo.com/privacy.
+**Video testimonials (optional):** if you add a YouTube or Vimeo URL to a testimonial, the visitor's browser connects to those services — YouTube thumbnails are loaded from img.youtube.com, and the player (youtube-nocookie.com or player.vimeo.com) is only embedded after the visitor clicks play. No connection is made if you don't use video, and nothing is sent to these services by your site itself. YouTube is provided by Google ([terms](https://www.youtube.com/t/terms) — [privacy](https://policies.google.com/privacy)); Vimeo ([terms](https://vimeo.com/terms) — [privacy](https://vimeo.com/privacy)).
 
 == Changelog ==
 
