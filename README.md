@@ -4,8 +4,6 @@ A modern, lightweight WordPress plugin for managing and displaying customer test
 
 [![CI](https://github.com/devmonowar/advanced-testimonial/actions/workflows/ci.yml/badge.svg)](https://github.com/devmonowar/advanced-testimonial/actions/workflows/ci.yml)
 
-> **Note:** This is a complete, from-scratch rewrite. The plugin shares only the WordPress.org slug (`advanced-testimonial`) with the previous version — no code, data model or UI is carried over.
-
 ## Features
 
 - **Testimonial post type** with hierarchical **Groups** and rich fields: rating, company, designation, website, verified badge, company logo, location, social links.

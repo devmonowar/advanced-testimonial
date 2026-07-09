@@ -180,7 +180,7 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Improved: accessibility (ARIA roles, keyboard focus styles) and admin conveniences (click-to-copy shortcodes, Settings link).
 
 = 2.0.1 =
-* Complete rewrite as a dedicated testimonial and customer-review plugin.
+* A brand-new, dedicated testimonial and customer-review plugin.
 * Testimonial post type with groups and rich review fields.
 * Six display layouts, `[advanced_testimonial]` shortcode and a no-build Gutenberg block.
 * Settings page with full theming controls, Schema.org Review markup, accessibility, RTL and a lightweight vanilla-JS carousel.
