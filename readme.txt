@@ -18,7 +18,7 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 
 **[Browse the demo gallery](https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/)** — see every ready-made demo you can import in one click · **[Development on GitHub](https://github.com/devmonowar/advanced-testimonial)** — report issues or contribute.
 
-= Why Advanced Testimonial? =
+= Why Advanced Testimonial? = 
 
 * **Build credibility & social proof** — show authentic reviews with star ratings, photos, companies, locations and verified badges.
 * **Increase conversions** — place persuasive testimonials on landing pages, product pages and checkout to turn visitors into customers.
