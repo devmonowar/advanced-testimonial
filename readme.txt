@@ -1,5 +1,5 @@
 === Advanced Testimonial ===
-Contributors: devmonowar
+Contributors: kstmonowar, ksthannan
 Tags: testimonials, customer reviews, social proof, testimonial block, review carousel
 Requires at least: 6.5
 Tested up to: 7.0
