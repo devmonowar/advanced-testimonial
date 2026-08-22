@@ -2,9 +2,9 @@
 Contributors: kstmonowar, ksthannan
 Tags: testimonials, customer reviews, social proof, testimonial block, review carousel
 Requires at least: 6.5
-Tested up to: 7.0
+Tested up to: 7.0.4
 Requires PHP: 7.4
-Stable tag: 2.0.6
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Turn happy customers into your best marketing. Advanced Testimonial helps you co
 
 Manage reviews like regular posts, group them, and drop them onto any page with a shortcode, a Gutenberg block or an Elementor widget.
 
-**[Browse the demo gallery](https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/)** — see every ready-made demo you can import in one click · **[Development on GitHub](https://github.com/devmonowar/advanced-testimonial)** — report issues or contribute.
+**[Browse the demo gallery](https://devmonowar.github.io/wp-plugin-demo-library/advanced-testimonial/)** — see every ready-made demo you can import in one click · **[Read the full guide](https://devmonowar.github.io/blog/advanced-testimonial-wordpress-testimonials-guide/)** — layouts, styling, the submission form and the shortcode options, explained step by step · **[Development on GitHub](https://github.com/devmonowar/advanced-testimonial)** — report issues or contribute.
 
 = Why Advanced Testimonial? = 
 
@@ -150,6 +150,13 @@ No data from your site is sent to the service; only public demo files (JSON and 
 
 == Changelog ==
 
+= 2.0.8 =
+* Fixed: the author link on the Plugins screen pointed to the wrong WordPress.org profile. It now opens devmonowar.github.io.
+* Added: a link to the full guide in the plugin description.
+
+= 2.0.7 =
+* Tested up to WordPress 7.0.4.
+
 = 2.0.6 =
 * New: nine card styles — Classic, Modern, Minimal, Bubble, Bold, Glass, Gradient, Outline and Retro (`style` attribute, per block or site-wide default).
 * New: video testimonials — paste a YouTube, Vimeo or self-hosted MP4 URL and the card shows a play button that opens the video in a lightbox (`show_video` to toggle).
@@ -186,6 +193,12 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Settings page with full theming controls, Schema.org Review markup, accessibility, RTL and a lightweight vanilla-JS carousel.
 
 == Upgrade Notice ==
+
+= 2.0.8 =
+Corrects the author link on the Plugins screen. No functional changes.
+
+= 2.0.7 =
+Tested up to WordPress 7.0.4.
 
 = 2.0.6 =
 Adds nine card styles, video testimonials (YouTube, Vimeo or MP4 in a lightbox), rating sort and a verified-only filter. Recommended update.
