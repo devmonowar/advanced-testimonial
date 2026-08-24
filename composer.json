@@ -2,10 +2,35 @@
 	"name": "devmonowar/advanced-testimonial",
 	"description": "Professional testimonial and customer review management for WordPress.",
 	"type": "wordpress-plugin",
+	"keywords": [
+		"wordpress",
+		"wordpress-plugin",
+		"testimonials",
+		"customer-reviews",
+		"social-proof",
+		"testimonial-block",
+		"review-carousel",
+		"gutenberg"
+	],
+	"homepage": "https://wordpress.org/plugins/advanced-testimonial/",
 	"license": "GPL-2.0-or-later",
-	"version": "2.0.8",
+	"authors": [
+		{
+			"name": "Monowar Hossain",
+			"email": "devmonowar@gmail.com",
+			"homepage": "https://devmonowar.github.io/",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/devmonowar/advanced-testimonial/issues",
+		"source": "https://github.com/devmonowar/advanced-testimonial",
+		"forum": "https://wordpress.org/support/plugin/advanced-testimonial/",
+		"docs": "https://devmonowar.github.io/blog/advanced-testimonial-wordpress-testimonials-guide/"
+	},
 	"require": {
-		"php": ">=7.4"
+		"php": ">=7.4",
+		"composer/installers": "^1.0 || ^2.0"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.9",
@@ -24,7 +49,8 @@
 	"config": {
 		"optimize-autoloader": true,
 		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true
 		}
 	},
 	"scripts": {
