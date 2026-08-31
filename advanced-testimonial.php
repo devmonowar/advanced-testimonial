@@ -20,7 +20,10 @@ namespace AdvancedTestimonial;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ADVANCED_TESTIMONIAL_VERSION', '2.0.8' );
+// The `Version:` header above is the single source of truth — read it
+// dynamically rather than repeating the number here, so a release only ever
+// changes one line.
+define( 'ADVANCED_TESTIMONIAL_VERSION', get_file_data( __FILE__, array( 'Version' => 'Version' ) )['Version'] );
 define( 'ADVANCED_TESTIMONIAL_FILE', __FILE__ );
 define( 'ADVANCED_TESTIMONIAL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ADVANCED_TESTIMONIAL_URL', plugin_dir_url( __FILE__ ) );
