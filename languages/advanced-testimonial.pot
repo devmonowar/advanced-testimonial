@@ -1,15 +1,15 @@
-# Copyright (C) 2026 devmonowar
+# Copyright (C) 2026 Monowar Hossain
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Testimonial 2.0.6\n"
+"Project-Id-Version: Advanced Testimonial 2.0.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/advanced-testimonial\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T20:10:19+02:00\n"
+"POT-Creation-Date: 2026-09-01T03:25:57+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-testimonial\n"
@@ -33,12 +33,12 @@ msgstr ""
 
 #. Author of the plugin
 #: advanced-testimonial.php
-msgid "devmonowar"
+msgid "Monowar Hossain"
 msgstr ""
 
 #. Author URI of the plugin
 #: advanced-testimonial.php
-msgid "https://profiles.wordpress.org/devmonowar/"
+msgid "https://devmonowar.github.io/"
 msgstr ""
 
 #: admin/Assets.php:67
@@ -59,14 +59,14 @@ msgstr ""
 
 #: admin/Columns.php:46
 #: admin/MetaBoxes.php:55
-#: templates/form.php:119
+#: templates/form.php:121
 msgid "Company"
 msgstr ""
 
 #: admin/Columns.php:47
 #: admin/MetaBoxes.php:75
 #: includes/Elementor_Widget.php:190
-#: templates/form.php:67
+#: templates/form.php:69
 #: blocks/editor.js:41
 msgid "Rating"
 msgstr ""
@@ -301,12 +301,12 @@ msgid "Designation / Job Title"
 msgstr ""
 
 #: admin/MetaBoxes.php:63
-#: templates/form.php:135
+#: templates/form.php:137
 msgid "Location"
 msgstr ""
 
 #: admin/MetaBoxes.php:67
-#: templates/form.php:151
+#: templates/form.php:153
 msgid "Website"
 msgstr ""
 
@@ -381,8 +381,42 @@ msgstr ""
 msgid "Import Starter Demo"
 msgstr ""
 
+#. translators: 1: opening link tag to the WordPress.org review form, 2: closing link tag.
+#: admin/ReviewNotice.php:69
+#, php-format
+msgid "Enjoying Advanced Testimonial? Leave us a %1$s&#9733;&#9733;&#9733;&#9733;&#9733; review%2$s — it keeps development going."
+msgstr ""
+
+#: admin/ReviewNotice.php:138
+msgid "Enjoying Advanced Testimonial?"
+msgstr ""
+
+#: admin/ReviewNotice.php:139
+msgid "A quick 5-star review helps other people find the plugin and keeps development going. Thank you!"
+msgstr ""
+
+#: admin/ReviewNotice.php:141
+msgid "Did you get a chance to leave that review?"
+msgstr ""
+
+#: admin/ReviewNotice.php:142
+msgid "If you did — thank you! Confirm below and we will never ask again."
+msgstr ""
+
+#: admin/ReviewNotice.php:150
+msgid "Yes, I left a review"
+msgstr ""
+
+#: admin/ReviewNotice.php:154
+msgid "Maybe later"
+msgstr ""
+
+#: admin/ReviewNotice.php:157
+msgid "Rate it ★★★★★"
+msgstr ""
+
 #: admin/Settings.php:61
-#: admin/Settings.php:424
+#: admin/Settings.php:412
 msgid "Settings"
 msgstr ""
 
@@ -399,7 +433,7 @@ msgid "Thumbnail"
 msgstr ""
 
 #: admin/Settings.php:83
-#: admin/Settings.php:171
+#: admin/Settings.php:165
 msgid "Medium"
 msgstr ""
 
@@ -435,311 +469,295 @@ msgstr ""
 msgid "Enable RTL Styles"
 msgstr ""
 
-#: admin/Settings.php:116
-msgid "Use Font Awesome Icons"
-msgstr ""
-
-#: admin/Settings.php:118
-msgid "Only if your theme already loads Font Awesome. Otherwise built-in SVG icons are used."
-msgstr ""
-
-#: admin/Settings.php:123
+#: admin/Settings.php:117
 msgid "Styles"
 msgstr ""
 
-#: admin/Settings.php:127
+#: admin/Settings.php:121
 msgid "Card Style"
 msgstr ""
 
-#: admin/Settings.php:130
+#: admin/Settings.php:124
 msgid "Default look of the testimonial cards. Each block or shortcode can override it with the style attribute."
 msgstr ""
 
-#: admin/Settings.php:134
+#: admin/Settings.php:128
 msgid "Primary Color"
 msgstr ""
 
-#: admin/Settings.php:139
+#: admin/Settings.php:133
 msgid "Secondary / Accent Color"
 msgstr ""
 
-#: admin/Settings.php:141
+#: admin/Settings.php:135
 msgid "Used for rating stars and accents."
 msgstr ""
 
-#: admin/Settings.php:145
+#: admin/Settings.php:139
 msgid "Text Color"
 msgstr ""
 
-#: admin/Settings.php:150
+#: admin/Settings.php:144
 msgid "Border Radius (px)"
 msgstr ""
 
-#: admin/Settings.php:158
+#: admin/Settings.php:152
 msgid "Spacing / Gap (px)"
 msgstr ""
 
-#: admin/Settings.php:166
+#: admin/Settings.php:160
 msgid "Card Shadow"
 msgstr ""
 
-#: admin/Settings.php:169
+#: admin/Settings.php:163
 msgid "None"
 msgstr ""
 
-#: admin/Settings.php:170
+#: admin/Settings.php:164
 msgid "Soft"
 msgstr ""
 
-#: admin/Settings.php:172
+#: admin/Settings.php:166
 msgid "Strong"
 msgstr ""
 
-#: admin/Settings.php:177
+#: admin/Settings.php:171
 msgid "Button Style"
 msgstr ""
 
-#: admin/Settings.php:180
+#: admin/Settings.php:174
 msgid "Filled"
 msgstr ""
 
-#: admin/Settings.php:181
+#: admin/Settings.php:175
 #: frontend/Renderer.php:52
 msgid "Outline"
 msgstr ""
 
-#: admin/Settings.php:186
+#: admin/Settings.php:180
 msgid "Avatar Shape"
 msgstr ""
 
-#: admin/Settings.php:189
+#: admin/Settings.php:183
 msgid "Circle"
 msgstr ""
 
-#: admin/Settings.php:190
+#: admin/Settings.php:184
 msgid "Rounded"
 msgstr ""
 
-#: admin/Settings.php:191
+#: admin/Settings.php:185
 msgid "Square"
 msgstr ""
 
-#: admin/Settings.php:196
+#: admin/Settings.php:190
 msgid "Rating Icon"
 msgstr ""
 
-#: admin/Settings.php:199
+#: admin/Settings.php:193
 msgid "Star"
 msgstr ""
 
-#: admin/Settings.php:200
+#: admin/Settings.php:194
 msgid "Heart"
 msgstr ""
 
-#: admin/Settings.php:205
+#: admin/Settings.php:199
 msgid "Default Rating"
 msgstr ""
 
-#: admin/Settings.php:210
+#: admin/Settings.php:204
 msgid "Used when a testimonial has no rating set (0 = none)."
 msgstr ""
 
-#: admin/Settings.php:214
+#: admin/Settings.php:208
 msgid "Marquee Scroll Speed"
 msgstr ""
 
-#: admin/Settings.php:217
+#: admin/Settings.php:211
 #: includes/Elementor_Widget.php:252
 #: blocks/editor.js:53
 msgid "Slow"
 msgstr ""
 
-#: admin/Settings.php:218
+#: admin/Settings.php:212
 #: includes/Elementor_Widget.php:253
 #: blocks/editor.js:54
 msgid "Normal"
 msgstr ""
 
-#: admin/Settings.php:219
+#: admin/Settings.php:213
 #: includes/Elementor_Widget.php:254
 #: blocks/editor.js:55
 msgid "Fast"
 msgstr ""
 
-#: admin/Settings.php:221
+#: admin/Settings.php:215
 msgid "Default speed for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:225
+#: admin/Settings.php:219
 msgid "Marquee Card Width (px)"
 msgstr ""
 
-#: admin/Settings.php:230
+#: admin/Settings.php:224
 msgid "Default card width for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:234
+#: admin/Settings.php:228
 msgid "Marquee Scroll Direction"
 msgstr ""
 
-#: admin/Settings.php:237
+#: admin/Settings.php:231
 #: includes/Elementor_Widget.php:278
 #: blocks/editor.js:60
 msgid "Right to left"
 msgstr ""
 
-#: admin/Settings.php:238
+#: admin/Settings.php:232
 #: includes/Elementor_Widget.php:279
 #: blocks/editor.js:61
 msgid "Left to right"
 msgstr ""
 
-#: admin/Settings.php:240
+#: admin/Settings.php:234
 msgid "Default scroll direction for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:244
+#: admin/Settings.php:238
 msgid "Read More — Lines Shown"
 msgstr ""
 
-#: admin/Settings.php:249
+#: admin/Settings.php:243
 msgid "When \"Read more\" is enabled on a block, reviews are trimmed to this many lines before the toggle appears."
 msgstr ""
 
-#: admin/Settings.php:253
+#: admin/Settings.php:247
 msgid "Load More — Batch Size"
 msgstr ""
 
-#: admin/Settings.php:258
+#: admin/Settings.php:252
 msgid "When \"Load more\" is enabled on a block, this many testimonials are shown at first and revealed per click."
 msgstr ""
 
-#: admin/Settings.php:263
+#: admin/Settings.php:257
 msgid "Performance"
 msgstr ""
 
-#: admin/Settings.php:267
+#: admin/Settings.php:261
 msgid "Load Assets Only When Needed"
 msgstr ""
 
-#: admin/Settings.php:269
+#: admin/Settings.php:263
 msgid "Only enqueue CSS/JS on pages that actually render testimonials."
 msgstr ""
 
-#: admin/Settings.php:273
+#: admin/Settings.php:267
 msgid "Cache Queries"
 msgstr ""
 
-#: admin/Settings.php:275
+#: admin/Settings.php:269
 msgid "Cache testimonial queries for faster repeat loads."
 msgstr ""
 
-#: admin/Settings.php:279
-msgid "Use Minified Assets"
-msgstr ""
-
-#: admin/Settings.php:281
-msgid "Load .min versions of CSS/JS when available."
-msgstr ""
-
-#: admin/Settings.php:286
+#: admin/Settings.php:274
 msgid "Submission Form"
 msgstr ""
 
-#: admin/Settings.php:290
+#: admin/Settings.php:278
 msgid "Enable Submission Form"
 msgstr ""
 
-#: admin/Settings.php:292
+#: admin/Settings.php:280
 msgid "Enable the [at_form] shortcode. Visitors can submit testimonials from the front end."
 msgstr ""
 
-#: admin/Settings.php:296
+#: admin/Settings.php:284
 msgid "Auto-Publish Submissions"
 msgstr ""
 
-#: admin/Settings.php:298
+#: admin/Settings.php:286
 msgid "Publish testimonials immediately. When off, they are saved as \"Pending\" for you to review first (recommended)."
 msgstr ""
 
-#: admin/Settings.php:302
+#: admin/Settings.php:290
 msgid "Require a Rating"
 msgstr ""
 
-#: admin/Settings.php:307
+#: admin/Settings.php:295
 msgid "Show \"Review Title\" Field"
 msgstr ""
 
-#: admin/Settings.php:312
+#: admin/Settings.php:300
 msgid "Show \"Company\" Field"
 msgstr ""
 
-#: admin/Settings.php:317
+#: admin/Settings.php:305
 msgid "Show \"Job Title\" Field"
 msgstr ""
 
-#: admin/Settings.php:322
+#: admin/Settings.php:310
 msgid "Show \"Location\" Field"
 msgstr ""
 
-#: admin/Settings.php:327
+#: admin/Settings.php:315
 msgid "Show \"Email Address\" Field"
 msgstr ""
 
-#: admin/Settings.php:329
+#: admin/Settings.php:317
 msgid "Email is never displayed publicly. Used for admin reference only."
 msgstr ""
 
-#: admin/Settings.php:333
+#: admin/Settings.php:321
 msgid "Show \"Website\" Field"
 msgstr ""
 
-#: admin/Settings.php:338
+#: admin/Settings.php:326
 msgid "Notification Email"
 msgstr ""
 
-#: admin/Settings.php:340
+#: admin/Settings.php:328
 msgid "Send a notification to this address on each new submission. Leave blank to use the site admin email."
 msgstr ""
 
-#: admin/Settings.php:344
+#: admin/Settings.php:332
 msgid "Success Message"
 msgstr ""
 
-#: admin/Settings.php:346
+#: admin/Settings.php:334
 msgid "Message shown after a successful submission. Shortcode attribute \"success\" overrides this."
 msgstr ""
 
-#: admin/Settings.php:351
+#: admin/Settings.php:339
 msgid "Advanced"
 msgstr ""
 
-#: admin/Settings.php:355
+#: admin/Settings.php:343
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/Settings.php:357
+#: admin/Settings.php:345
 msgid "Output on the frontend after the plugin styles."
 msgstr ""
 
-#: admin/Settings.php:361
+#: admin/Settings.php:349
 msgid "Remove all plugin data when deleting the plugin"
 msgstr ""
 
-#: admin/Settings.php:363
+#: admin/Settings.php:351
 msgid "When the plugin is deleted, permanently remove all testimonials, groups, meta, settings and transients. Deactivating never deletes anything. Default: off."
 msgstr ""
 
-#: admin/Settings.php:423
-#: admin/Settings.php:491
+#: admin/Settings.php:411
+#: admin/Settings.php:479
 msgid "Advanced Testimonial Settings"
 msgstr ""
 
-#: admin/Settings.php:510
+#: admin/Settings.php:498
 msgid "Tools"
 msgstr ""
 
-#: admin/Settings.php:564
+#: admin/Settings.php:552
 msgid "Enable"
 msgstr ""
 
@@ -961,18 +979,14 @@ msgstr ""
 msgid "Thank you! Your testimonial has been submitted and is awaiting review."
 msgstr ""
 
-#: frontend/Form.php:124
-msgid "Security check failed."
-msgstr ""
-
 #. translators: %s: site name
-#: frontend/Form.php:230
+#: frontend/Form.php:249
 #, php-format
 msgid "[%s] New testimonial submitted"
 msgstr ""
 
 #. translators: 1: author name, 2: author email, 3: review text, 4: edit URL
-#: frontend/Form.php:236
+#: frontend/Form.php:255
 #, php-format
 msgid ""
 "Author: %1$s\n"
@@ -1293,46 +1307,54 @@ msgid "Too many submissions. Please wait a few minutes and try again."
 msgstr ""
 
 #: templates/form.php:21
+msgid "This page has been open too long. Please reload it and submit again."
+msgstr ""
+
+#: templates/form.php:22
+msgid "Your name or review is too long. Please shorten it and try again."
+msgstr ""
+
+#: templates/form.php:23
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: templates/form.php:44
+#: templates/form.php:46
 msgid "Leave this blank"
 msgstr ""
 
-#: templates/form.php:51
+#: templates/form.php:53
 msgid "Your Name"
 msgstr ""
 
-#: templates/form.php:72
+#: templates/form.php:74
 msgid "Select a rating"
 msgstr ""
 
 #. translators: %d: number of stars selected (1-5).
-#: templates/form.php:76
+#: templates/form.php:78
 #, php-format
 msgid "%d star"
 msgid_plural "%d stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/form.php:96
+#: templates/form.php:98
 msgid "Your Review"
 msgstr ""
 
-#: templates/form.php:111
+#: templates/form.php:113
 msgid "Review Title"
 msgstr ""
 
-#: templates/form.php:127
+#: templates/form.php:129
 msgid "Job Title"
 msgstr ""
 
-#: templates/form.php:143
+#: templates/form.php:145
 msgid "Email Address"
 msgstr ""
 
-#: templates/form.php:158
+#: templates/form.php:160
 msgid "Submit Testimonial"
 msgstr ""
 

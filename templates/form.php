@@ -18,6 +18,8 @@ $advanced_testimonial_form_errors = array(
 	'required'        => __( 'Please fill in your name and review.', 'advanced-testimonial' ),
 	'rating_required' => __( 'Please select a rating before submitting.', 'advanced-testimonial' ),
 	'rate_limit'      => __( 'Too many submissions. Please wait a few minutes and try again.', 'advanced-testimonial' ),
+	'expired'         => __( 'This page has been open too long. Please reload it and submit again.', 'advanced-testimonial' ),
+	'too_long'        => __( 'Your name or review is too long. Please shorten it and try again.', 'advanced-testimonial' ),
 	'server'          => __( 'Something went wrong. Please try again.', 'advanced-testimonial' ),
 );
 ?>
@@ -106,7 +108,7 @@ $advanced_testimonial_form_errors = array(
 		</div>
 
 		<?php /* --- Optional: Headline --- */ ?>
-		<?php if ( ! empty( $at_s['form_show_headline'] ) ) : ?>
+		<?php if ( ! empty( $at_form_settings['form_show_headline'] ) ) : ?>
 		<div class="at-form__field at-form__field--headline">
 			<label for="at_headline" class="at-form__label"><?php esc_html_e( 'Review Title', 'advanced-testimonial' ); ?></label>
 			<input type="text" id="at_headline" name="at_headline" class="at-form__input">
@@ -114,7 +116,7 @@ $advanced_testimonial_form_errors = array(
 		<?php endif; ?>
 
 		<?php /* --- Optional: Company --- */ ?>
-		<?php if ( ! empty( $at_s['form_show_company'] ) ) : ?>
+		<?php if ( ! empty( $at_form_settings['form_show_company'] ) ) : ?>
 		<div class="at-form__field at-form__field--company">
 			<label for="at_company" class="at-form__label"><?php esc_html_e( 'Company', 'advanced-testimonial' ); ?></label>
 			<input type="text" id="at_company" name="at_company" class="at-form__input" autocomplete="organization">
@@ -122,7 +124,7 @@ $advanced_testimonial_form_errors = array(
 		<?php endif; ?>
 
 		<?php /* --- Optional: Designation --- */ ?>
-		<?php if ( ! empty( $at_s['form_show_designation'] ) ) : ?>
+		<?php if ( ! empty( $at_form_settings['form_show_designation'] ) ) : ?>
 		<div class="at-form__field at-form__field--designation">
 			<label for="at_designation" class="at-form__label"><?php esc_html_e( 'Job Title', 'advanced-testimonial' ); ?></label>
 			<input type="text" id="at_designation" name="at_designation" class="at-form__input" autocomplete="organization-title">
@@ -130,7 +132,7 @@ $advanced_testimonial_form_errors = array(
 		<?php endif; ?>
 
 		<?php /* --- Optional: Location --- */ ?>
-		<?php if ( ! empty( $at_s['form_show_location'] ) ) : ?>
+		<?php if ( ! empty( $at_form_settings['form_show_location'] ) ) : ?>
 		<div class="at-form__field at-form__field--location">
 			<label for="at_location" class="at-form__label"><?php esc_html_e( 'Location', 'advanced-testimonial' ); ?></label>
 			<input type="text" id="at_location" name="at_location" class="at-form__input" autocomplete="address-level2">
@@ -138,7 +140,7 @@ $advanced_testimonial_form_errors = array(
 		<?php endif; ?>
 
 		<?php /* --- Optional: Email --- */ ?>
-		<?php if ( ! empty( $at_s['form_show_email'] ) ) : ?>
+		<?php if ( ! empty( $at_form_settings['form_show_email'] ) ) : ?>
 		<div class="at-form__field at-form__field--email">
 			<label for="at_email" class="at-form__label"><?php esc_html_e( 'Email Address', 'advanced-testimonial' ); ?></label>
 			<input type="email" id="at_email" name="at_email" class="at-form__input" autocomplete="email">
@@ -146,7 +148,7 @@ $advanced_testimonial_form_errors = array(
 		<?php endif; ?>
 
 		<?php /* --- Optional: Website --- */ ?>
-		<?php if ( ! empty( $at_s['form_show_website'] ) ) : ?>
+		<?php if ( ! empty( $at_form_settings['form_show_website'] ) ) : ?>
 		<div class="at-form__field at-form__field--website">
 			<label for="at_website" class="at-form__label"><?php esc_html_e( 'Website', 'advanced-testimonial' ); ?></label>
 			<input type="url" id="at_website" name="at_website" class="at-form__input" autocomplete="url" placeholder="https://">
@@ -163,36 +165,41 @@ $advanced_testimonial_form_errors = array(
 
 <script>
 (function () {
-	var wrap = document.querySelector('.at-form__stars');
-	if (!wrap) return;
-	var stars = [].slice.call(wrap.querySelectorAll('.at-form__star'));
-	var input = wrap.querySelector('.at-form__rating-val');
+	// Bind every .at-form__stars on the page, not just the first. Two
+	// [at_form] shortcodes emit this script twice, so the flag below stops
+	// the second copy re-binding a picker that is already wired up.
+	[].slice.call(document.querySelectorAll('.at-form__stars')).forEach(function (wrap) {
+		if (wrap.getAttribute('data-at-stars-done')) return;
+		wrap.setAttribute('data-at-stars-done', '1');
+		var stars = [].slice.call(wrap.querySelectorAll('.at-form__star'));
+		var input = wrap.querySelector('.at-form__rating-val');
 
-	function setActive(n) {
-		stars.forEach(function (b, i) {
-			b.classList.toggle('is-active', i < n);
-		});
-		if (input) input.value = n;
-	}
-
-	stars.forEach(function (btn) {
-		var val = parseInt(btn.getAttribute('data-value'), 10);
-		btn.addEventListener('click', function () { setActive(val); });
-		btn.addEventListener('mouseenter', function () {
-			stars.forEach(function (b, i) { b.classList.toggle('at-form__star--hover', i < val); });
-		});
-		btn.addEventListener('focus', function () {
-			stars.forEach(function (b, i) { b.classList.toggle('at-form__star--hover', i < val); });
-		});
-	});
-
-	wrap.addEventListener('mouseleave', function () {
-		stars.forEach(function (b) { b.classList.remove('at-form__star--hover'); });
-	});
-	wrap.addEventListener('focusout', function (e) {
-		if (!wrap.contains(e.relatedTarget)) {
-			stars.forEach(function (b) { b.classList.remove('at-form__star--hover'); });
+		function setActive(n) {
+			stars.forEach(function (b, i) {
+				b.classList.toggle('is-active', i < n);
+			});
+			if (input) input.value = n;
 		}
+
+		stars.forEach(function (btn) {
+			var val = parseInt(btn.getAttribute('data-value'), 10);
+			btn.addEventListener('click', function () { setActive(val); });
+			btn.addEventListener('mouseenter', function () {
+				stars.forEach(function (b, i) { b.classList.toggle('at-form__star--hover', i < val); });
+			});
+			btn.addEventListener('focus', function () {
+				stars.forEach(function (b, i) { b.classList.toggle('at-form__star--hover', i < val); });
+			});
+		});
+
+		wrap.addEventListener('mouseleave', function () {
+			stars.forEach(function (b) { b.classList.remove('at-form__star--hover'); });
+		});
+		wrap.addEventListener('focusout', function (e) {
+			if (!wrap.contains(e.relatedTarget)) {
+				stars.forEach(function (b) { b.classList.remove('at-form__star--hover'); });
+			}
+		});
 	});
 }());
 </script>

@@ -48,8 +48,11 @@ final class Plugin {
 	 * @return void
 	 */
 	public function run() {
-		// Translations load automatically since WordPress 4.6 (Domain Path
-		// header points at /languages), so no load_plugin_textdomain() call.
+		// No load_plugin_textdomain() call: WordPress.org ships translations to
+		// wp-content/languages/plugins/ and loads them on demand, and Plugin
+		// Check flags the call as discouraged. Note the plugin's own /languages
+		// folder holds the .pot only — WordPress does not scan it, so a bundled
+		// .mo would need that call back.
 
 		// Data layer — registered on both admin and frontend.
 		( new Admin\CPT() )->register();
@@ -68,6 +71,11 @@ final class Plugin {
 		add_action( 'save_post_' . Admin\CPT::POST_TYPE, array( Frontend\Query::class, 'bust_cache' ) );
 		add_action( 'deleted_post', array( Frontend\Query::class, 'bust_cache' ) );
 
+		// Group edits move testimonials in and out of a cached ID set too.
+		add_action( 'created_' . Admin\Taxonomy::TAXONOMY, array( Frontend\Query::class, 'bust_cache' ) );
+		add_action( 'edited_' . Admin\Taxonomy::TAXONOMY, array( Frontend\Query::class, 'bust_cache' ) );
+		add_action( 'delete_' . Admin\Taxonomy::TAXONOMY, array( Frontend\Query::class, 'bust_cache' ) );
+
 		// Admin-only modules.
 		if ( is_admin() ) {
 			( new Admin\MetaBoxes() )->register();
@@ -76,6 +84,7 @@ final class Plugin {
 			( new Admin\Settings() )->register();
 			( new Admin\Tools() )->register();
 			( new Admin\Notices() )->register();
+			( new Admin\ReviewNotice() )->register();
 			( new Admin\ShortcodeHelper() )->register();
 			( new Admin\DemoLibrary() )->register();
 		}

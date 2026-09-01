@@ -111,12 +111,6 @@ final class Settings {
 						'label'   => __( 'Enable RTL Styles', 'advanced-testimonial' ),
 						'default' => 0,
 					),
-					'enable_fontawesome' => array(
-						'type'        => 'checkbox',
-						'label'       => __( 'Use Font Awesome Icons', 'advanced-testimonial' ),
-						'default'     => 0,
-						'description' => __( 'Only if your theme already loads Font Awesome. Otherwise built-in SVG icons are used.', 'advanced-testimonial' ),
-					),
 				),
 			),
 			'styles'      => array(
@@ -274,12 +268,6 @@ final class Settings {
 						'default'     => 1,
 						'description' => __( 'Cache testimonial queries for faster repeat loads.', 'advanced-testimonial' ),
 					),
-					'use_minified'       => array(
-						'type'        => 'checkbox',
-						'label'       => __( 'Use Minified Assets', 'advanced-testimonial' ),
-						'default'     => 0,
-						'description' => __( 'Load .min versions of CSS/JS when available.', 'advanced-testimonial' ),
-					),
 				),
 			),
 			'submission'  => array(
@@ -334,7 +322,7 @@ final class Settings {
 						'default' => 0,
 					),
 					'form_notify_email'     => array(
-						'type'        => 'text',
+						'type'        => 'email',
 						'label'       => __( 'Notification Email', 'advanced-testimonial' ),
 						'default'     => '',
 						'description' => __( 'Send a notification to this address on each new submission. Leave blank to use the site admin email.', 'advanced-testimonial' ),
@@ -588,6 +576,10 @@ final class Settings {
 				echo '<textarea class="large-text code" rows="8" id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '">' . esc_textarea( $value ) . '</textarea>';
 				break;
 
+			case 'email':
+				echo '<input type="email" class="regular-text" id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '" />';
+				break;
+
 			default:
 				echo '<input type="text" class="regular-text" id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '" />';
 				break;
@@ -638,6 +630,11 @@ final class Settings {
 
 					case 'textarea':
 						$clean[ $key ] = wp_strip_all_tags( (string) $raw );
+						break;
+
+					case 'email':
+						$mail          = sanitize_email( (string) $raw );
+						$clean[ $key ] = is_email( $mail ) ? $mail : $field['default'];
 						break;
 
 					default:

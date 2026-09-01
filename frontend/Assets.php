@@ -51,32 +51,12 @@ final class Assets {
 			return;
 		}
 
-		$min = self::min_suffix( 'assets/css/front.css' );
-
 		wp_register_style(
 			self::STYLE,
-			ADVANCED_TESTIMONIAL_URL . 'assets/css/front' . $min . '.css',
+			ADVANCED_TESTIMONIAL_URL . 'assets/css/front.css',
 			array(),
-			Helpers::asset_version( 'assets/css/front' . $min . '.css' )
+			Helpers::asset_version( 'assets/css/front.css' )
 		);
-	}
-
-	/**
-	 * Resolve the ".min" suffix for an asset, honouring the "Use Minified
-	 * Assets" setting only when the minified file actually exists — otherwise
-	 * it falls back to the full file so enabling the option never 404s.
-	 *
-	 * @param string $relative Path to the full asset, e.g. assets/css/front.css.
-	 * @return string Either ".min" or an empty string.
-	 */
-	private static function min_suffix( $relative ) {
-		if ( ! Settings::get( 'use_minified' ) ) {
-			return '';
-		}
-
-		$min = preg_replace( '/\.(css|js)$/', '.min.$1', $relative );
-
-		return ( $min && is_readable( ADVANCED_TESTIMONIAL_DIR . $min ) ) ? '.min' : '';
 	}
 
 	/**
@@ -89,13 +69,11 @@ final class Assets {
 			return;
 		}
 
-		$min = self::min_suffix( 'assets/js/carousel.js' );
-
 		wp_register_script(
 			self::SCRIPT_CAROUSEL,
-			ADVANCED_TESTIMONIAL_URL . 'assets/js/carousel' . $min . '.js',
+			ADVANCED_TESTIMONIAL_URL . 'assets/js/carousel.js',
 			array(),
-			Helpers::asset_version( 'assets/js/carousel' . $min . '.js' ),
+			Helpers::asset_version( 'assets/js/carousel.js' ),
 			true
 		);
 	}
@@ -110,13 +88,11 @@ final class Assets {
 			return;
 		}
 
-		$min = self::min_suffix( 'assets/js/video.js' );
-
 		wp_register_script(
 			self::SCRIPT_VIDEO,
-			ADVANCED_TESTIMONIAL_URL . 'assets/js/video' . $min . '.js',
+			ADVANCED_TESTIMONIAL_URL . 'assets/js/video.js',
 			array(),
-			Helpers::asset_version( 'assets/js/video' . $min . '.js' ),
+			Helpers::asset_version( 'assets/js/video.js' ),
 			true
 		);
 	}

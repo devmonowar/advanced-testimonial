@@ -41,7 +41,10 @@ final class Query {
 		 */
 		$args = apply_filters( 'advanced_testimonial_query_args', $args, $atts );
 
-		if ( empty( $atts['ids'] ) && ! empty( $atts['cache'] ) ) {
+		// A random order must not be cached: the transient would store the IDs
+		// the first visitor happened to get, so everyone else would see that
+		// same handful for an hour, merely shuffled among themselves.
+		if ( empty( $atts['ids'] ) && ! empty( $atts['cache'] ) && 'random' !== $atts['order'] ) {
 			return $this->cached_query( $args, $atts );
 		}
 
@@ -98,7 +101,7 @@ final class Query {
 			);
 			if ( isset( $args['meta_query'] ) ) {
 				// Combine with the rating sort clause: (rating OR no rating) AND verified.
-				$args['meta_query'] = array(
+				$args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- intentional, scoped display.
 					'relation' => 'AND',
 					$args['meta_query'],
 					$verified_clause,

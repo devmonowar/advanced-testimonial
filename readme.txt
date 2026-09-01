@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,15 @@ No data from your site is sent to the service; only public demo files (JSON and 
 
 == Changelog ==
 
+= 2.0.9 =
+* Fixed: the submission form ignored its "Show ... Field" settings, and kept accepting submissions after being switched off.
+* Fixed: two forms on one page left the second star rating dead.
+* Fixed: uninstall missed trashed testimonials, and other sites on Multisite.
+* Fixed: a random order repeated for an hour, and group renames left stale results.
+* Fixed: an invalid notification email silently dropped submission alerts.
+* Added: a review request on the plugin's own screens.
+* Removed: two settings that did nothing.
+
 = 2.0.8 =
 * Fixed: the author link on the Plugins screen pointed to the wrong WordPress.org profile. It now opens devmonowar.github.io.
 * Added: a link to the full guide in the plugin description.
@@ -193,6 +202,9 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Settings page with full theming controls, Schema.org Review markup, accessibility, RTL and a lightweight vanilla-JS carousel.
 
 == Upgrade Notice ==
+
+= 2.0.9 =
+Fixes the submission form: its optional fields never showed, and turning the form off did not stop submissions. Recommended for anyone using [at_form].
 
 = 2.0.8 =
 Corrects the author link on the Plugins screen. No functional changes.

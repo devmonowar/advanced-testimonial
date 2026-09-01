@@ -116,12 +116,24 @@ final class Form {
 			return;
 		}
 
+		$settings = Settings::get_settings();
+
+		// Enforced here as well as in render(): a page carrying the form can
+		// sit in a page cache, and its nonce stays valid for up to 24 hours,
+		// so switching the form off would otherwise keep accepting
+		// submissions until every cached nonce had expired.
+		if ( empty( $settings['form_enabled'] ) ) {
+			return;
+		}
+
 		// Nonce.
 		if ( ! wp_verify_nonce(
 			isset( $_POST[ self::NONCE_FIELD ] ) ? sanitize_text_field( wp_unslash( $_POST[ self::NONCE_FIELD ] ) ) : '',
 			self::NONCE_ACTION
 		) ) {
-			wp_die( esc_html__( 'Security check failed.', 'advanced-testimonial' ), '', array( 'response' => 403 ) );
+			// Nearly always an expired nonce on a cached page rather than an
+			// attack, so send the visitor back with a message they can act on.
+			$this->redirect_error( 'expired' );
 		}
 
 		// Honeypot — bots fill hidden fields that real users never see.
@@ -135,8 +147,6 @@ final class Form {
 			$this->redirect_error( 'rate_limit' );
 		}
 
-		$settings = Settings::get_settings();
-
 		// Required fields.
 		$name    = sanitize_text_field( wp_unslash( isset( $_POST['at_name'] ) ? $_POST['at_name'] : '' ) );
 		$content = sanitize_textarea_field( wp_unslash( isset( $_POST['at_content'] ) ? $_POST['at_content'] : '' ) );
@@ -145,8 +155,13 @@ final class Form {
 			$this->redirect_error( 'required' );
 		}
 
+		// Cap the free-text fields so a scripted POST cannot store megabytes.
+		if ( mb_strlen( $name ) > 200 || mb_strlen( $content ) > 5000 ) {
+			$this->redirect_error( 'too_long' );
+		}
+
 		// Rating.
-		$rating = min( 5, max( 0, (int) ( isset( $_POST['at_rating'] ) ? $_POST['at_rating'] : 0 ) ) );
+		$rating = min( 5, max( 0, (int) sanitize_text_field( wp_unslash( isset( $_POST['at_rating'] ) ? $_POST['at_rating'] : '0' ) ) ) );
 		if ( ! empty( $settings['form_require_rating'] ) && $rating < 1 ) {
 			$this->redirect_error( 'rating_required' );
 		}
@@ -223,7 +238,11 @@ final class Form {
 	 * @return void
 	 */
 	private function notify_admin( $post_id, $name, $content, $email, $settings ) {
-		$to      = ! empty( $settings['form_notify_email'] ) ? $settings['form_notify_email'] : get_option( 'admin_email' );
+		// Fall back to the site admin if the configured address is not valid,
+		// so a typo in Settings can never silently drop notifications.
+		$to      = ! empty( $settings['form_notify_email'] ) && is_email( $settings['form_notify_email'] )
+			? $settings['form_notify_email']
+			: get_option( 'admin_email' );
 		$site    = get_bloginfo( 'name' );
 		$subject = sprintf(
 			/* translators: %s: site name */
