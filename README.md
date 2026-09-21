@@ -32,6 +32,12 @@ Submission form: `[at_form title="Leave a review" group="clients"]` — attribut
 - Namespace `AdvancedTestimonial`, PSR-4 autoload (with a bundled fallback loader, so `composer install` is not required at runtime).
 - `includes/` core · `admin/` CPT, taxonomy, meta boxes, columns, settings · `frontend/` query, renderer, template loader, assets · `shortcode/` · `blocks/` (no-build) · `templates/` · `assets/`.
 
+## Links
+
+- Plugin page: https://devmonowar.github.io/advanced-testimonial/
+- Guide: https://devmonowar.github.io/blog/advanced-testimonial-wordpress-testimonials-guide/
+- WordPress.org: https://wordpress.org/plugins/advanced-testimonial/
+
 ## Development
 
 ```bash
