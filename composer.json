@@ -1,6 +1,6 @@
 {
 	"name": "devmonowar/advanced-testimonial",
-	"description": "Professional testimonial and customer review management for WordPress.",
+	"description": "Showcase customer testimonials and client reviews in beautiful grids, carousels, cards and more. Lightweight, block-ready and built for social proof.",
 	"type": "wordpress-plugin",
 	"keywords": [
 		"wordpress",
@@ -12,7 +12,7 @@
 		"review-carousel",
 		"gutenberg"
 	],
-	"homepage": "https://wordpress.org/plugins/advanced-testimonial/",
+	"homepage": "https://devmonowar.github.io/advanced-testimonial/",
 	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
