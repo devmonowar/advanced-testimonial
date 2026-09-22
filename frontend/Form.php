@@ -141,8 +141,19 @@ final class Form {
 			$this->redirect_success(); // Pretend success so bots don't know they failed.
 		}
 
-		// Rate limit: 1 successful submission per IP per 5 minutes.
-		$rate_key = self::RATE_PREFIX . md5( isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '' );
+		// Rate limit: 1 successful submission per key per 5 minutes. The key
+		// defaults to the visitor IP, but behind a proxy or Cloudflare every
+		// visitor shares one REMOTE_ADDR — the filter lets the owner supply
+		// the real client IP (or any other per-visitor key) instead.
+		$rate_ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		$rate_key = self::RATE_PREFIX . md5(
+			/**
+			 * Filter the rate-limit key for the submission form.
+			 *
+			 * @param string $rate_ip Visitor IP from REMOTE_ADDR.
+			 */
+			(string) apply_filters( 'advanced_testimonial_rate_limit_key', $rate_ip )
+		);
 		if ( get_transient( $rate_key ) ) {
 			$this->redirect_error( 'rate_limit' );
 		}

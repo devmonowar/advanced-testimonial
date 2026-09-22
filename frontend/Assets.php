@@ -108,6 +108,7 @@ final class Assets {
 
 		if ( Settings::get( 'enable_js', 1 ) ) {
 			wp_enqueue_script( self::SCRIPT_VIDEO );
+			wp_localize_script( self::SCRIPT_VIDEO, 'advancedTestimonialA11y', self::strings() );
 		}
 	}
 
@@ -149,6 +150,27 @@ final class Assets {
 		$needs_js = in_array( $atts['layout'], array( 'carousel', 'spotlight', 'marquee' ), true ) || ! empty( $atts['show_filter'] ) || ! empty( $atts['read_more'] ) || ! empty( $atts['load_more'] );
 		if ( $needs_js && Settings::get( 'enable_js', 1 ) ) {
 			wp_enqueue_script( self::SCRIPT_CAROUSEL );
+			wp_localize_script( self::SCRIPT_CAROUSEL, 'advancedTestimonialA11y', self::strings() );
 		}
+	}
+
+	/**
+	 * Translatable strings for the frontend scripts — these are exactly the
+	 * screen-reader labels, so they must go through the translation system
+	 * like everything else (the readme promises "translation-ready").
+	 *
+	 * @return array<string,string>
+	 */
+	private static function strings() {
+		return array(
+			/* translators: 1: slide number, 2: total slides. */
+			'slideOf'    => __( '%1$s of %2$s', 'advanced-testimonial' ),
+			/* translators: %s: slide number. */
+			'goToSlide'  => __( 'Go to slide %s', 'advanced-testimonial' ),
+			'pause'      => __( 'Pause testimonials', 'advanced-testimonial' ),
+			'play'       => __( 'Play testimonials', 'advanced-testimonial' ),
+			'videoTitle' => __( 'Video testimonial', 'advanced-testimonial' ),
+			'close'      => __( 'Close', 'advanced-testimonial' ),
+		);
 	}
 }

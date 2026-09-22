@@ -39,6 +39,13 @@ final class Settings {
 	private $hook_suffix = '';
 
 	/**
+	 * Per-request cache of the merged settings array.
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	private static $cache = null;
+
+	/**
 	 * Hook into WordPress.
 	 *
 	 * @return void
@@ -48,6 +55,25 @@ final class Settings {
 		add_action( 'admin_init', array( $this, 'register_setting' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_filter( 'plugin_action_links_' . ADVANCED_TESTIMONIAL_BASENAME, array( $this, 'action_links' ) );
+
+		self::register_cache();
+	}
+
+	/**
+	 * Attach the cache-flush hooks.
+	 *
+	 * Separate from register() (which is admin-only): settings are read on
+	 * the frontend too, so the flush must be armed everywhere.
+	 *
+	 * @return void
+	 */
+	public static function register_cache() {
+		// The settings array is cached per request (see get_settings()) — drop
+		// it whenever the underlying option could have changed, so a single
+		// request never serves a mix of old and new values.
+		add_action( 'update_option_' . self::OPTION, array( __CLASS__, 'flush_cache' ) );
+		add_action( 'deleted_option', array( __CLASS__, 'flush_on_delete' ) );
+		add_action( 'switch_blog', array( __CLASS__, 'flush_cache' ) );
 	}
 
 	/**
@@ -106,10 +132,44 @@ final class Settings {
 						'default'     => 1,
 						'description' => __( 'Adds Review/Rating structured data for richer search results.', 'advanced-testimonial' ),
 					),
+					'reviewed_type'      => array(
+						'type'        => 'select',
+						'label'       => __( 'What is being reviewed', 'advanced-testimonial' ),
+						'default'     => 'organization',
+						'options'     => array(
+							'organization' => __( 'My own business / organization', 'advanced-testimonial' ),
+							'product'      => __( 'A product', 'advanced-testimonial' ),
+							'software'     => __( 'Software / app', 'advanced-testimonial' ),
+							'course'       => __( 'A course', 'advanced-testimonial' ),
+							'event'        => __( 'An event', 'advanced-testimonial' ),
+						),
+						'description' => __( 'Google only shows star ratings for reviews of products, apps, courses and similar — never for a business reviewing itself. Pick what your testimonials praise.', 'advanced-testimonial' ),
+					),
+					'reviewed_name'      => array(
+						'type'    => 'text',
+						'label'   => __( 'Reviewed name', 'advanced-testimonial' ),
+						'default' => '',
+					),
+					'reviewed_url'       => array(
+						'type'    => 'text',
+						'label'   => __( 'Reviewed URL', 'advanced-testimonial' ),
+						'default' => '',
+					),
+					'reviewed_image'     => array(
+						'type'    => 'text',
+						'label'   => __( 'Reviewed image URL', 'advanced-testimonial' ),
+						'default' => '',
+					),
 					'enable_rtl'         => array(
 						'type'    => 'checkbox',
 						'label'   => __( 'Enable RTL Styles', 'advanced-testimonial' ),
 						'default' => 0,
+					),
+					'single_pages'       => array(
+						'type'        => 'checkbox',
+						'label'       => __( 'Give testimonials their own public pages', 'advanced-testimonial' ),
+						'default'     => 0,
+						'description' => __( 'Off (recommended): testimonials appear only where you place them, never as thin standalone pages or in site search. Existing sites keep their current URLs — this is on for them.', 'advanced-testimonial' ),
 					),
 				),
 			),
@@ -375,16 +435,45 @@ final class Settings {
 	/**
 	 * Get all settings merged with defaults.
 	 *
+	 * The merged array is built once per request: a 9-card grid calls this
+	 * ~59 times, and rebuilding the schema (dozens of translation lookups
+	 * plus the card-style list) on every call is pure waste.
+	 *
 	 * @return array<string,mixed>
 	 */
 	public static function get_settings() {
-		$saved = get_option( self::OPTION, array() );
+		if ( null === self::$cache ) {
+			$saved = get_option( self::OPTION, array() );
 
-		if ( ! is_array( $saved ) ) {
-			$saved = array();
+			if ( ! is_array( $saved ) ) {
+				$saved = array();
+			}
+
+			self::$cache = wp_parse_args( $saved, self::defaults() );
 		}
 
-		return wp_parse_args( $saved, self::defaults() );
+		return self::$cache;
+	}
+
+	/**
+	 * Drop the cached settings array.
+	 *
+	 * @return void
+	 */
+	public static function flush_cache() {
+		self::$cache = null;
+	}
+
+	/**
+	 * Flush the cache when our own option is deleted (e.g. Tools → reset).
+	 *
+	 * @param string $option Deleted option name.
+	 * @return void
+	 */
+	public static function flush_on_delete( $option ) {
+		if ( self::OPTION === $option ) {
+			self::flush_cache();
+		}
 	}
 
 	/**

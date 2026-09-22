@@ -8,6 +8,12 @@
 ( function () {
 	'use strict';
 
+	// Screen-reader strings come from wp_localize_script (see Frontend\Assets).
+	var i18n = window.advancedTestimonialA11y || {};
+	function t( key, fallback ) {
+		return 'string' === typeof i18n[ key ] && i18n[ key ] ? i18n[ key ] : fallback;
+	}
+
 	var modal = null;
 	var lastFocus = null;
 
@@ -20,12 +26,12 @@
 		modal.className = 'at-video-modal';
 		modal.setAttribute( 'role', 'dialog' );
 		modal.setAttribute( 'aria-modal', 'true' );
-		modal.setAttribute( 'aria-label', 'Video testimonial' );
+		modal.setAttribute( 'aria-label', t( 'videoTitle', 'Video testimonial' ) );
 		modal.hidden = true;
 		modal.innerHTML =
 			'<div class="at-video-modal__backdrop"></div>' +
 			'<div class="at-video-modal__dialog">' +
-				'<button type="button" class="at-video-modal__close" aria-label="Close">' +
+				'<button type="button" class="at-video-modal__close" aria-label="' + t( 'close', 'Close' ).replace( /"/g, '&quot;' ) + '">' +
 					'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4L13.4 12z"/></svg>' +
 				'</button>' +
 				'<div class="at-video-modal__frame"></div>' +
@@ -61,7 +67,7 @@
 			iframe.src = src;
 			iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
 			iframe.setAttribute( 'allowfullscreen', '' );
-			iframe.setAttribute( 'title', 'Video testimonial' );
+			iframe.setAttribute( 'title', t( 'videoTitle', 'Video testimonial' ) );
 			frame.appendChild( iframe );
 		}
 

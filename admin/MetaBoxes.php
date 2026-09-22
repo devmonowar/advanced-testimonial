@@ -229,7 +229,7 @@ final class MetaBoxes {
 		foreach ( self::fields() as $name => $field ) {
 			$key       = Helpers::meta_key( $name );
 			$raw       = isset( $_POST[ $key ] ) ? wp_unslash( $_POST[ $key ] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized per field type in sanitize_value().
-			$sanitized = $this->sanitize_value( $field['type'], $raw );
+			$sanitized = self::sanitize_value( $field['type'], $raw );
 
 			if ( '' === $sanitized || ( 'media' === $field['type'] && 0 === $sanitized ) || ( 'checkbox' === $field['type'] && '' === $sanitized ) ) {
 				delete_post_meta( $post_id, $key );
@@ -242,11 +242,14 @@ final class MetaBoxes {
 	/**
 	 * Sanitize a value according to its field type.
 	 *
+	 * Public and static so register_post_meta() can reuse the exact same
+	 * rules for REST writes — one sanitizer, two entry points.
+	 *
 	 * @param string $type Field type.
 	 * @param mixed  $raw  Raw submitted value.
 	 * @return mixed
 	 */
-	private function sanitize_value( $type, $raw ) {
+	public static function sanitize_value( $type, $raw ) {
 		switch ( $type ) {
 			case 'rating':
 				return Helpers::clamp_rating( $raw );

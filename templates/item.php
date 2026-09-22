@@ -15,7 +15,10 @@ defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are function-scoped via TemplateLoader::render().
 $at_has_rating = ! empty( $atts['show_rating'] ) && $item['rating'] > 0;
-$at_review     = $schema && $at_has_rating;
+// Schema stars need a rating the customer actually gave — the visual stars
+// above may show the "Default Rating" fallback, which must never be marked up.
+$at_schema_rating = ! empty( $atts['show_rating'] ) && ! empty( $item['has_real_rating'] );
+$at_review        = $schema && $at_schema_rating;
 
 $at_role = array();
 if ( ! empty( $atts['show_designation'] ) && '' !== $item['designation'] ) {
@@ -45,9 +48,18 @@ do_action( 'advanced_testimonial_before_card', $item, $atts );
 	<div class="at-card__inner">
 
 		<?php if ( $at_review ) : ?>
-			<div itemprop="itemReviewed" itemscope itemtype="https://schema.org/Organization" class="at-visually-hidden">
-				<meta itemprop="name" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+			<div itemprop="itemReviewed" itemscope itemtype="<?php echo esc_attr( $item['reviewed']['type'] ); ?>" class="at-visually-hidden">
+				<meta itemprop="name" content="<?php echo esc_attr( $item['reviewed']['name'] ); ?>">
+				<?php if ( '' !== $item['reviewed']['url'] ) : ?>
+					<link itemprop="url" href="<?php echo esc_url( $item['reviewed']['url'] ); ?>">
+				<?php endif; ?>
+				<?php if ( '' !== $item['reviewed']['image'] ) : ?>
+					<meta itemprop="image" content="<?php echo esc_url( $item['reviewed']['image'] ); ?>">
+				<?php endif; ?>
 			</div>
+			<?php if ( '' !== $item['date'] ) : ?>
+				<meta itemprop="datePublished" content="<?php echo esc_attr( $item['date'] ); ?>">
+			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php if ( ! empty( $item['video'] ) ) : ?>

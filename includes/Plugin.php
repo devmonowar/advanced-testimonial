@@ -57,6 +57,11 @@ final class Plugin {
 		// Data layer — registered on both admin and frontend.
 		( new Admin\CPT() )->register();
 		( new Admin\Taxonomy() )->register();
+		Admin\Settings::register_cache();
+
+		// Update migrations run after the CPT exists (priority 20), so the
+		// one-time rewrite flush rebuilds rules from the new registration.
+		add_action( 'init', array( Activator::class, 'maybe_migrate' ), 20 );
 
 		// Frontend output layer.
 		( new Frontend\Assets() )->register();
@@ -75,6 +80,9 @@ final class Plugin {
 		add_action( 'created_' . Admin\Taxonomy::TAXONOMY, array( Frontend\Query::class, 'bust_cache' ) );
 		add_action( 'edited_' . Admin\Taxonomy::TAXONOMY, array( Frontend\Query::class, 'bust_cache' ) );
 		add_action( 'delete_' . Admin\Taxonomy::TAXONOMY, array( Frontend\Query::class, 'bust_cache' ) );
+
+		// Privacy tools must see submitter data (export + erasure + policy).
+		( new Privacy() )->register();
 
 		// Admin-only modules.
 		if ( is_admin() ) {

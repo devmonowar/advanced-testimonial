@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Testimonial 2.0.9\n"
+"Project-Id-Version: Advanced Testimonial 2.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/advanced-testimonial\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-01T03:25:57+02:00\n"
+"POT-Creation-Date: 2026-09-22T05:27:43+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-testimonial\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: advanced-testimonial.php
-msgid "https://wordpress.org/plugins/advanced-testimonial/"
+msgid "https://devmonowar.github.io/advanced-testimonial/"
 msgstr ""
 
 #. Description of the plugin
@@ -77,88 +77,88 @@ msgstr ""
 msgid "%s out of 5"
 msgstr ""
 
-#: admin/CPT.php:39
+#: admin/CPT.php:44
 msgctxt "Post type general name"
 msgid "Testimonials"
 msgstr ""
 
-#: admin/CPT.php:40
+#: admin/CPT.php:45
 msgctxt "Post type singular name"
 msgid "Testimonial"
 msgstr ""
 
-#: admin/CPT.php:41
+#: admin/CPT.php:46
 msgctxt "Admin Menu text"
 msgid "Testimonials"
 msgstr ""
 
-#: admin/CPT.php:42
+#: admin/CPT.php:47
 msgctxt "Add New on Toolbar"
 msgid "Testimonial"
 msgstr ""
 
-#: admin/CPT.php:43
+#: admin/CPT.php:48
 #: admin/Notices.php:55
 msgid "Add New"
 msgstr ""
 
-#: admin/CPT.php:44
+#: admin/CPT.php:49
 msgid "Add New Testimonial"
 msgstr ""
 
-#: admin/CPT.php:45
+#: admin/CPT.php:50
 msgid "New Testimonial"
 msgstr ""
 
-#: admin/CPT.php:46
+#: admin/CPT.php:51
 msgid "Edit Testimonial"
 msgstr ""
 
-#: admin/CPT.php:47
+#: admin/CPT.php:52
 msgid "View Testimonial"
 msgstr ""
 
-#: admin/CPT.php:48
+#: admin/CPT.php:53
 msgid "All Testimonials"
 msgstr ""
 
-#: admin/CPT.php:49
+#: admin/CPT.php:54
 msgid "Search Testimonials"
 msgstr ""
 
-#: admin/CPT.php:50
+#: admin/CPT.php:55
 msgid "No testimonials found."
 msgstr ""
 
-#: admin/CPT.php:51
+#: admin/CPT.php:56
 msgid "No testimonials found in Trash."
 msgstr ""
 
-#: admin/CPT.php:52
+#: admin/CPT.php:57
 msgid "Client Photo"
 msgstr ""
 
-#: admin/CPT.php:53
+#: admin/CPT.php:58
 msgid "Set client photo"
 msgstr ""
 
-#: admin/CPT.php:54
+#: admin/CPT.php:59
 msgid "Remove client photo"
 msgstr ""
 
-#: admin/CPT.php:55
+#: admin/CPT.php:60
 msgid "Use as client photo"
 msgstr ""
 
-#: admin/CPT.php:56
+#: admin/CPT.php:61
 msgid "Testimonial published."
 msgstr ""
 
-#: admin/CPT.php:57
+#: admin/CPT.php:62
 msgid "Testimonial updated."
 msgstr ""
 
-#: admin/CPT.php:91
+#: admin/CPT.php:177
 msgid "Client name"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgid "Filter demos by category"
 msgstr ""
 
 #: admin/DemoLibrary.php:228
-#: frontend/Renderer.php:377
+#: frontend/Renderer.php:452
 msgid "All"
 msgstr ""
 
@@ -415,349 +415,397 @@ msgstr ""
 msgid "Rate it ★★★★★"
 msgstr ""
 
-#: admin/Settings.php:61
-#: admin/Settings.php:412
+#: admin/Settings.php:87
+#: admin/Settings.php:501
 msgid "Settings"
 msgstr ""
 
-#: admin/Settings.php:75
+#: admin/Settings.php:101
 msgid "General"
 msgstr ""
 
-#: admin/Settings.php:79
+#: admin/Settings.php:105
 msgid "Client Image Size"
 msgstr ""
 
-#: admin/Settings.php:82
+#: admin/Settings.php:108
 msgid "Thumbnail"
 msgstr ""
 
-#: admin/Settings.php:83
-#: admin/Settings.php:165
+#: admin/Settings.php:109
+#: admin/Settings.php:225
 msgid "Medium"
 msgstr ""
 
-#: admin/Settings.php:84
+#: admin/Settings.php:110
 msgid "Large"
 msgstr ""
 
-#: admin/Settings.php:85
+#: admin/Settings.php:111
 msgid "Full"
 msgstr ""
 
-#: admin/Settings.php:90
+#: admin/Settings.php:116
 msgid "Lazy Load Images"
 msgstr ""
 
-#: admin/Settings.php:95
+#: admin/Settings.php:121
 msgid "Enable Frontend CSS"
 msgstr ""
 
-#: admin/Settings.php:100
+#: admin/Settings.php:126
 msgid "Enable Frontend JS"
 msgstr ""
 
-#: admin/Settings.php:105
+#: admin/Settings.php:131
 msgid "Enable Schema.org Markup"
 msgstr ""
 
-#: admin/Settings.php:107
+#: admin/Settings.php:133
 msgid "Adds Review/Rating structured data for richer search results."
 msgstr ""
 
-#: admin/Settings.php:111
-msgid "Enable RTL Styles"
+#: admin/Settings.php:137
+msgid "What is being reviewed"
 msgstr ""
 
-#: admin/Settings.php:117
-msgid "Styles"
+#: admin/Settings.php:140
+msgid "My own business / organization"
 msgstr ""
 
-#: admin/Settings.php:121
-msgid "Card Style"
+#: admin/Settings.php:141
+msgid "A product"
 msgstr ""
 
-#: admin/Settings.php:124
-msgid "Default look of the testimonial cards. Each block or shortcode can override it with the style attribute."
+#: admin/Settings.php:142
+msgid "Software / app"
 msgstr ""
 
-#: admin/Settings.php:128
-msgid "Primary Color"
-msgstr ""
-
-#: admin/Settings.php:133
-msgid "Secondary / Accent Color"
-msgstr ""
-
-#: admin/Settings.php:135
-msgid "Used for rating stars and accents."
-msgstr ""
-
-#: admin/Settings.php:139
-msgid "Text Color"
+#: admin/Settings.php:143
+msgid "A course"
 msgstr ""
 
 #: admin/Settings.php:144
-msgid "Border Radius (px)"
+msgid "An event"
 msgstr ""
 
-#: admin/Settings.php:152
-msgid "Spacing / Gap (px)"
+#: admin/Settings.php:146
+msgid "Google only shows star ratings for reviews of products, apps, courses and similar — never for a business reviewing itself. Pick what your testimonials praise."
+msgstr ""
+
+#: admin/Settings.php:150
+msgid "Reviewed name"
+msgstr ""
+
+#: admin/Settings.php:155
+msgid "Reviewed URL"
 msgstr ""
 
 #: admin/Settings.php:160
+msgid "Reviewed image URL"
+msgstr ""
+
+#: admin/Settings.php:165
+msgid "Enable RTL Styles"
+msgstr ""
+
+#: admin/Settings.php:170
+msgid "Give testimonials their own public pages"
+msgstr ""
+
+#: admin/Settings.php:172
+msgid "Off (recommended): testimonials appear only where you place them, never as thin standalone pages or in site search. Existing sites keep their current URLs — this is on for them."
+msgstr ""
+
+#: admin/Settings.php:177
+msgid "Styles"
+msgstr ""
+
+#: admin/Settings.php:181
+msgid "Card Style"
+msgstr ""
+
+#: admin/Settings.php:184
+msgid "Default look of the testimonial cards. Each block or shortcode can override it with the style attribute."
+msgstr ""
+
+#: admin/Settings.php:188
+msgid "Primary Color"
+msgstr ""
+
+#: admin/Settings.php:193
+msgid "Secondary / Accent Color"
+msgstr ""
+
+#: admin/Settings.php:195
+msgid "Used for rating stars and accents."
+msgstr ""
+
+#: admin/Settings.php:199
+msgid "Text Color"
+msgstr ""
+
+#: admin/Settings.php:204
+msgid "Border Radius (px)"
+msgstr ""
+
+#: admin/Settings.php:212
+msgid "Spacing / Gap (px)"
+msgstr ""
+
+#: admin/Settings.php:220
 msgid "Card Shadow"
 msgstr ""
 
-#: admin/Settings.php:163
+#: admin/Settings.php:223
 msgid "None"
 msgstr ""
 
-#: admin/Settings.php:164
+#: admin/Settings.php:224
 msgid "Soft"
 msgstr ""
 
-#: admin/Settings.php:166
+#: admin/Settings.php:226
 msgid "Strong"
 msgstr ""
 
-#: admin/Settings.php:171
+#: admin/Settings.php:231
 msgid "Button Style"
 msgstr ""
 
-#: admin/Settings.php:174
+#: admin/Settings.php:234
 msgid "Filled"
 msgstr ""
 
-#: admin/Settings.php:175
+#: admin/Settings.php:235
 #: frontend/Renderer.php:52
 msgid "Outline"
 msgstr ""
 
-#: admin/Settings.php:180
+#: admin/Settings.php:240
 msgid "Avatar Shape"
 msgstr ""
 
-#: admin/Settings.php:183
+#: admin/Settings.php:243
 msgid "Circle"
 msgstr ""
 
-#: admin/Settings.php:184
+#: admin/Settings.php:244
 msgid "Rounded"
 msgstr ""
 
-#: admin/Settings.php:185
+#: admin/Settings.php:245
 msgid "Square"
 msgstr ""
 
-#: admin/Settings.php:190
+#: admin/Settings.php:250
 msgid "Rating Icon"
 msgstr ""
 
-#: admin/Settings.php:193
+#: admin/Settings.php:253
 msgid "Star"
 msgstr ""
 
-#: admin/Settings.php:194
+#: admin/Settings.php:254
 msgid "Heart"
 msgstr ""
 
-#: admin/Settings.php:199
+#: admin/Settings.php:259
 msgid "Default Rating"
 msgstr ""
 
-#: admin/Settings.php:204
+#: admin/Settings.php:264
 msgid "Used when a testimonial has no rating set (0 = none)."
 msgstr ""
 
-#: admin/Settings.php:208
+#: admin/Settings.php:268
 msgid "Marquee Scroll Speed"
 msgstr ""
 
-#: admin/Settings.php:211
+#: admin/Settings.php:271
 #: includes/Elementor_Widget.php:252
 #: blocks/editor.js:53
 msgid "Slow"
 msgstr ""
 
-#: admin/Settings.php:212
+#: admin/Settings.php:272
 #: includes/Elementor_Widget.php:253
 #: blocks/editor.js:54
 msgid "Normal"
 msgstr ""
 
-#: admin/Settings.php:213
+#: admin/Settings.php:273
 #: includes/Elementor_Widget.php:254
 #: blocks/editor.js:55
 msgid "Fast"
 msgstr ""
 
-#: admin/Settings.php:215
+#: admin/Settings.php:275
 msgid "Default speed for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:219
+#: admin/Settings.php:279
 msgid "Marquee Card Width (px)"
 msgstr ""
 
-#: admin/Settings.php:224
+#: admin/Settings.php:284
 msgid "Default card width for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:228
+#: admin/Settings.php:288
 msgid "Marquee Scroll Direction"
 msgstr ""
 
-#: admin/Settings.php:231
+#: admin/Settings.php:291
 #: includes/Elementor_Widget.php:278
 #: blocks/editor.js:60
 msgid "Right to left"
 msgstr ""
 
-#: admin/Settings.php:232
+#: admin/Settings.php:292
 #: includes/Elementor_Widget.php:279
 #: blocks/editor.js:61
 msgid "Left to right"
 msgstr ""
 
-#: admin/Settings.php:234
+#: admin/Settings.php:294
 msgid "Default scroll direction for the Marquee layout. Each block can override this."
 msgstr ""
 
-#: admin/Settings.php:238
+#: admin/Settings.php:298
 msgid "Read More — Lines Shown"
 msgstr ""
 
-#: admin/Settings.php:243
+#: admin/Settings.php:303
 msgid "When \"Read more\" is enabled on a block, reviews are trimmed to this many lines before the toggle appears."
 msgstr ""
 
-#: admin/Settings.php:247
+#: admin/Settings.php:307
 msgid "Load More — Batch Size"
 msgstr ""
 
-#: admin/Settings.php:252
+#: admin/Settings.php:312
 msgid "When \"Load more\" is enabled on a block, this many testimonials are shown at first and revealed per click."
 msgstr ""
 
-#: admin/Settings.php:257
+#: admin/Settings.php:317
 msgid "Performance"
 msgstr ""
 
-#: admin/Settings.php:261
+#: admin/Settings.php:321
 msgid "Load Assets Only When Needed"
 msgstr ""
 
-#: admin/Settings.php:263
+#: admin/Settings.php:323
 msgid "Only enqueue CSS/JS on pages that actually render testimonials."
 msgstr ""
 
-#: admin/Settings.php:267
+#: admin/Settings.php:327
 msgid "Cache Queries"
 msgstr ""
 
-#: admin/Settings.php:269
+#: admin/Settings.php:329
 msgid "Cache testimonial queries for faster repeat loads."
 msgstr ""
 
-#: admin/Settings.php:274
+#: admin/Settings.php:334
 msgid "Submission Form"
 msgstr ""
 
-#: admin/Settings.php:278
+#: admin/Settings.php:338
 msgid "Enable Submission Form"
 msgstr ""
 
-#: admin/Settings.php:280
+#: admin/Settings.php:340
 msgid "Enable the [at_form] shortcode. Visitors can submit testimonials from the front end."
 msgstr ""
 
-#: admin/Settings.php:284
+#: admin/Settings.php:344
 msgid "Auto-Publish Submissions"
 msgstr ""
 
-#: admin/Settings.php:286
+#: admin/Settings.php:346
 msgid "Publish testimonials immediately. When off, they are saved as \"Pending\" for you to review first (recommended)."
 msgstr ""
 
-#: admin/Settings.php:290
+#: admin/Settings.php:350
 msgid "Require a Rating"
 msgstr ""
 
-#: admin/Settings.php:295
+#: admin/Settings.php:355
 msgid "Show \"Review Title\" Field"
 msgstr ""
 
-#: admin/Settings.php:300
+#: admin/Settings.php:360
 msgid "Show \"Company\" Field"
 msgstr ""
 
-#: admin/Settings.php:305
+#: admin/Settings.php:365
 msgid "Show \"Job Title\" Field"
 msgstr ""
 
-#: admin/Settings.php:310
+#: admin/Settings.php:370
 msgid "Show \"Location\" Field"
 msgstr ""
 
-#: admin/Settings.php:315
+#: admin/Settings.php:375
 msgid "Show \"Email Address\" Field"
 msgstr ""
 
-#: admin/Settings.php:317
+#: admin/Settings.php:377
 msgid "Email is never displayed publicly. Used for admin reference only."
 msgstr ""
 
-#: admin/Settings.php:321
+#: admin/Settings.php:381
 msgid "Show \"Website\" Field"
 msgstr ""
 
-#: admin/Settings.php:326
+#: admin/Settings.php:386
 msgid "Notification Email"
 msgstr ""
 
-#: admin/Settings.php:328
+#: admin/Settings.php:388
 msgid "Send a notification to this address on each new submission. Leave blank to use the site admin email."
 msgstr ""
 
-#: admin/Settings.php:332
+#: admin/Settings.php:392
 msgid "Success Message"
 msgstr ""
 
-#: admin/Settings.php:334
+#: admin/Settings.php:394
 msgid "Message shown after a successful submission. Shortcode attribute \"success\" overrides this."
 msgstr ""
 
-#: admin/Settings.php:339
+#: admin/Settings.php:399
 msgid "Advanced"
 msgstr ""
 
-#: admin/Settings.php:343
+#: admin/Settings.php:403
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/Settings.php:345
+#: admin/Settings.php:405
 msgid "Output on the frontend after the plugin styles."
 msgstr ""
 
-#: admin/Settings.php:349
+#: admin/Settings.php:409
 msgid "Remove all plugin data when deleting the plugin"
 msgstr ""
 
-#: admin/Settings.php:351
+#: admin/Settings.php:411
 msgid "When the plugin is deleted, permanently remove all testimonials, groups, meta, settings and transients. Deactivating never deletes anything. Default: off."
 msgstr ""
 
-#: admin/Settings.php:411
-#: admin/Settings.php:479
+#: admin/Settings.php:500
+#: admin/Settings.php:568
 msgid "Advanced Testimonial Settings"
 msgstr ""
 
-#: admin/Settings.php:498
+#: admin/Settings.php:587
 msgid "Tools"
 msgstr ""
 
-#: admin/Settings.php:552
+#: admin/Settings.php:641
 msgid "Enable"
 msgstr ""
 
@@ -913,6 +961,9 @@ msgid "Export"
 msgstr ""
 
 #: admin/Tools.php:275
+#: includes/Privacy.php:41
+#: includes/Privacy.php:56
+#: includes/Privacy.php:102
 msgid "Testimonials"
 msgstr ""
 
@@ -975,18 +1026,49 @@ msgstr ""
 msgid "All groups"
 msgstr ""
 
+#. translators: 1: slide number, 2: total slides.
+#: frontend/Assets.php:167
+#, php-format
+msgid "%1$s of %2$s"
+msgstr ""
+
+#. translators: %s: slide number.
+#: frontend/Assets.php:169
+#, php-format
+msgid "Go to slide %s"
+msgstr ""
+
+#: frontend/Assets.php:170
+#: templates/carousel.php:43
+#: templates/marquee.php:62
+#: templates/spotlight.php:43
+msgid "Pause testimonials"
+msgstr ""
+
+#: frontend/Assets.php:171
+msgid "Play testimonials"
+msgstr ""
+
+#: frontend/Assets.php:172
+msgid "Video testimonial"
+msgstr ""
+
+#: frontend/Assets.php:173
+msgid "Close"
+msgstr ""
+
 #: frontend/Form.php:90
 msgid "Thank you! Your testimonial has been submitted and is awaiting review."
 msgstr ""
 
 #. translators: %s: site name
-#: frontend/Form.php:249
+#: frontend/Form.php:260
 #, php-format
 msgid "[%s] New testimonial submitted"
 msgstr ""
 
 #. translators: 1: author name, 2: author email, 3: review text, 4: edit URL
-#: frontend/Form.php:255
+#: frontend/Form.php:266
 #, php-format
 msgid ""
 "Author: %1$s\n"
@@ -1031,27 +1113,27 @@ msgstr ""
 msgid "Retro"
 msgstr ""
 
-#: frontend/Renderer.php:376
+#: frontend/Renderer.php:451
 msgid "Filter testimonials by group"
 msgstr ""
 
-#: frontend/Renderer.php:403
+#: frontend/Renderer.php:478
 msgid "Load more"
 msgstr ""
 
 #. translators: %s: client name.
-#: frontend/Renderer.php:485
+#: frontend/Renderer.php:560
 #, php-format
 msgid "Play video testimonial from %s"
 msgstr ""
 
 #. translators: %s: rating value out of five, e.g. 4.5.
-#: frontend/Renderer.php:510
+#: frontend/Renderer.php:585
 #, php-format
 msgid "Rated %s out of 5"
 msgstr ""
 
-#: frontend/Renderer.php:613
+#: frontend/Renderer.php:688
 msgid "No testimonials found for the selected options."
 msgstr ""
 
@@ -1270,6 +1352,30 @@ msgstr ""
 msgid "Reveal in batches (Load more)"
 msgstr ""
 
+#: includes/Privacy.php:106
+msgid "Name"
+msgstr ""
+
+#: includes/Privacy.php:110
+msgid "Email"
+msgstr ""
+
+#: includes/Privacy.php:114
+msgid "Review"
+msgstr ""
+
+#: includes/Privacy.php:118
+msgid "Submitted"
+msgstr ""
+
+#: includes/Privacy.php:149
+msgid "Anonymous"
+msgstr ""
+
+#: includes/Privacy.php:177
+msgid "When you submit a testimonial through our form, your name, email address (optional) and review text are stored as a testimonial on this site until you ask us to remove them. The email is never displayed publicly; it is only used to verify your submission."
+msgstr ""
+
 #: templates/carousel.php:26
 #: templates/marquee.php:40
 #: templates/spotlight.php:26
@@ -1289,8 +1395,8 @@ msgstr ""
 msgid "Next testimonials"
 msgstr ""
 
-#: templates/carousel.php:42
-#: templates/spotlight.php:42
+#: templates/carousel.php:47
+#: templates/spotlight.php:47
 msgid "Choose testimonial"
 msgstr ""
 
@@ -1358,19 +1464,19 @@ msgstr ""
 msgid "Submit Testimonial"
 msgstr ""
 
-#: templates/item.php:89
+#: templates/item.php:101
 msgid "Read more"
 msgstr ""
 
-#: templates/item.php:89
+#: templates/item.php:101
 msgid "Read less"
 msgstr ""
 
-#: templates/item.php:107
+#: templates/item.php:119
 msgid "Verified customer"
 msgstr ""
 
-#: templates/item.php:133
+#: templates/item.php:145
 msgid "Visit Website"
 msgstr ""
 

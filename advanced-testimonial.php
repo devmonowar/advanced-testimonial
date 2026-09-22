@@ -3,7 +3,7 @@
  * Plugin Name:       Advanced Testimonial
  * Plugin URI:        https://devmonowar.github.io/advanced-testimonial/
  * Description:       Showcase customer testimonials and reviews in beautiful grids, carousels, cards and more. Lightweight, block-ready and built for social proof.
- * Version:           2.0.9
+ * Version:           2.1.0
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Monowar Hossain

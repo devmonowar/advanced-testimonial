@@ -11,6 +11,16 @@
 
 	var reduceMotion = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 
+	// Screen-reader strings come from wp_localize_script (see Frontend\Assets);
+	// English fallbacks keep the controls labelled if localization is missing.
+	var i18n = window.advancedTestimonialA11y || {};
+	function t( key, fallback ) {
+		return 'string' === typeof i18n[ key ] && i18n[ key ] ? i18n[ key ] : fallback;
+	}
+	function fmt( str, a, b ) {
+		return String( str ).replace( '%1$s', a ).replace( '%2$s', b ).replace( '%s', a );
+	}
+
 	function Carousel( root ) {
 		this.root     = root;
 		this.track    = root.querySelector( '.at-carousel__track' );
@@ -30,11 +40,18 @@
 		// Label each slide "N of M" for screen readers.
 		var total = this.slides.length;
 		this.slides.forEach( function ( slide, i ) {
-			slide.setAttribute( 'aria-label', ( i + 1 ) + ' of ' + total );
+			slide.setAttribute( 'aria-label', fmt( t( 'slideOf', '%1$s of %2$s' ), i + 1, total ) );
 		} );
+
+		this.pauseBtn = root.querySelector( '[data-at-pause]' );
+		this.paused   = false;
+		if ( this.pauseBtn ) {
+			this.pauseBtn.addEventListener( 'click', this.togglePause.bind( this ) );
+		}
 
 		this.bind();
 		this.layout();
+		this.updatePauseBtn();
 		this.startAutoplay();
 	}
 
@@ -76,6 +93,27 @@
 
 	Carousel.prototype.update = function () {
 		this.track.style.transform = 'translateX(-' + ( this.index * ( 100 / this.perView() ) ) + '%)';
+
+		// The track is only translated, never clipped from the tab order — so
+		// slides outside the current view must be hidden from keyboard and
+		// screen readers explicitly, on every move.
+		var pv = this.perView();
+		this.slides.forEach( function ( slide, i ) {
+			var visible = i >= this.index && i < this.index + pv;
+			if ( visible ) {
+				slide.removeAttribute( 'aria-hidden' );
+				Array.prototype.forEach.call( slide.querySelectorAll( '[data-at-tab]' ), function ( el ) {
+					el.removeAttribute( 'tabindex' );
+					el.removeAttribute( 'data-at-tab' );
+				} );
+			} else {
+				slide.setAttribute( 'aria-hidden', 'true' );
+				Array.prototype.forEach.call( slide.querySelectorAll( 'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])' ), function ( el ) {
+					el.setAttribute( 'tabindex', '-1' );
+					el.setAttribute( 'data-at-tab', '1' );
+				} );
+			}
+		}.bind( this ) );
 
 		if ( this.dotsWrap ) {
 			Array.prototype.forEach.call( this.dotsWrap.children, function ( dot, i ) {
@@ -125,7 +163,7 @@
 			var dot = document.createElement( 'button' );
 			dot.type = 'button';
 			dot.className = 'at-carousel__dot';
-			dot.setAttribute( 'aria-label', 'Go to slide ' + ( i + 1 ) );
+			dot.setAttribute( 'aria-label', fmt( t( 'goToSlide', 'Go to slide %s' ), i + 1 ) );
 			dot.addEventListener( 'click', this.goTo.bind( this, i ) );
 			this.dotsWrap.appendChild( dot );
 		}
@@ -176,6 +214,13 @@
 		this.root.addEventListener( 'mouseenter', this.stopAutoplay.bind( this ) );
 		this.root.addEventListener( 'mouseleave', this.startAutoplay.bind( this ) );
 		this.root.addEventListener( 'focusin', this.stopAutoplay.bind( this ) );
+		// Focus moving between slides is not leaving — restart only when
+		// focus truly exits the carousel.
+		this.root.addEventListener( 'focusout', function ( event ) {
+			if ( ! this.root.contains( event.relatedTarget ) ) {
+				this.startAutoplay();
+			}
+		}.bind( this ) );
 
 		var resizeTimer;
 		window.addEventListener( 'resize', function () {
@@ -185,7 +230,7 @@
 	};
 
 	Carousel.prototype.startAutoplay = function () {
-		if ( ! this.autoplay || reduceMotion || this.maxIndex() < 1 ) {
+		if ( this.paused || ! this.autoplay || reduceMotion || this.maxIndex() < 1 ) {
 			return;
 		}
 		this.stopAutoplay();
@@ -197,6 +242,26 @@
 			window.clearInterval( this.timer );
 			this.timer = null;
 		}
+	};
+
+	// A visible pause control — hover/focus pause alone fails WCAG 2.2.2,
+	// and a manual pause must survive mouseleave (which restarts autoplay).
+	Carousel.prototype.togglePause = function () {
+		this.paused = ! this.paused;
+		if ( this.paused ) {
+			this.stopAutoplay();
+		} else {
+			this.startAutoplay();
+		}
+		this.updatePauseBtn();
+	};
+
+	Carousel.prototype.updatePauseBtn = function () {
+		if ( ! this.pauseBtn ) {
+			return;
+		}
+		this.pauseBtn.setAttribute( 'aria-pressed', this.paused ? 'true' : 'false' );
+		this.pauseBtn.setAttribute( 'aria-label', this.paused ? t( 'play', 'Play testimonials' ) : t( 'pause', 'Pause testimonials' ) );
 	};
 
 	/**
@@ -223,14 +288,45 @@
 			// Content does not overflow: nothing to scroll, just center it.
 			if ( half <= visible ) {
 				root.classList.add( 'at-marquee--static' );
-				return;
+				root.classList.remove( 'at-marquee--paused' );
+			} else {
+				root.classList.remove( 'at-marquee--static' );
 			}
 
-			root.classList.remove( 'at-marquee--static' );
+			// No pause control when there is nothing to pause.
+			var btn = root.querySelector( '[data-at-pause]' );
+			if ( btn ) {
+				btn.hidden = root.classList.contains( 'at-marquee--static' );
+			}
+
+			if ( root.classList.contains( 'at-marquee--static' ) ) {
+				return;
+			}
 			track.style.setProperty( '--at-marquee-duration', ( half / speed ).toFixed( 2 ) + 's' );
 		}
 
 		apply();
+
+		// The cloned half carries aria-hidden="true" but duplicates every link
+		// and button of the visible half — a serious focus violation. `inert`
+		// in the markup handles modern browsers; this is the fallback that
+		// pulls the clones' focusables out of the tab order everywhere else.
+		if ( ! ( 'HTMLElement' in window && 'inert' in window.HTMLElement.prototype ) ) {
+			Array.prototype.forEach.call( track.querySelectorAll( '.at-marquee__slide[aria-hidden="true"] a[href], .at-marquee__slide[aria-hidden="true"] button, .at-marquee__slide[aria-hidden="true"] input, .at-marquee__slide[aria-hidden="true"] select, .at-marquee__slide[aria-hidden="true"] textarea, .at-marquee__slide[aria-hidden="true"] [tabindex]:not([tabindex="-1"])' ), function ( el ) {
+				el.setAttribute( 'tabindex', '-1' );
+			} );
+		}
+
+		// Visible pause control (WCAG 2.2.2) — CSS hover/focus pause is not
+		// enough on its own.
+		var pauseBtn = root.querySelector( '[data-at-pause]' );
+		if ( pauseBtn ) {
+			pauseBtn.addEventListener( 'click', function () {
+				var paused = root.classList.toggle( 'at-marquee--paused' );
+				pauseBtn.setAttribute( 'aria-pressed', paused ? 'true' : 'false' );
+				pauseBtn.setAttribute( 'aria-label', paused ? t( 'play', 'Play testimonials' ) : t( 'pause', 'Pause testimonials' ) );
+			} );
+		}
 
 		var resizeTimer;
 		window.addEventListener( 'resize', function () {

@@ -266,6 +266,75 @@ final class Renderer {
 	}
 
 	/**
+	 * What the reviews are about, for itemReviewed markup.
+	 *
+	 * Google shows star ratings for reviews of products, apps, courses and
+	 * similar — never for a business reviewing itself. So the owner picks the
+	 * reviewed thing in Settings → General; when they leave the default
+	 * ("my own business") and the block renders on a WooCommerce product
+	 * page, that product is used instead — the one case the owner never has
+	 * to configure. An explicit non-organization choice always wins.
+	 *
+	 * @return array{type:string,name:string,url:string,image:string}
+	 */
+	public static function reviewed_entity() {
+		$types = array(
+			'organization' => 'https://schema.org/Organization',
+			'product'      => 'https://schema.org/Product',
+			'software'     => 'https://schema.org/SoftwareApplication',
+			'course'       => 'https://schema.org/Course',
+			'event'        => 'https://schema.org/Event',
+		);
+
+		$type = (string) Settings::get( 'reviewed_type', 'organization' );
+		if ( ! isset( $types[ $type ] ) ) {
+			$type = 'organization';
+		}
+
+		$entity = array(
+			'type'  => $types[ $type ],
+			'name'  => (string) Settings::get( 'reviewed_name', '' ),
+			'url'   => (string) Settings::get( 'reviewed_url', '' ),
+			'image' => (string) Settings::get( 'reviewed_image', '' ),
+		);
+
+		if ( 'organization' === $type ) {
+			if ( '' === $entity['name'] ) {
+				$entity['name'] = (string) get_bloginfo( 'name' );
+			}
+
+			if ( function_exists( 'is_product' ) && is_product() ) {
+				$product_id = get_queried_object_id();
+
+				if ( $product_id && function_exists( 'wc_get_product' ) ) {
+					$product = wc_get_product( $product_id );
+
+					if ( $product ) {
+						$entity['type'] = 'https://schema.org/Product';
+						$entity['name'] = $product->get_name();
+
+						if ( function_exists( 'get_permalink' ) ) {
+							$entity['url'] = (string) get_permalink( $product_id );
+						}
+
+						$image_id = $product->get_image_id();
+						if ( $image_id ) {
+							$entity['image'] = (string) wp_get_attachment_url( $image_id );
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * Filter the reviewed entity used in itemReviewed markup.
+		 *
+		 * @param array $entity Entity with type, name, url, image keys.
+		 */
+		return apply_filters( 'advanced_testimonial_reviewed_entity', $entity );
+	}
+
+	/**
 	 * Build a normalized data array for one testimonial.
 	 *
 	 * @param \WP_Post $post Post object.
@@ -278,7 +347,11 @@ final class Renderer {
 			return get_post_meta( $id, Helpers::meta_key( $field ), true );
 		};
 
-		$rating = Helpers::clamp_rating( $meta( 'rating' ) );
+		// The stored rating is the only honest one: schema markup must never
+		// carry a rating the customer did not give. The "Default Rating"
+		// setting still fills the visual stars below, display only.
+		$real_rating = Helpers::clamp_rating( $meta( 'rating' ) );
+		$rating      = $real_rating;
 		if ( $rating <= 0 ) {
 			$rating = Helpers::clamp_rating( Settings::get( 'default_rating', 0 ) );
 		}
@@ -292,11 +365,13 @@ final class Renderer {
 		);
 
 		$item = array(
-			'id'          => $id,
-			'name'        => get_the_title( $id ),
-			'headline'    => (string) $meta( 'headline' ),
-			'review'      => $post->post_content,
-			'rating'      => $rating,
+			'id'              => $id,
+			'name'            => get_the_title( $id ),
+			'headline'        => (string) $meta( 'headline' ),
+			'review'          => $post->post_content,
+			'rating'          => $rating,
+			'has_real_rating' => $real_rating > 0,
+			'reviewed'        => self::reviewed_entity(),
 			'company'     => (string) $meta( 'company' ),
 			'designation' => (string) $meta( 'designation' ),
 			'location'    => (string) $meta( 'location' ),

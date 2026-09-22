@@ -463,6 +463,44 @@
 	right: -8px;
 }
 
+/* Visible autoplay toggle (WCAG 2.2.2) — same chrome as the nav arrows,
+   parked bottom-right so it never covers a slide's content. */
+.at-carousel__pause {
+	position: absolute;
+	right: 0;
+	bottom: -2px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e5e7eb;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: var( --at-shadow );
+	cursor: pointer;
+	z-index: 2;
+	padding: 0;
+}
+
+.at-carousel__pause svg {
+	width: 14px;
+	height: 14px;
+	fill: var( --at-primary );
+}
+
+.at-carousel__pause:hover {
+	background: var( --at-primary );
+}
+
+.at-carousel__pause:hover svg {
+	fill: #fff;
+}
+
+.at-carousel__pause[aria-pressed="true"] svg {
+	fill: var( --at-accent );
+}
+
 .at-carousel__dots {
 	display: flex;
 	justify-content: center;
@@ -659,8 +697,46 @@
 
 /* Pause while hovered or when a link inside is focused. */
 .at-marquee:hover .at-marquee__track,
-.at-marquee:focus-within .at-marquee__track {
+.at-marquee:focus-within .at-marquee__track,
+.at-marquee--paused .at-marquee__track {
 	animation-play-state: paused;
+}
+
+/* Visible pause control (WCAG 2.2.2) — same chrome as the carousel arrows. */
+.at-marquee__pause {
+	position: absolute;
+	right: 0;
+	bottom: -2px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e5e7eb;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: var( --at-shadow );
+	cursor: pointer;
+	z-index: 2;
+	padding: 0;
+}
+
+.at-marquee__pause svg {
+	width: 14px;
+	height: 14px;
+	fill: var( --at-primary );
+}
+
+.at-marquee__pause:hover {
+	background: var( --at-primary );
+}
+
+.at-marquee__pause:hover svg {
+	fill: #fff;
+}
+
+.at-marquee__pause[aria-pressed="true"] svg {
+	fill: var( --at-accent );
 }
 
 /* JS adds this when the items do not overflow the row (nothing to scroll). */

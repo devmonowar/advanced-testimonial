@@ -45,17 +45,23 @@ defined( 'ABSPATH' ) || exit;
 						<?php include $item_template; ?>
 					</div>
 				<?php endforeach; ?>
-				<?php
-				// Cloned set for the seamless loop: hidden from screen readers and
-				// rendered without schema markup so Review data is not duplicated.
-				$schema = false;
-				?>
-				<?php foreach ( $testimonials as $item ) : ?>
-					<div class="at-marquee__slide" aria-hidden="true">
-						<?php include $item_template; ?>
-					</div>
-				<?php endforeach; ?>
-			</div>
+			<?php
+			// Cloned set for the seamless loop: hidden from screen readers and
+			// rendered without schema markup so Review data is not duplicated.
+			// `inert` pulls the clones' links and buttons out of the tab order
+			// too (aria-hidden alone does not); carousel.js re-asserts that
+			// for browsers without `inert` support.
+			$schema = false;
+			?>
+			<?php foreach ( $testimonials as $item ) : ?>
+				<div class="at-marquee__slide" aria-hidden="true" inert>
+					<?php include $item_template; ?>
+				</div>
+			<?php endforeach; ?>
 		</div>
+		<button type="button" class="at-marquee__pause" data-at-pause aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause testimonials', 'advanced-testimonial' ); ?>">
+			<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+		</button>
+	</div>
 	</div>
 </div>

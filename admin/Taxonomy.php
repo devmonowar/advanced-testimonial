@@ -50,18 +50,24 @@ final class Taxonomy {
 			'not_found'         => __( 'No groups found.', 'advanced-testimonial' ),
 		);
 
+		// Same treatment as the CPT itself (see CPT::register_post_type): the
+		// group archives are thin duplicates too, so they follow the single
+		// pages setting. `public` stays true for the admin UI.
+		$single_pages = (bool) Settings::get( 'single_pages', 0 );
+
 		$args = array(
-			'labels'            => $labels,
-			'hierarchical'      => true,
-			'public'            => true,
-			'show_ui'           => true,
-			'show_in_rest'      => true,
-			'show_admin_column' => true,
-			'query_var'         => true,
-			'rewrite'           => array(
+			'labels'             => $labels,
+			'hierarchical'       => true,
+			'public'             => true,
+			'publicly_queryable' => $single_pages,
+			'show_ui'            => true,
+			'show_in_rest'       => true,
+			'show_admin_column'  => true,
+			'query_var'          => $single_pages,
+			'rewrite'            => $single_pages ? array(
 				'slug'       => 'testimonial-group',
 				'with_front' => false,
-			),
+			) : false,
 		);
 
 		register_taxonomy( self::TAXONOMY, array( CPT::POST_TYPE ), $args );

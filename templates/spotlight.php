@@ -39,6 +39,11 @@ defined( 'ABSPATH' ) || exit;
 		<button type="button" class="at-carousel__nav at-carousel__next" aria-label="<?php esc_attr_e( 'Next testimonial', 'advanced-testimonial' ); ?>">
 			<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
 		</button>
+		<?php if ( ! empty( $atts['autoplay'] ) ) : ?>
+			<button type="button" class="at-carousel__pause" data-at-pause aria-pressed="false" aria-label="<?php esc_attr_e( 'Pause testimonials', 'advanced-testimonial' ); ?>">
+				<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+			</button>
+		<?php endif; ?>
 		<div class="at-carousel__dots" role="group" aria-label="<?php esc_attr_e( 'Choose testimonial', 'advanced-testimonial' ); ?>"></div>
 	</div>
 </div>

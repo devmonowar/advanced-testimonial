@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.9
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Manage reviews like regular posts, group them, and drop them onto any page with 
 
 * **Build credibility & social proof** — show authentic reviews with star ratings, photos, companies, locations and verified badges.
 * **Increase conversions** — place persuasive testimonials on landing pages, product pages and checkout to turn visitors into customers.
-* **Win in Google** — built-in **Schema.org Review markup** lets search engines show ⭐ star ratings as rich snippets, so your result stands out and earns more clicks.
+* **Win in Google** — Review/Rating structured data on every testimonial, eligible for ⭐ star rich results when your reviews point at a product, app or course (Google never stars a business reviewing itself — pick the reviewed thing in Settings → General).
 * **Fast & lightweight** — frontend assets load only where they are used, with no jQuery and no bloat, so your pages stay fast.
 * **Fits any site** — agencies, SaaS products, WooCommerce shops, restaurants, portfolios, healthcare and more.
 
@@ -125,11 +125,11 @@ No. The shortcode and the Gutenberg block work with any theme. If Elementor is i
 
 = Will it slow down my site? =
 
-No. CSS/JS load only on pages that actually display testimonials, there is no jQuery and no external libraries, queries are cached, and you can serve minified assets — all configurable under **Settings → Performance**.
+No. CSS/JS load only on pages that actually display testimonials, there is no jQuery and no external libraries, and queries are cached — all configurable under **Settings → Performance**.
 
 = Are there hooks for developers? =
 
-Yes. Filters: `advanced_testimonial_query_args`, `advanced_testimonial_item_data`, `advanced_testimonial_review_html`, `advanced_testimonial_output`, `advanced_testimonial_template`, `advanced_testimonial_card_styles` (register your own card style). Actions: `advanced_testimonial_before_card`, `advanced_testimonial_after_card`.
+Yes. Filters: `advanced_testimonial_query_args`, `advanced_testimonial_item_data`, `advanced_testimonial_review_html`, `advanced_testimonial_output`, `advanced_testimonial_template`, `advanced_testimonial_card_styles` (register your own card style), `advanced_testimonial_demo_library_url` (point the Demo Library at your own JSON source), `advanced_testimonial_rate_limit_key`, `advanced_testimonial_reviewed_entity`. Actions: `advanced_testimonial_before_card`, `advanced_testimonial_after_card`.
 
 = Is it accessible and translation-ready? =
 
@@ -149,6 +149,17 @@ No data from your site is sent to the service; only public demo files (JSON and 
 **Video testimonials (optional):** if you add a YouTube or Vimeo URL to a testimonial, the visitor's browser connects to those services — YouTube thumbnails are loaded from img.youtube.com, and the player (youtube-nocookie.com or player.vimeo.com) is only embedded after the visitor clicks play. No connection is made if you don't use video, and nothing is sent to these services by your site itself. YouTube is provided by Google ([terms](https://www.youtube.com/t/terms) — [privacy](https://policies.google.com/privacy)); Vimeo ([terms](https://vimeo.com/terms) — [privacy](https://vimeo.com/privacy)).
 
 == Changelog ==
+
+= 2.1.0 =
+* New: single testimonial pages are off by default for new installs (existing sites keep their URLs) — no more thin duplicate pages or testimonials in site search. Toggle under Settings → General.
+* New: say what your reviews are about (product, app, course, event) in Settings → General — star ratings can only appear for those, never for a business reviewing itself. WooCommerce product pages are detected automatically.
+* New: schema markup now carries only ratings customers actually gave (the Default Rating still fills the visual stars) plus the review date.
+* New: visible pause/play buttons on carousels and marquees; off-screen slides and duplicated marquee content are hidden from keyboard and screen readers.
+* New: submitter data (name, email) is available to WordPress privacy export/erase tools, with suggested policy text.
+* New: testimonial fields are exposed to the block editor and REST API.
+* Improved: settings load once per request instead of on every lookup; rate limiting works behind proxies via the `advanced_testimonial_rate_limit_key` filter; all screen-reader strings are translatable.
+* Fixed: readme no longer promises minified assets (removed in 2.0.9) and lists the demo-library URL hook.
+* Dev: PHPUnit coverage for the Helpers, with a test job in CI.
 
 = 2.0.9 =
 * Fixed: the submission form ignored its "Show ... Field" settings, and kept accepting submissions after being switched off.
@@ -202,6 +213,9 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Settings page with full theming controls, Schema.org Review markup, accessibility, RTL and a lightweight vanilla-JS carousel.
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+Single testimonial pages turn off for new installs (existing URLs untouched); schema stars now need real ratings and a reviewed product/app/course; plus pause buttons, privacy tools, REST fields and faster settings. Recommended update.
 
 = 2.0.9 =
 Fixes the submission form: its optional fields never showed, and turning the form off did not stop submissions. Recommended for anyone using [at_form].
