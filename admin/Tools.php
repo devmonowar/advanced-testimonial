@@ -159,7 +159,7 @@ final class Tools {
 		}
 
 		$data = wp_json_file_decode( $tmp, array( 'associative' => true ) );
-		if ( ! is_array( $data ) || empty( $data['testimonials'] ) && empty( $data['groups'] ) ) {
+		if ( ! is_array( $data ) || ( empty( $data['testimonials'] ) && empty( $data['groups'] ) ) ) {
 			$this->redirect_back( 'error', __( 'That file is not a valid Advanced Testimonial export.', 'advanced-testimonial' ) );
 		}
 

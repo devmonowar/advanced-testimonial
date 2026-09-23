@@ -78,6 +78,9 @@ final class CPT {
 			'has_archive'         => false,
 			'publicly_queryable'  => $single_pages,
 			'exclude_from_search' => ! $single_pages,
+			// Nav-menu picker follows the pages, not the admin UI: with single
+			// pages off the links would 404.
+			'show_in_nav_menus'   => $single_pages,
 			'menu_position'       => 26,
 			'menu_icon'           => 'dashicons-testimonial',
 			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author' ),

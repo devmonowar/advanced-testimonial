@@ -89,6 +89,11 @@
 
 		this.buildDots();
 		this.update();
+		this.updatePauseBtn();
+		// Resize can make autoplay possible again (everything was visible,
+		// now it isn't) — startAutoplay() re-checks all guards itself,
+		// so calling it here is safe.
+		this.startAutoplay();
 	};
 
 	Carousel.prototype.update = function () {
@@ -260,6 +265,14 @@
 		if ( ! this.pauseBtn ) {
 			return;
 		}
+		// No autoplay can ever run (reduced motion, or everything visible):
+		// hide the toggle instead of showing a dead control that would also
+		// lie to screen readers via aria-pressed.
+		if ( reduceMotion || this.maxIndex() < 1 ) {
+			this.pauseBtn.hidden = true;
+			return;
+		}
+		this.pauseBtn.hidden = false;
 		this.pauseBtn.setAttribute( 'aria-pressed', this.paused ? 'true' : 'false' );
 		this.pauseBtn.setAttribute( 'aria-label', this.paused ? t( 'play', 'Play testimonials' ) : t( 'pause', 'Pause testimonials' ) );
 	};

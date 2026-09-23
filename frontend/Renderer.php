@@ -112,7 +112,7 @@ final class Renderer {
 		$query = ( new Query() )->get( $atts );
 
 		if ( ! $query->have_posts() ) {
-			return self::empty_message( $atts );
+			return self::empty_message();
 		}
 
 		$items = array();
@@ -278,6 +278,10 @@ final class Renderer {
 	 * @return array{type:string,name:string,url:string,image:string}
 	 */
 	public static function reviewed_entity() {
+		static $cached = null;
+		if ( null !== $cached ) {
+			return $cached;
+		}
 		$types = array(
 			'organization' => 'https://schema.org/Organization',
 			'product'      => 'https://schema.org/Product',
@@ -331,7 +335,9 @@ final class Renderer {
 		 *
 		 * @param array $entity Entity with type, name, url, image keys.
 		 */
-		return apply_filters( 'advanced_testimonial_reviewed_entity', $entity );
+		$cached = apply_filters( 'advanced_testimonial_reviewed_entity', $entity );
+
+		return $cached;
 	}
 
 	/**
@@ -379,7 +385,7 @@ final class Renderer {
 			'email'       => (string) $meta( 'email' ),
 			'verified'    => '1' === $meta( 'verified' ),
 			'date'        => (string) $meta( 'review_date' ),
-			'photo'       => $atts['show_image'] ? self::avatar_html( $post, $atts ) : '',
+			'photo'       => $atts['show_image'] ? self::avatar_html( $post ) : '',
 			'logo'        => self::logo_html( (int) $meta( 'company_logo' ) ),
 			'stars'       => self::stars_html( $rating ),
 			'socials'     => $socials,
@@ -482,10 +488,9 @@ final class Renderer {
 	 * Build the client avatar markup (featured image or initial fallback).
 	 *
 	 * @param \WP_Post $post Post object.
-	 * @param array    $atts Display attributes.
 	 * @return string
 	 */
-	private static function avatar_html( $post, array $atts ) {
+	private static function avatar_html( $post ) {
 		$size = (string) Settings::get( 'image_size', 'medium' );
 		$lazy = (bool) Settings::get( 'lazy_load', 1 );
 
@@ -677,10 +682,9 @@ final class Renderer {
 	/**
 	 * Markup shown when there are no testimonials to display.
 	 *
-	 * @param array $atts Display attributes.
 	 * @return string
 	 */
-	private static function empty_message( array $atts ) {
+	private static function empty_message() {
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			return '';
 		}

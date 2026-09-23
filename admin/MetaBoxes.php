@@ -214,6 +214,7 @@ final class MetaBoxes {
 	 * @return void
 	 */
 	public function save( $post_id, $post ) {
+		unset( $post ); // Required by the save_post hook signature; only the ID is used.
 		if ( ! isset( $_POST[ self::NONCE_NAME ] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST[ self::NONCE_NAME ] ) ), self::NONCE_ACTION ) ) {
 			return;
 		}

@@ -3,7 +3,7 @@
  * Plugin Name:       Advanced Testimonial
  * Plugin URI:        https://devmonowar.github.io/advanced-testimonial/
  * Description:       Showcase customer testimonials and reviews in beautiful grids, carousels, cards and more. Lightweight, block-ready and built for social proof.
- * Version:           2.1.0
+ * Version:           2.1.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Monowar Hossain
@@ -20,10 +20,10 @@ namespace AdvancedTestimonial;
 
 defined( 'ABSPATH' ) || exit;
 
-// The `Version:` header above is the single source of truth — read it
-// dynamically rather than repeating the number here, so a release only ever
-// changes one line.
-define( 'ADVANCED_TESTIMONIAL_VERSION', get_file_data( __FILE__, array( 'Version' => 'Version' ) )['Version'] );
+// Hardcoded (not get_file_data): reading the header costs fopen + fread +
+// regex on every page load, frontend included. Keep in sync with the
+// `Version:` header above + readme.txt Stable tag + changelog on release.
+define( 'ADVANCED_TESTIMONIAL_VERSION', '2.1.1' );
 define( 'ADVANCED_TESTIMONIAL_FILE', __FILE__ );
 define( 'ADVANCED_TESTIMONIAL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ADVANCED_TESTIMONIAL_URL', plugin_dir_url( __FILE__ ) );

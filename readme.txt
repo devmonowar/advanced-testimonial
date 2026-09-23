@@ -4,7 +4,7 @@ Tags: testimonials, customer reviews, social proof, testimonial block, review ca
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,11 @@ No data from your site is sent to the service; only public demo files (JSON and 
 
 == Changelog ==
 
+= 2.1.1 =
+* Fixed: the carousel pause button no longer shows when autoplay can never run (reduced motion, or all slides visible) — it was a dead control lying to screen readers.
+* Fixed: testimonial nav-menu items follow the single-pages setting (no more 404 links).
+* Performance: reviewed entity computed once per render; version constant hardcoded.
+
 = 2.1.0 =
 * New: single testimonial pages are off by default for new installs (existing sites keep their URLs) — no more thin duplicate pages or testimonials in site search. Toggle under Settings → General.
 * New: say what your reviews are about (product, app, course, event) in Settings → General — star ratings can only appear for those, never for a business reviewing itself. WooCommerce product pages are detected automatically.
@@ -213,6 +218,9 @@ No data from your site is sent to the service; only public demo files (JSON and 
 * Settings page with full theming controls, Schema.org Review markup, accessibility, RTL and a lightweight vanilla-JS carousel.
 
 == Upgrade Notice ==
+
+= 2.1.1 =
+Accessibility and small correctness fixes (pause button, menu links). No settings change needed.
 
 = 2.1.0 =
 Single testimonial pages turn off for new installs (existing URLs untouched); schema stars now need real ratings and a reviewed product/app/course; plus pause buttons, privacy tools, REST fields and faster settings. Recommended update.

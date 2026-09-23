@@ -9,6 +9,7 @@ define( 'ABSPATH', __DIR__ . '/../' ); // phpcs:ignore WordPress.NamingConventio
 if ( ! function_exists( 'wp_parse_url' ) ) {
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- stub mirrors the core function Helpers calls.
 	function wp_parse_url( $url, $component = -1 ) {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url -- the stub intentionally mirrors core's parse_url-based behavior.
 		return parse_url( $url, $component );
 	}
 }
