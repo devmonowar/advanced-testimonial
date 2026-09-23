@@ -58,3 +58,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run Plugin Check
         uses: wordpress/plugin-check-action@v1
+        with:
+          # Dev-only paths: never shipped to WordPress.org (.distignore),
+          # so checking them only produces repo-hygiene noise.
+          exclude-directories: '.github, .wordpress-org, tests, vendor, node_modules, build'
+          exclude-files: '.distignore, .gitattributes, .gitignore, phpcs.xml.dist, phpunit.xml.dist'

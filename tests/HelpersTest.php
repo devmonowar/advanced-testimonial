@@ -3,6 +3,8 @@
  * Coverage for the two pure functions in includes/Helpers.php.
  */
 
+defined( 'ABSPATH' ) || exit;
+
 use AdvancedTestimonial\Helpers;
 use PHPUnit\Framework\TestCase;
 
