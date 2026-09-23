@@ -61,5 +61,7 @@ jobs:
         with:
           # Dev-only paths: never shipped to WordPress.org (.distignore),
           # so checking them only produces repo-hygiene noise.
-          exclude-directories: '.github, .wordpress-org, tests, vendor, node_modules, build'
-          exclude-files: '.distignore, .gitattributes, .gitignore, phpcs.xml.dist, phpunit.xml.dist'
+          # NOTE: comma-separated with NO spaces — the action word-splits
+          # on spaces and anything after a space becomes a stray argument.
+          exclude-directories: '.github,.wordpress-org,tests,vendor,node_modules,build'
+          exclude-files: '.distignore,.gitattributes,.gitignore,phpcs.xml.dist,phpunit.xml.dist'
